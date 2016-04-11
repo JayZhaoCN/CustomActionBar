@@ -29,8 +29,9 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
-        setStyle(STYLE.SINGLE_BACK
-         );
+
+        setStyle(STYLE.SINGLE_BACK);
+
         recyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
         recyclerViewText.setOnClickListener(this);
     }

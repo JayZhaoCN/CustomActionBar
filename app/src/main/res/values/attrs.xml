@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyLoadingView">
+        <attr name="text" format="reference|string"/>
+        <attr name="colorz" format="reference|color"/>
+        <attr name="stroke" format="dimension"/>
+
+    </declare-styleable>
+</resources>

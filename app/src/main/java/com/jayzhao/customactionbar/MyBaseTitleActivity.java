@@ -134,17 +134,16 @@ public class MyBaseTitleActivity extends Activity {
 
         mContentParent.addView(mContentView, layoutParams);
         updateView();
-
     }
 
     private void updateView() {
         if(mContentView != null && mStyle == FULL_SCREEN) {
-            Log.e(TAG, "mContentView is not null");
+            //Log.e(TAG, "mContentView is not null");
             //直接从mContentView中拿到的LayoutParams似乎是NULL，具体为什么不知道。
             //mContentView.getLayoutParams();  //the value is NULL
             //(mContentParent.addView())，当然是null啊
             if(mContentParent.getChildAt(1) != null) {
-                Log.e(TAG, "child is not null");
+                //Log.e(TAG, "child is not null");
                 FrameLayout.LayoutParams params =
                         (FrameLayout.LayoutParams) mContentParent.getChildAt(1).getLayoutParams();
                 params.topMargin = 0;

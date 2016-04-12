@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import java.util.List;
  */
 public class RecyclerViewActivity extends MyBaseTitleActivity implements View.OnClickListener {
 
+    private static final String TAG = "RecyclerViewActivity";
     private RecyclerView mRecyclerView;
     List<String> mDatas;
     MyRecyclerViewAdapter mAdapter;
@@ -143,6 +145,7 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
         mDialog = new Dialog(mContext, R.style.dialog2);
         Window window = mDialog.getWindow();
+        //window.setWindowAnimations(R.anim.dialog_anim);
         WindowManager.LayoutParams lp = window.getAttributes();
         window.setGravity(Gravity.RIGHT | Gravity.TOP);
 
@@ -196,9 +199,7 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
     class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
-
         private MyOnItemClickListener mOnClickListener;
-
 
         public void addData(int position) {
             mDatas.add(position, "Jay");
@@ -244,6 +245,8 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
         public void onBindViewHolder(final MyViewHolder holder, int position) {
             holder.tv.setText(mDatas.get(position));
 
+            //Log.e(TAG, "onBindViewHolder");
+
             holder.tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -259,10 +262,8 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
                     mOnClickListener.onItemLongClick(holder.tv, holder.getLayoutPosition());
                     //这里返回true表示不再处理onClick事件，否则，长按事件响应后，还会响应一次点击（onClick）事件
                     return true;
-
                 }
             });
-
         }
 
         @Override

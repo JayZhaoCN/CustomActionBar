@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,7 +48,6 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.recyclerViewText:
-
                 startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
                 break;
         }

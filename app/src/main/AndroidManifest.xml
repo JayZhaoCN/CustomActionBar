@@ -24,6 +24,7 @@
         <activity android:name=".JayActivity"/>
         <activity android:name=".MyWebActivity"/>
         <activity android:name=".RecyclerViewActivity"/>
+        <activity android:name=".MyTableLayout"/>
     </application>
 
 </manifest>

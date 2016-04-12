@@ -149,8 +149,6 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
         WindowManager.LayoutParams lp = window.getAttributes();
         window.setGravity(Gravity.RIGHT | Gravity.TOP);
 
-
-
         lp.y = this.getResources().getDimensionPixelSize(R.dimen.title_height);
         lp.x = 0;
 

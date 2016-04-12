@@ -132,6 +132,9 @@ public class MyBaseTitleActivity extends Activity {
         int titleHeight = this.getResources().getDimensionPixelSize(R.dimen.title_height);
         layoutParams.topMargin = titleHeight + getStatusBarHeight();
 
+        if(mContentParent.getChildCount() > 1) {
+            mContentParent.removeViewAt(1);
+        }
         mContentParent.addView(mContentView, layoutParams);
         updateView();
     }

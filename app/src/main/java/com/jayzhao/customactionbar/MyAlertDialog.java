@@ -29,66 +29,76 @@ public class MyAlertDialog {
         mContext = context;
     }
 
+    public Dialog getDialog() {
+        return mDialog;
+    }
 
 
-    public Dialog getDialog(int visibleNum) {
+    public Dialog getDialog(int visibleNum, String ...textTitle) {
+        try {
+            if (visibleNum < 0 || visibleNum > 5)
+                throw new IllegalArgumentException("visibleNum is illegal!");
+            mVisibleNum = visibleNum;
 
-        if (visibleNum < 0 || visibleNum > 5)
-            throw new IllegalArgumentException("visibleNum is illegal!");
-        mVisibleNum = visibleNum;
+            mDialog = new Dialog(mContext, R.style.dialog2);
+            Window window = mDialog.getWindow();
+            WindowManager.LayoutParams lp = window.getAttributes();
+            window.setGravity(Gravity.RIGHT | Gravity.TOP);
 
-        mDialog = new Dialog(mContext, R.style.dialog2);
-        Window window = mDialog.getWindow();
-        WindowManager.LayoutParams lp = window.getAttributes();
-        window.setGravity(Gravity.RIGHT | Gravity.TOP);
+            lp.y = mContext.getResources().getDimensionPixelSize(R.dimen.title_height);
+            lp.x = 0;
 
-        lp.y = mContext.getResources().getDimensionPixelSize(R.dimen.title_height);
-        lp.x = 0;
+            window.setAttributes(lp);
 
-        window.setAttributes(lp);
+            mDialog.setContentView(R.layout.dialog_item);
 
-        mDialog.setContentView(R.layout.dialog_item);
-
-        text1 = (TextView) mDialog.findViewById(R.id.num1);
-        text1.setVisibility(View.VISIBLE);
-        text1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOnItemlickListener.firstItemClick(v);
-            }
-        });
-
-        if (mVisibleNum > 1) {
-            text2 = (TextView) mDialog.findViewById(R.id.num2);
-            text2.setVisibility(View.VISIBLE);
-            text2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemlickListener.secondItemClick(v);
-                }
-            });
-        }
-
-        if (mVisibleNum > 2) {
-            text3 = (TextView) mDialog.findViewById(R.id.num3);
-            text3.setVisibility(View.VISIBLE);
-            text3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemlickListener.thirdItemClick(v);
-                }
-            });
-        }
-
-        if (mVisibleNum > 3) {
-            text4 = (TextView) mDialog.findViewById(R.id.num4);
-            text4.setVisibility(View.VISIBLE);
-            text4.setOnClickListener(new View.OnClickListener() {
+            text1 = (TextView) mDialog.findViewById(R.id.num1);
+            text1.setText(textTitle[0]);
+            text1.setVisibility(View.VISIBLE);
+            text1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mOnItemlickListener.firstItemClick(v);
                 }
             });
+
+            if (mVisibleNum > 1) {
+                text2 = (TextView) mDialog.findViewById(R.id.num2);
+                text2.setText(textTitle[1]);
+                text2.setVisibility(View.VISIBLE);
+                text2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemlickListener.secondItemClick(v);
+                    }
+                });
+            }
+
+            if (mVisibleNum > 2) {
+                text3 = (TextView) mDialog.findViewById(R.id.num3);
+                text3.setText(textTitle[2]);
+                text3.setVisibility(View.VISIBLE);
+                text3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemlickListener.thirdItemClick(v);
+                    }
+                });
+            }
+
+            if (mVisibleNum > 3) {
+                text4 = (TextView) mDialog.findViewById(R.id.num4);
+                text4.setText(textTitle[3]);
+                text4.setVisibility(View.VISIBLE);
+                text4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnItemlickListener.fourthItemClick(v);
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

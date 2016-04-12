@@ -39,19 +39,20 @@ public class MyTableLayout extends MyBaseTitleActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.right:
                 mMyAlertDialog = new MyAlertDialog(mContext);
-                mMyAlertDialog.getDialog(2).show();
+                mDialog = mMyAlertDialog.getDialog(2, "First Layout", "Second Layout");
+                mDialog.show();
 
                 mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
                     @Override
                     public void firstItemClick(View v) {
-                        //MyTableLayout.this.setContentView(R.layout.table_layout);
-
+                        MyTableLayout.this.setContentView(R.layout.table_layout);
+                        mDialog.cancel();
                     }
 
                     @Override
                     public void secondItemClick(View v) {
-                        //MyTableLayout.this.setContentView(R.layout.table_layout2);
-
+                        MyTableLayout.this.setContentView(R.layout.table_layout2);
+                        mDialog.cancel();
                     }
 
                     @Override

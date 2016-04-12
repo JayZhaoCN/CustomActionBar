@@ -10,6 +10,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private static final String TAG = "MainActivity";
     private TextView mRecyclerViewText;
     private TextView mTableText;
+    private TextView mWebText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,12 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mRecyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
         mRecyclerViewText.setOnClickListener(this);
 
-        mTableText = (TextView) findViewById(R.id.TableLayoutText);
+        mTableText = (TextView) findViewById(R.id.tableLayoutText);
         mTableText.setOnClickListener(this);
+
+        mWebText = (TextView) findViewById(R.id.webText);
+        mWebText.setOnClickListener(this);
+
     }
 
     public void click(View view) {
@@ -38,8 +43,13 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
             case R.id.recyclerViewText:
                 startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
                 break;
-            case R.id.TableLayoutText:
+            case R.id.tableLayoutText:
                 startActivity(new Intent(MainActivity.this, MyTableLayout.class));
+                break;
+            case R.id.webText:
+                Intent intent = new Intent(MainActivity.this, MyWebActivity.class);
+                intent.putExtra("URL", "https://github.com/");
+                startActivity(intent);
                 break;
         }
     }

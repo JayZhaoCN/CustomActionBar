@@ -50,6 +50,8 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
     private Context mContext;
 
+    private MyAlertDialog mMyAlertDialog = null;
+
     private RecyclerView.ItemDecoration mDecoration;
     TextView addText;
     TextView removeText;
@@ -143,47 +145,53 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
         mRightButton = getRightButton();
 
-        mDialog = new Dialog(mContext, R.style.dialog2);
-        Window window = mDialog.getWindow();
-        //window.setWindowAnimations(R.anim.dialog_anim);
-        WindowManager.LayoutParams lp = window.getAttributes();
-        window.setGravity(Gravity.RIGHT | Gravity.TOP);
+        try {
+            mRightButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMyAlertDialog = new MyAlertDialog(mContext);
+                    mDialog = mMyAlertDialog.getDialog(4, "Linear Vertical", "Linear Horizontal", "Grid Vertical", "Grid Horizontal");
 
-        lp.y = this.getResources().getDimensionPixelSize(R.dimen.title_height);
-        lp.x = 0;
+                    mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
+                        @Override
+                        public void firstItemClick(View v) {
+                            mStyle = LINEAR_VERTICAL;
+                            mDialog.cancel();
+                            initRecyclerView();
+                        }
 
-        window.setAttributes(lp);
+                        @Override
+                        public void secondItemClick(View v) {
+                            mStyle = LINEAR_HORIZONTAL;
+                            mDialog.cancel();
+                            initRecyclerView();
+                        }
 
-        mDialog.setContentView(R.layout.dialog_item);
+                        @Override
+                        public void thirdItemClick(View v) {
+                            mStyle = GRID_VERTICAL;
+                            mDialog.cancel();
+                            initRecyclerView();
+                        }
 
-        mDialog.findViewById(R.id.num1).setOnClickListener(this);
-        mDialog.findViewById(R.id.num2).setOnClickListener(this);
-        mDialog.findViewById(R.id.num3).setOnClickListener(this);
-        mDialog.findViewById(R.id.num4).setOnClickListener(this);
-
-        mRightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.show();
-            }
-        });
+                        @Override
+                        public void fourthItemClick(View v) {
+                            mStyle = GRID_HORIZONTAL;
+                            mDialog.cancel();
+                            initRecyclerView();
+                        }
+                    });
+                    mDialog.show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.num1:
-                mStyle = LINEAR_VERTICAL;
-                break;
-            case R.id.num2:
-                mStyle = LINEAR_HORIZONTAL;
-                break;
-            case R.id.num3:
-                mStyle = GRID_VERTICAL;
-                break;
-            case R.id.num4:
-                mStyle = GRID_HORIZONTAL;
-                break;
             case R.id.add:
                 mAdapter.addData(1);
                 break;

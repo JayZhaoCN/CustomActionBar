@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
- * Created by hm on 16-4-12.
+ * Created by Jay Zhao on 16-4-12.
  */
 public class MyAlertDialog {
     private Dialog mDialog;
@@ -43,6 +43,8 @@ public class MyAlertDialog {
             mDialog = new Dialog(mContext, R.style.dialog2);
             Window window = mDialog.getWindow();
             WindowManager.LayoutParams lp = window.getAttributes();
+            window.setWindowAnimations(R.style.dialogWindowAnim); //设置窗口弹出动画
+
             window.setGravity(Gravity.RIGHT | Gravity.TOP);
 
             lp.y = mContext.getResources().getDimensionPixelSize(R.dimen.title_height);

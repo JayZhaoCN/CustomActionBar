@@ -35,9 +35,6 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
     private LinearLayoutManager mLinearLayoutManager;
     private GridLayoutManager mGridLayoutManager;
 
-    private boolean isVertical = true;
-    private boolean isGrid = true;
-
     public static final int LINEAR_VERTICAL = 0;
     public static final int LINEAR_HORIZONTAL = 1;
     public static final int GRID_VERTICAL = 2;
@@ -55,8 +52,6 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
     private RecyclerView.ItemDecoration mDecoration;
     TextView addText;
     TextView removeText;
-
-    StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +75,57 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
         mContext = this;
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mStyle = GRID_HORIZONTAL;
+        mStyle = LINEAR_VERTICAL;
 
         addText = (TextView) findViewById(R.id.add);
         addText.setOnClickListener(this);
 
+        initRecyclerView();
+
+
         removeText = (TextView) findViewById(R.id.remove);
         removeText.setOnClickListener(this);
+
+        mRightButton = getRightButton();
+
+        mRightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMyAlertDialog = new MyAlertDialog(mContext);
+                mDialog = mMyAlertDialog.getDialog(4, "Linear Vertical", "Linear Horizontal", "Grid Vertical", "Grid Horizontal");
+
+                mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
+                    @Override
+                    public void firstItemClick(View v) {
+                        mStyle = LINEAR_VERTICAL;
+                        mDialog.cancel();
+                        initRecyclerView();
+                    }
+
+                    @Override
+                    public void secondItemClick(View v) {
+                        mStyle = LINEAR_HORIZONTAL;
+                        mDialog.cancel();
+                        initRecyclerView();
+                    }
+
+                    @Override
+                    public void thirdItemClick(View v) {
+                        mStyle = GRID_VERTICAL;
+                        mDialog.cancel();
+                        initRecyclerView();
+                    }
+
+                    @Override
+                    public void fourthItemClick(View v) {
+                        mStyle = GRID_HORIZONTAL;
+                        mDialog.cancel();
+                        initRecyclerView();
+                    }
+                });
+                mDialog.show();
+            }
+        });
 
         initRecyclerView();
     }
@@ -142,51 +181,6 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
             }
         });
-
-        mRightButton = getRightButton();
-
-        try {
-            mRightButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mMyAlertDialog = new MyAlertDialog(mContext);
-                    mDialog = mMyAlertDialog.getDialog(4, "Linear Vertical", "Linear Horizontal", "Grid Vertical", "Grid Horizontal");
-
-                    mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
-                        @Override
-                        public void firstItemClick(View v) {
-                            mStyle = LINEAR_VERTICAL;
-                            mDialog.cancel();
-                            initRecyclerView();
-                        }
-
-                        @Override
-                        public void secondItemClick(View v) {
-                            mStyle = LINEAR_HORIZONTAL;
-                            mDialog.cancel();
-                            initRecyclerView();
-                        }
-
-                        @Override
-                        public void thirdItemClick(View v) {
-                            mStyle = GRID_VERTICAL;
-                            mDialog.cancel();
-                            initRecyclerView();
-                        }
-
-                        @Override
-                        public void fourthItemClick(View v) {
-                            mStyle = GRID_HORIZONTAL;
-                            mDialog.cancel();
-                            initRecyclerView();
-                        }
-                    });
-                    mDialog.show();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

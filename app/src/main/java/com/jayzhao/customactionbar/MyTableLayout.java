@@ -27,6 +27,7 @@ public class MyTableLayout extends MyBaseTitleActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.table_layout);
         this.setStyle(STYLE.BACK_AND_MORE);
+        this.setTitle("My TableLayout");
 
         mContext = this;
 

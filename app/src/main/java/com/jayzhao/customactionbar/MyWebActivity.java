@@ -2,6 +2,7 @@ package com.jayzhao.customactionbar;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -37,6 +38,7 @@ public class MyWebActivity extends MyBaseTitleActivity {
         setStyle(STYLE.SINGLE_BACK);
 
         mUrl = getIntent().getStringExtra("URL");
+        setTitle("Surf Internet");
 
         mWebView = (WebView) findViewById(R.id.webView);
 
@@ -92,7 +94,6 @@ public class MyWebActivity extends MyBaseTitleActivity {
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                Log.e(TAG, (newProgress+5) + " ");
                 mProgressBar.setProgress(newProgress + 5);
             }
         });

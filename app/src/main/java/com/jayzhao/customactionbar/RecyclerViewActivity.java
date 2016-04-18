@@ -57,6 +57,7 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setStyle(STYLE.BACK_AND_MORE);
+        this.setTitle("My RecyclerView");
 
         this.setContentView(R.layout.recycler_layout);
 

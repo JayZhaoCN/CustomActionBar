@@ -1,9 +1,16 @@
 package com.jayzhao.customactionbar;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends MyBaseTitleActivity implements View.OnClickListener {
@@ -17,7 +24,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        setStyle(STYLE.SINGLE_BACK);
+        setStyle(STYLE.BACK_AND_MORE);
 
         mRecyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
         mRecyclerViewText.setOnClickListener(this);
@@ -27,6 +34,44 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mWebText = (TextView) findViewById(R.id.webText);
         mWebText.setOnClickListener(this);
+
+        getRightButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final MyAlertDialog dialog = new MyAlertDialog(MainActivity.this);
+                final Dialog myDialog = dialog.getDialog(3, "Toast", "Custom Toast", "Custom Toast 2");
+                dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
+                    @Override
+                    public void firstItemClick(View v) {
+
+                        MyUtils.showToast(MainActivity.this, "Custom Toast");
+
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void secondItemClick(View v) {
+                        MyUtils.showIconToast(MainActivity.this, "Icon Toast!", R.mipmap.ic_launcher);
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void thirdItemClick(View v) {
+                        MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void fourthItemClick(View v) {
+
+                    }
+                });
+                myDialog.show();
+            }
+        });
+
+
 
     }
 

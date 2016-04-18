@@ -3,11 +3,7 @@ package com.jayzhao.customactionbar;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Switch;
 import android.widget.TextView;
 
 /**
@@ -43,7 +39,7 @@ public class MyTableLayout extends MyBaseTitleActivity implements View.OnClickLi
                 mDialog = mMyAlertDialog.getDialog(2, "First Layout", "Second Layout");
                 mDialog.show();
 
-                mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
+                mMyAlertDialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
                     public void firstItemClick(View v) {
                         MyTableLayout.this.setContentView(R.layout.table_layout);

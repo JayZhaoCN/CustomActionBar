@@ -2,7 +2,6 @@ package com.jayzhao.customactionbar;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -23,7 +22,7 @@ public class MyAlertDialog {
     private TextView text3;
     private TextView text4;
 
-    private MyOnItemlickListener mOnItemlickListener;
+    private MyOnItemClickListener mOnItemClickListener;
 
     public MyAlertDialog(Context context) {
         mContext = context;
@@ -46,7 +45,7 @@ public class MyAlertDialog {
             window.setWindowAnimations(R.style.dialogWindowAnim); //设置窗口弹出动画
 
             window.setGravity(Gravity.RIGHT | Gravity.TOP);
-
+            //默认是居中显示的，y为正，则向下移动，y为负，则向上移动。x正，则向右移动，x负，则向左移动。
             lp.y = mContext.getResources().getDimensionPixelSize(R.dimen.title_height);
             lp.x = 0;
 
@@ -60,7 +59,7 @@ public class MyAlertDialog {
             text1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnItemlickListener.firstItemClick(v);
+                    mOnItemClickListener.firstItemClick(v);
                 }
             });
 
@@ -71,7 +70,7 @@ public class MyAlertDialog {
                 text2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemlickListener.secondItemClick(v);
+                        mOnItemClickListener.secondItemClick(v);
                     }
                 });
             }
@@ -83,7 +82,7 @@ public class MyAlertDialog {
                 text3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemlickListener.thirdItemClick(v);
+                        mOnItemClickListener.thirdItemClick(v);
                     }
                 });
             }
@@ -95,7 +94,7 @@ public class MyAlertDialog {
                 text4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemlickListener.fourthItemClick(v);
+                        mOnItemClickListener.fourthItemClick(v);
                     }
                 });
             }
@@ -107,14 +106,37 @@ public class MyAlertDialog {
         return mDialog;
     }
 
-    public void setmOnItemlickListener(MyOnItemlickListener listener) {
-        mOnItemlickListener = listener;
+    public void setmOnItemClickListener(MyOnItemClickListener listener) {
+        mOnItemClickListener = listener;
     }
 
-    public interface MyOnItemlickListener {
+    public interface MyOnItemClickListener {
         void firstItemClick(View v);
         void secondItemClick(View v);
         void thirdItemClick(View v);
         void fourthItemClick(View v);
+    }
+
+    public class MyOnItemClickListenerAdapter implements MyOnItemClickListener {
+
+        @Override
+        public void firstItemClick(View v) {
+
+        }
+
+        @Override
+        public void secondItemClick(View v) {
+
+        }
+
+        @Override
+        public void thirdItemClick(View v) {
+
+        }
+
+        @Override
+        public void fourthItemClick(View v) {
+
+        }
     }
 }

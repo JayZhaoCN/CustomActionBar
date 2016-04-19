@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jayzhao.customactionbar.Widget.MyDialogFragment;
+
 
 public class MainActivity extends MyBaseTitleActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -19,6 +21,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mTableText;
     private TextView mWebText;
     private TextView mChangeAnimation;
+    private TextView mPromptDialogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,11 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mChangeAnimation = (TextView) findViewById(R.id.changeAnimation);
         mChangeAnimation.setOnClickListener(this);
+
+        mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
+        mPromptDialogText.setOnClickListener(this);
+
+
         getRightButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +109,9 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
             case R.id.changeAnimation:
                 intent = new Intent(MainActivity.this, ChangeAnimation.class);
                 startActivity(intent);
+                break;
+            case R.id.promptDiglog:
+                MyDialogFragment.showDialogFragment(MainActivity.this, MyDialogFragment.class);
                 break;
         }
     }

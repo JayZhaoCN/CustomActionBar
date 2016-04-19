@@ -167,13 +167,14 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(mContext, mDatas.get(position) + " click!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, mDatas.get(position) + " click!", Toast.LENGTH_SHORT).show();
+                MyUtils.showToast(mContext, mDatas.get(position) + " click!");
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(mContext, mDatas.get(position) + " Long click!", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(mContext, mDatas.get(position) + " Long click!", Toast.LENGTH_SHORT).show();
+                MyUtils.showToast(mContext, mDatas.get(position) + " long click!");
             }
         });
     }

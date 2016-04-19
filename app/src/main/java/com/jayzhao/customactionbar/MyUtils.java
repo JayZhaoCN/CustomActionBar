@@ -21,7 +21,7 @@ public class MyUtils {
 
     public static void showToast(Context context, String str) {
         if(myToast == null) {
-            myToast = Toast.makeText(context, str, Toast.LENGTH_LONG);
+            myToast = Toast.makeText(context, str, Toast.LENGTH_SHORT);
         } else {
             myToast.setText(str);
         }
@@ -64,7 +64,7 @@ public class MyUtils {
         if(myCustomToast == null) {
             myCustomToast = new Toast(activity);
             myCustomToast.setGravity(Gravity.RIGHT | Gravity.TOP, 300, 300);
-            myCustomToast.setDuration(Toast.LENGTH_LONG);
+            myCustomToast.setDuration(Toast.LENGTH_SHORT);
             myCustomToast.setView(layout);
         } else {
             myCustomToast.setView(layout);

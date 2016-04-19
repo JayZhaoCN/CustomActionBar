@@ -35,7 +35,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mWebText = (TextView) findViewById(R.id.webText);
         mWebText.setOnClickListener(this);
-        
+
         mChangeAnimation = (TextView) findViewById(R.id.changeAnimation);
         mChangeAnimation.setOnClickListener(this);
         getRightButton().setOnClickListener(new View.OnClickListener() {

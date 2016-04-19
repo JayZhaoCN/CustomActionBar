@@ -50,7 +50,8 @@ public class ChangeAnimation extends MyBaseTitleActivity {
         findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ChangeAnimation.this, arr[index], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ChangeAnimation.this, arr[index], Toast.LENGTH_SHORT).show();
+                MyUtils.showToast(ChangeAnimation.this, arr[index]);
                 index ++;
                 if(index == 4) {
                     index = 0;
@@ -70,10 +71,10 @@ public class ChangeAnimation extends MyBaseTitleActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int value = (int) animation.getAnimatedValue();
-                Log.e("value: ", value + "");
+                //Log.e("value: ", value + "");
                 double index = value/100d;
                 int currentRadius = (int) (index * mMaxRadius);
-                Log.e("currentRadius: ", currentRadius + "");
+                //Log.e("currentRadius: ", currentRadius + "");
                 mFragment2.getRoot().setOvalMask(mScreenSize.x, 0, currentRadius);
             }
         };

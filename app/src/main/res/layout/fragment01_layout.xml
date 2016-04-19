@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jayzhao.customactionbar.MaskableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="Fragment01"
+      android:textColor="@color/white_80_percent"
+      android:background="@color/colorAccent"
+      android:gravity="center"
+      />
+</com.jayzhao.customactionbar.MaskableLayout>

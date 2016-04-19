@@ -11,6 +11,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mRecyclerViewText;
     private TextView mTableText;
     private TextView mWebText;
+    private TextView mChangeAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mWebText = (TextView) findViewById(R.id.webText);
         mWebText.setOnClickListener(this);
 
+        mChangeAnimation = (TextView) findViewById(R.id.changeAnimation);
+        mChangeAnimation.setOnClickListener(this);
+
     }
 
     public void click(View view) {
@@ -39,6 +43,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.recyclerViewText:
                 startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
@@ -47,8 +52,12 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 startActivity(new Intent(MainActivity.this, MyTableLayout.class));
                 break;
             case R.id.webText:
-                Intent intent = new Intent(MainActivity.this, MyWebActivity.class);
+                intent = new Intent(MainActivity.this, MyWebActivity.class);
                 intent.putExtra("URL", "http://www.sina.com.cn/");
+                startActivity(intent);
+                break;
+            case R.id.changeAnimation:
+                intent = new Intent(MainActivity.this, ChangeAnimation.class);
                 startActivity(intent);
                 break;
         }

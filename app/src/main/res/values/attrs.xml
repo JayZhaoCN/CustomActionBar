@@ -22,4 +22,10 @@
         <attr name="MyProgressBarProgressBgWidth" format="reference|dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="promptDialog">
+        <attr name="left_textColor" format="color|reference"/>
+        <attr name="right_textColor" format="color|reference"/>
+        <attr name="right_text" format="string|reference"/>
+        <attr name="left_text" format="string|reference"/>
+    </declare-styleable>
 </resources>

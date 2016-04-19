@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/dlg_empty_area_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:orientation="horizontal" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:background="@color/window_bg"
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+            <TextView
+                android:layout_marginTop="30dp"
+                android:id="@+id/dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sure?"
+                android:gravity="center"
+                />
+
+            <com.jayzhao.customactionbar.Widget.DialogBottomBar
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:left_textColor="@color/black_40_percent"
+                app:right_textColor="@color/black_40_percent"
+                app:right_text="取消"
+                app:left_text="确定"
+                />
+    </LinearLayout>
+
+</LinearLayout>

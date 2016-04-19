@@ -7,15 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,7 +89,7 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
                 mMyAlertDialog = new MyAlertDialog(mContext);
                 mDialog = mMyAlertDialog.getDialog(4, "Linear Vertical", "Linear Horizontal", "Grid Vertical", "Grid Horizontal");
 
-                mMyAlertDialog.setmOnItemlickListener(new MyAlertDialog.MyOnItemlickListener() {
+                mMyAlertDialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
                     public void firstItemClick(View v) {
                         mStyle = LINEAR_VERTICAL;

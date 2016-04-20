@@ -1,7 +1,9 @@
 package com.jayzhao.customactionbar;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,11 +50,40 @@ public class MyUtils {
         myIconToast.show();
     }
 
-    public static void showCustomToast(Activity activity, String title, String text, int resId) {
+    public static void showCustomToast(Context context, String title, String text, int resId) {
 
-        LayoutInflater inflater = activity.getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast_layout,
-                (ViewGroup) activity.findViewById(R.id.llToast));
+        //三种获得LayoutInflater的方法
+        //LayoutInflater inflater = activity.getLayoutInflater();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //LayoutInflater inflater = LayoutInflater.from(context);
+
+
+        //事实上并不需要ViewGroup,直接传null即可.
+        View layout = inflater.inflate(R.layout.custom_toast_layout, null);
+
+
+        //总结一下，Inflater.inflate()方法找到的布局，如果想让其Layout_width和Layout_height生效，需要在外层添加一个FrameLayout（也可以是其他类型的Layout）
+
+        View content = layout.findViewById(R.id.llToast);
+        if(content.getLayoutParams() == null) {
+            Log.e("MyUtils", "NULL");
+        } else {
+            Log.e("MyUtils", content.getLayoutParams().width + "");
+        }
+
+
+        //ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(500, 300);
+        //layout.setLayoutParams(lp);
+        //Log.e("height: ", layout.getLayoutParams().height + "");
+        //Log.e("width: ", layout.getLayoutParams().width + "");
+
+        /*
+        真是坑爹，找到的竟然是null
+        if(activity.findViewById(R.id.llToast) == null) {
+            Log.e("MyUtils", "NULL");
+        }
+        View layout = inflater.inflate(R.layout.custom_toast_layout, (ViewGroup) activity.findViewById(R.id.llToast), true);
+        */
 
         TextView titleView = (TextView) layout.findViewById(R.id.tvTitleToast);
         titleView.setText(title);
@@ -62,7 +93,7 @@ public class MyUtils {
         textView.setText(text);
 
         if(myCustomToast == null) {
-            myCustomToast = new Toast(activity);
+            myCustomToast = new Toast(context);
             myCustomToast.setGravity(Gravity.RIGHT | Gravity.TOP, 300, 300);
             myCustomToast.setDuration(Toast.LENGTH_SHORT);
             myCustomToast.setView(layout);

@@ -2,6 +2,7 @@ package com.jayzhao.customactionbar;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.view.Window;
 
@@ -22,11 +23,21 @@ public class MyLoadingDialog {
         mDialog.setContentView(view);
         mMyLoadingView = (MyLoadingView) mDialog.findViewById(R.id.myLoadingView);
         mMyLoadingView.startLoading();
+
+        mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                mMyLoadingView.stopLoading();
+            }
+        });
+
     }
 
     public void showDialog() {
         mDialog.show();
     }
+
+
 
 
 

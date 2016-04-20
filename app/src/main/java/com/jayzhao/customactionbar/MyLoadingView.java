@@ -98,7 +98,7 @@ public class MyLoadingView extends View {
 
     public void startLoading() {
         if (mAnimator == null) {
-            mAnimator = animLoading() ;
+            mAnimator = animLoading();
         }
 
         if (!mAnimator.isStarted()) {

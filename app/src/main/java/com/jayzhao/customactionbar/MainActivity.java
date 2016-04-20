@@ -113,7 +113,6 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
             case R.id.promptDiglog:
                 //MyDialogFragment.showDialogFragment(MainActivity.this, MyDialogFragment.class);
                 new MyLoadingDialog(this).showDialog();
-
                 break;
         }
     }

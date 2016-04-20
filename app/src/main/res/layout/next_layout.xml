@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.jayzhao.customactionbar.Widget.SubItem
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50.7dp"
+        android:background="@drawable/item_background"
+        android:id="@+id/subItem"
+        android:clickable="true"
+        app:Mytitle="勿扰模式"
+        app:MysubTitle="未开启"
+        app:Myicon="@drawable/icon_sport_goal"
+        />
+
+</LinearLayout>

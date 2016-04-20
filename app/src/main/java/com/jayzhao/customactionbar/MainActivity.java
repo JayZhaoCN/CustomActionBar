@@ -22,6 +22,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mWebText;
     private TextView mChangeAnimation;
     private TextView mPromptDialogText;
+    private TextView mNextPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
         mPromptDialogText.setOnClickListener(this);
 
+        mNextPage = (TextView) findViewById(R.id.nextPage);
+        mNextPage.setOnClickListener(this);
 
         getRightButton().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +117,10 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 //MyDialogFragment.showDialogFragment(MainActivity.this, MyDialogFragment.class);
                 new MyLoadingDialog(this).showDialog();
                 break;
+            case R.id.nextPage:
+                startActivity(new Intent(MainActivity.this, NextActivity.class));
+                break;
+
         }
     }
 }

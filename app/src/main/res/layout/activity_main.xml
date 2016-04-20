@@ -72,5 +72,16 @@
         android:id="@+id/promptDiglog"
         />
 
+    <TextView
+        android:background="@drawable/button_background"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:text="Click me to next Page"
+        android:layout_marginTop="30dp"
+        android:id="@+id/nextPage"
+        />
+
 
 </LinearLayout>

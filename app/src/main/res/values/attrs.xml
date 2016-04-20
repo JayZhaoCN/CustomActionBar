@@ -28,4 +28,12 @@
         <attr name="right_text" format="string|reference"/>
         <attr name="left_text" format="string|reference"/>
     </declare-styleable>
+
+    <declare-styleable name="item">
+        <attr name="Myicon" format="reference"/>
+        <attr name="Mytitle" format="string|reference"/>
+        <attr name="MysubTitle" format="string|reference"/>
+    </declare-styleable>
+
+
 </resources>

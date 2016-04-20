@@ -66,6 +66,7 @@ public class ChangeAnimation extends MyBaseTitleActivity {
             }
         });
 
+
         mListener = new AnimatorUpdateListener() {
 
             @Override

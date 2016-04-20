@@ -21,7 +21,6 @@ import android.view.animation.LinearInterpolator;
  */
 public class MyLoadingView extends View {
 
-
     private String mText = null;
     private int mColor;
     private Context mContext;
@@ -38,7 +37,6 @@ public class MyLoadingView extends View {
     private int mWidth;
     private int mHeight;
 
-
     private static final String TAG = "MyLoadingView";
 
     public MyLoadingView(Context context) {
@@ -51,7 +49,6 @@ public class MyLoadingView extends View {
 
     public MyLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         mContext = getContext();
         obtainStyledAttr(attrs, defStyleAttr);
         initView();

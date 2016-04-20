@@ -3,6 +3,8 @@ package com.jayzhao.customactionbar;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,18 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mChangeAnimation;
     private TextView mPromptDialogText;
     private TextView mNextPage;
+
+    private MyLoadingDialog mDialog;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 1) {
+                mDialog.setError();
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +128,13 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 startActivity(intent);
                 break;
             case R.id.promptDiglog:
-                //MyDialogFragment.showDialogFragment(MainActivity.this, MyDialogFragment.class);
-                new MyLoadingDialog(this).showDialog();
+                mDialog = new MyLoadingDialog(this);
+                mDialog.showDialog();
+                mHandler.sendEmptyMessageDelayed(1, 2000);
                 break;
             case R.id.nextPage:
                 startActivity(new Intent(MainActivity.this, NextActivity.class));
                 break;
-
         }
     }
 }

@@ -19,7 +19,18 @@
         app:stroke="8dp"
         />
 
+    <ImageView
+        android:id="@+id/errorImage"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@drawable/icon_toast_error"
+        />
+
     <TextView
+        android:id="@+id/tips"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:text="正在加载"

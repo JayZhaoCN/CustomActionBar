@@ -27,7 +27,7 @@ public class MyLoadingView extends View {
     private int mColor;
     private Context mContext;
     private int angle;
-    private RectF mRectF;  
+    private RectF mRectF;    
 
     private Paint mPaint;
 

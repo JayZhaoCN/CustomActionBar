@@ -23,6 +23,8 @@ import android.view.animation.LinearInterpolator;
 
 public class MyLoadingView extends View {
 
+    //just for test branch
+
     private String mText = null;
     private int mColor;
     private Context mContext;

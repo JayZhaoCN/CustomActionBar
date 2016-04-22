@@ -25,6 +25,7 @@ public class MyLoadingView extends View {
 
     //just for test branch
     //just for test branch 2
+    //just for test branch 3
 
     private String mText = null;
     private int mColor;

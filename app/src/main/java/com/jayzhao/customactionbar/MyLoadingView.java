@@ -24,6 +24,7 @@ import android.view.animation.LinearInterpolator;
 public class MyLoadingView extends View {
 
     //just for test branch
+    //just for test branch 2
 
     private String mText = null;
     private int mColor;

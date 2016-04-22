@@ -49,4 +49,39 @@
         android:layout_marginTop="30dp"
         android:id="@+id/webText"
         />
+
+    <TextView
+        android:background="@drawable/button_background"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:text="ChangeAnimation"
+        android:layout_marginTop="30dp"
+        android:id="@+id/changeAnimation"
+        />
+
+    <TextView
+        android:background="@drawable/button_background"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:text="Loading Dialog"
+        android:layout_marginTop="30dp"
+        android:id="@+id/promptDiglog"
+        />
+
+    <TextView
+        android:background="@drawable/button_background"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="38dp"
+        android:text="Click me to next Page"
+        android:layout_marginTop="30dp"
+        android:id="@+id/nextPage"
+        />
+
+
 </LinearLayout>

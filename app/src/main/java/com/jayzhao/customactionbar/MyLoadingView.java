@@ -18,15 +18,16 @@ import android.view.animation.LinearInterpolator;
 
 /**
  * Created by hm on 16-4-1.
+ * 下一阶段准备添加加载成功的动画
  */
-public class MyLoadingView extends View {
 
+public class MyLoadingView extends View {
 
     private String mText = null;
     private int mColor;
     private Context mContext;
     private int angle;
-    private RectF mRectF;
+    private RectF mRectF;    
 
     private Paint mPaint;
 
@@ -37,7 +38,6 @@ public class MyLoadingView extends View {
 
     private int mWidth;
     private int mHeight;
-
 
     private static final String TAG = "MyLoadingView";
 
@@ -51,7 +51,6 @@ public class MyLoadingView extends View {
 
     public MyLoadingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         mContext = getContext();
         obtainStyledAttr(attrs, defStyleAttr);
         initView();
@@ -98,7 +97,7 @@ public class MyLoadingView extends View {
 
     public void startLoading() {
         if (mAnimator == null) {
-            mAnimator = animLoading() ;
+            mAnimator = animLoading();
         }
 
         if (!mAnimator.isStarted()) {

@@ -1,9 +1,20 @@
 package com.jayzhao.customactionbar;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 
 
 public class MainActivity extends MyBaseTitleActivity implements View.OnClickListener {
@@ -11,13 +22,28 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mRecyclerViewText;
     private TextView mTableText;
     private TextView mWebText;
+    private TextView mChangeAnimation;
+    private TextView mPromptDialogText;
+    private TextView mNextPage;
+
+    private MyLoadingDialog mDialog;
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if(msg.what == 1) {
+                mDialog.setError();
+            }
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        setStyle(STYLE.SINGLE_BACK);
+        setStyle(STYLE.BACK_AND_MORE);
 
         mRecyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
         mRecyclerViewText.setOnClickListener(this);
@@ -27,6 +53,51 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mWebText = (TextView) findViewById(R.id.webText);
         mWebText.setOnClickListener(this);
+
+        mChangeAnimation = (TextView) findViewById(R.id.changeAnimation);
+        mChangeAnimation.setOnClickListener(this);
+
+        mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
+        mPromptDialogText.setOnClickListener(this);
+
+        mNextPage = (TextView) findViewById(R.id.nextPage);
+        mNextPage.setOnClickListener(this);
+
+        getRightButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final MyAlertDialog dialog = new MyAlertDialog(MainActivity.this);
+                final Dialog myDialog = dialog.getDialog(3, "Toast", "Custom Toast", "Custom Toast 2");
+                dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
+                    @Override
+                    public void firstItemClick(View v) {
+
+                        MyUtils.showToast(MainActivity.this, "Custom Toast");
+
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void secondItemClick(View v) {
+                        MyUtils.showIconToast(MainActivity.this, "Icon Toast!", R.mipmap.ic_launcher);
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void thirdItemClick(View v) {
+                        MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
+                        myDialog.dismiss();
+                    }
+
+                    @Override
+                    public void fourthItemClick(View v) {
+
+                    }
+                });
+                myDialog.show();
+            }
+        });
 
     }
 
@@ -39,6 +110,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.recyclerViewText:
                 startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
@@ -47,9 +119,21 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 startActivity(new Intent(MainActivity.this, MyTableLayout.class));
                 break;
             case R.id.webText:
-                Intent intent = new Intent(MainActivity.this, MyWebActivity.class);
-                intent.putExtra("URL", "https://github.com/");
+                intent = new Intent(MainActivity.this, MyWebActivity.class);
+                intent.putExtra("URL", "http://www.sina.com.cn/");
                 startActivity(intent);
+                break;
+            case R.id.changeAnimation:
+                intent = new Intent(MainActivity.this, ChangeAnimation.class);
+                startActivity(intent);
+                break;
+            case R.id.promptDiglog:
+                mDialog = new MyLoadingDialog(this);
+                mDialog.showDialog();
+                mHandler.sendEmptyMessageDelayed(1, 2000);
+                break;
+            case R.id.nextPage:
+                startActivity(new Intent(MainActivity.this, NextActivity.class));
                 break;
         }
     }

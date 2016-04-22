@@ -25,6 +25,8 @@
         <activity android:name=".MyWebActivity"/>
         <activity android:name=".RecyclerViewActivity"/>
         <activity android:name=".MyTableLayout"/>
+        <activity android:name=".ChangeAnimation"/>
+        <activity android:name=".NextActivity"/>
     </application>
 
 </manifest>

@@ -4,6 +4,36 @@
         <attr name="text" format="reference|string"/>
         <attr name="colorz" format="reference|color"/>
         <attr name="stroke" format="dimension"/>
-
     </declare-styleable>
+
+    <declare-styleable name="MyProgressBar">
+        <attr name="MyProgressBarBackgroundColor" format="color|reference"/>
+        <attr name="MyProgressBarStrockColor" format="reference|color"/>
+        <attr name="MyProgressBarProgress" format="integer"/>
+        <attr name="MyProgressBarTotal" format="integer"/>
+        <attr name="MyProgressBarStrockWidth" format="reference|dimension"></attr>
+        <attr name="MyProgressBarRadius" format="reference|dimension"/>
+        <attr name="MyProgressBarProgressWidth" format="reference|dimension"/>
+        <attr name="MyProgressBarProgressColor" format="reference|color"/>
+        <attr name="MyProgressBarText" format="reference|string"/>
+        <attr name="MyProgressBarTextSize" format="reference|dimension"/>
+        <attr name="MyProgressBarTextColor" format="reference|color"/>
+        <attr name="MyProgressBarProgressBgColor" format="reference|color"/>
+        <attr name="MyProgressBarProgressBgWidth" format="reference|dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="promptDialog">
+        <attr name="left_textColor" format="color|reference"/>
+        <attr name="right_textColor" format="color|reference"/>
+        <attr name="right_text" format="string|reference"/>
+        <attr name="left_text" format="string|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="item">
+        <attr name="Myicon" format="reference"/>
+        <attr name="Mytitle" format="string|reference"/>
+        <attr name="MysubTitle" format="string|reference"/>
+    </declare-styleable>
+
+
 </resources>

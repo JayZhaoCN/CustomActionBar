@@ -6,43 +6,54 @@
     >
 
     <TextView
-        android:layout_marginTop="20dp"
+        android:textColor="@color/device_setting_item_color"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:id="@+id/num1"
         android:text="Linear Vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_marginBottom="15dp"
+        />
 
     <TextView
-        android:layout_marginTop="30dp"
+        android:textColor="@color/device_setting_item_color"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:id="@+id/num2"
         android:text="Linear Horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_marginBottom="15dp"
+        />
 
     <TextView
-        android:layout_marginTop="30dp"
+        android:textColor="@color/device_setting_item_color"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:id="@+id/num3"
         android:text="Grid Vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_marginBottom="15dp"
+        />
 
     <TextView
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="20dp"
+        android:textColor="@color/device_setting_item_color"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:id="@+id/num4"
         android:text="Grid Horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        />
 
 </LinearLayout>

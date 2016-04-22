@@ -34,6 +34,7 @@ public class MyBaseTitleActivity extends Activity {
     private Button mRightButton;
 
     private View mContentView = null;
+    private TextView mTitleText = null;
 
     private RelativeLayout mTitle;
 
@@ -49,6 +50,10 @@ public class MyBaseTitleActivity extends Activity {
         return mRightButton;
     }
 
+    public void setTitle(String title) {
+        mTitleText.setText(title);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,8 @@ public class MyBaseTitleActivity extends Activity {
 
         mContentParent = (FrameLayout) findViewById(R.id.title_parent);
         mTitle = (RelativeLayout) findViewById(R.id.title);
+
+        mTitleText = (TextView) findViewById(R.id.title_text);
 
         mLeftButton  = (Button) findViewById(R.id.left);
         mRightButton = (Button) findViewById(R.id.right);

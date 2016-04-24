@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.jayzhao.customactionbar.R;
+import com.jayzhao.customactionbar.R; 
 
 import org.w3c.dom.Text;
 

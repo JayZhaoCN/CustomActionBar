@@ -2,6 +2,10 @@ package com.jayzhao.customactionbar;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.jayzhao.customactionbar.Widget.SubItem;
 
@@ -11,6 +15,9 @@ import com.jayzhao.customactionbar.Widget.SubItem;
 public class NextActivity extends MyBaseTitleActivity implements View.OnClickListener {
 
     private SubItem mSubItem = null;
+    private Button mStartButton = null;
+    private Animation mAnimation = null;
+    private View mStartBg = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,11 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mSubItem = (SubItem) findViewById(R.id.subItem);
         mSubItem.setOnClickListener(this);
+
+        mStartButton = (Button) findViewById(R.id.start_button);
+        mStartBg = findViewById(R.id.start_bg);
+        mAnimation = AnimationUtils.loadAnimation(this, R.anim.button_anim);
+        mStartBg.startAnimation(mAnimation);
     }
 
     @Override

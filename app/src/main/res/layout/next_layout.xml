@@ -18,4 +18,26 @@
         app:Myicon="@drawable/icon_sport_goal"
         />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:layout_centerInParent="true"
+            android:id="@+id/start_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_backgound"
+            />
+
+        <Button
+            android:textColor="@color/white_80_percent"
+            android:layout_centerInParent="true"
+            android:id="@+id/start_button"
+            android:background="@drawable/button_backgound"
+            android:text="Start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
 </LinearLayout>

@@ -42,6 +42,7 @@ public class MaskableLayout extends RelativeLayout {
         //动态改变Oval的大小，canvas.clipPath()方法会将canvas切割成需要的形状。
         //Region.Op.DIFFERENCE表示显示第一次canvas和第二次canvas不同的区域。
 
+        //差不多有点明白了
         updatePath();
         canvas.clipPath(mPath, Region.Op.DIFFERENCE);
         super.dispatchDraw(canvas);

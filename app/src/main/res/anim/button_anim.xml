@@ -5,6 +5,10 @@
     android:interpolator="@android:anim/decelerate_interpolator"
     android:shareInterpolator="true"
     >
+    <!--
+        startOffset表示动画启动的延时(毫秒)
+
+    -->
     <alpha
         android:fromAlpha="0.8"
         android:repeatCount="infinite"

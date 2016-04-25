@@ -27,6 +27,7 @@
         <activity android:name=".MyTableLayout"/>
         <activity android:name=".ChangeAnimation"/>
         <activity android:name=".NextActivity"/>
+        <activity android:name=".AnimationTest"/>
     </application>
 
 </manifest>

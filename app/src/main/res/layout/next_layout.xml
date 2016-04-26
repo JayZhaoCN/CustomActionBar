@@ -40,6 +40,19 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
+
+    <com.jayzhao.customactionbar.Widget.MyProgressBar
+        android:id="@+id/progressbar"
+        android:clickable="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="15dp"
+        app:strokeDefaultColor="@color/colorPrimary"
+        app:strokeWidth="10dp"
+        app:strokeColor="@color/colorAccent"
+        />
+
+
     <TextView
         android:layout_marginLeft="15dp"
         android:background="@drawable/button_background"

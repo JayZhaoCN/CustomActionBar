@@ -7,7 +7,15 @@
     </declare-styleable>
 
     <declare-styleable name="MyProgressBar">
-        <attr name="MyProgressBarBackgroundColor" format="color|reference"/>
+
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="strokeColor" format="color|reference"/>
+        <attr name="strokeDefaultColor" format="color|reference"/>
+        <attr name="textColor" format="color|reference"/>
+        <attr name="centertext" format="string|reference"/>
+
+        <!--<attr name="MyProgressBarBackgroundColor" format="color|reference"/>
         <attr name="MyProgressBarStrockColor" format="reference|color"/>
         <attr name="MyProgressBarProgress" format="integer"/>
         <attr name="MyProgressBarTotal" format="integer"/>
@@ -19,7 +27,7 @@
         <attr name="MyProgressBarTextSize" format="reference|dimension"/>
         <attr name="MyProgressBarTextColor" format="reference|color"/>
         <attr name="MyProgressBarProgressBgColor" format="reference|color"/>
-        <attr name="MyProgressBarProgressBgWidth" format="reference|dimension"/>
+        <attr name="MyProgressBarProgressBgWidth" format="reference|dimension"/>-->
     </declare-styleable>
 
     <declare-styleable name="promptDialog">

@@ -1,14 +1,21 @@
 package com.jayzhao.customactionbar;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jayzhao.customactionbar.Widget.MyProgressBar;
 import com.jayzhao.customactionbar.Widget.SubItem;
 
 /**
@@ -21,6 +28,10 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
     private Animation mAnimation = null;
     private View mStartBg = null;
     private TextView mValueAnimation = null;
+
+    private MyProgressBar myProgressBar = null;
+
+    ValueAnimator mAnimator = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,55 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
         mStartBg.startAnimation(mAnimation);
         mValueAnimation = (TextView) findViewById(R.id.valueAnimation);
         mValueAnimation.setOnClickListener(this);
+
+        myProgressBar = (MyProgressBar) findViewById(R.id.progressbar);
+        myProgressBar.setOnClickListener(this);
+
+        initAnimation();
+
+        myProgressBar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mAnimator.start();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        mAnimator.cancel();
+                        myProgressBar.setmProgress(0);
+                        break;
+                }
+                return false;
+            }
+        });
+
+    }
+
+    public void initAnimation() {
+        mAnimator = ValueAnimator.ofInt(0, 200);
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Log.e("animation: ", "fuck update");
+                int value = (int) animation.getAnimatedValue();
+                myProgressBar.setmProgress(value);
+            }
+        });
+        mAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                Log.e("onAnimationEnd: ", "fuck cancel");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                Log.e("onAnimationEnd: ", "fuck end");
+            }
+        });
+        mAnimator.setDuration(2000);
+        mAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
     }
 
     @Override
@@ -49,6 +109,9 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
                 break;
             case R.id.valueAnimation:
                 startActivity(new Intent(NextActivity.this, AnimationTest.class));
+                break;
+            case R.id.progressbar:
+                Log.e("onClick: ", "fuck click");
                 break;
         }
     }

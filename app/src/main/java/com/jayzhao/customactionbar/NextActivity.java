@@ -52,25 +52,8 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
         mValueAnimation.setOnClickListener(this);
 
         myProgressBar = (MyProgressBar) findViewById(R.id.progressbar);
-        myProgressBar.setOnClickListener(this);
 
         initAnimation();
-
-        myProgressBar.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        mAnimator.start();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        mAnimator.cancel();
-                        myProgressBar.setmProgress(0);
-                        break;
-                }
-                return false;
-            }
-        });
 
     }
 
@@ -109,9 +92,6 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
                 break;
             case R.id.valueAnimation:
                 startActivity(new Intent(NextActivity.this, AnimationTest.class));
-                break;
-            case R.id.progressbar:
-                Log.e("onClick: ", "fuck click");
                 break;
         }
     }

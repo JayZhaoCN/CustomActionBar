@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.jayzhao.customactionbar.MyUtils;
 import com.jayzhao.customactionbar.R;
 
 /**
@@ -27,6 +28,8 @@ public class MyProgressBar extends View {
     private int mColor = 0;
     private String mText = null;
     private int mStrokeWidth = 0;
+
+    private boolean mIsCanceled = false;
 
     private Context mContext = null;
 
@@ -59,7 +62,42 @@ public class MyProgressBar extends View {
         mContext = context;
         obtainAttrs(attrs, defStyleAttr);
 
+        initAnimation();
+
         setUp();
+    }
+
+    private void initAnimation() {
+        mAnimator = ValueAnimator.ofInt(0, 200);
+        mAnimator.setDuration(5000);
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int value = (int) animation.getAnimatedValue();
+                setmProgress(value);
+            }
+        });
+        mAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                mIsCanceled = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if(mIsCanceled) {
+                    mIsCanceled = false;
+                    return;
+                }
+
+                MyUtils.showToast(mContext, "Animation Completed!");
+
+                //TODO do something
+
+            }
+        });
     }
 
     private void setUp() {
@@ -75,6 +113,8 @@ public class MyProgressBar extends View {
         mProgressPaint.setStyle(Paint.Style.STROKE);
 
         mTextPaint = new Paint();
+        mTextPaint.setTextSize(60);
+        mTextPaint.setColor(mTextColor);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
     }
 
@@ -86,6 +126,7 @@ public class MyProgressBar extends View {
         mColor = ta.getColor(R.styleable.MyProgressBar_strokeColor, Color.CYAN);
 
         mText = ta.getString(R.styleable.MyProgressBar_centertext);
+        //Log.e("obtainAttrs: ", mText);
         mStrokeWidth = ta.getDimensionPixelOffset(R.styleable.MyProgressBar_strokeWidth, 45);
         mRadius = ta.getDimensionPixelOffset(R.styleable.MyProgressBar_radius, 45);
         ta.recycle();
@@ -104,52 +145,27 @@ public class MyProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawOval(mBound, mBackgroundPaint);
-
         canvas.drawArc(mBoundArc, 0, (float) mProgress / 200 * 360, false, mProgressPaint);
-
+        canvas.drawText(mText, mRadius, mRadius, mTextPaint);
     }
 
- /*   @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mAnimator = ValueAnimator.ofInt(0, 200);
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mBackgroundPaint.setColor(getResources().getColor(R.color.colorPrimaryDark));
                 invalidate();
-                mAnimator.setDuration(5000);
-                mAnimator.setRepeatCount(1);
-                mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator animation) {
-                        int value = (int) animation.getAnimatedValue();
-                        setmProgress(value);
-                    }
-                });
-
-                mAnimator.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-                        super.onAnimationCancel(animation);
-                        Log.e("animation: ", "fuck cancel");
-                    }
-                });
-
                 mAnimator.start();
                 break;
             case MotionEvent.ACTION_UP:
-                mBackgroundPaint.setColor(getResources().getColor(R.color.colorPrimary));
+                mBackgroundPaint.setColor(getResources().getColor(R.color.user_agreement_text));
                 invalidate();
-                mAnimator.end();
                 mAnimator.cancel();
-                mAnimator = null;
                 setmProgress(0);
-                //Log.e("onTouchEvent: ", "UP");
                 break;
         }
         return super.onTouchEvent(event);
-    }*/
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {

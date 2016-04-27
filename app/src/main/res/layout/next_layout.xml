@@ -47,9 +47,11 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginLeft="15dp"
-        app:strokeDefaultColor="@color/colorPrimary"
+        app:strokeDefaultColor="@color/user_agreement_text"
         app:strokeWidth="10dp"
         app:strokeColor="@color/colorAccent"
+        app:centertext="Stop"
+        app:textColor="@color/item_light_title"
         />
 
 

@@ -39,6 +39,8 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
         mEmptyArea = view.findViewById(R.id.dlg_empty_area_btn);
         mRightButton = (TextView) view.findViewById(R.id.right_text);
         mLeftButton = (TextView) view.findViewById(R.id.left_text);
+
+        //这三个控件是有可能找不到的
         if(mEmptyArea != null)
             mEmptyArea.setOnClickListener(this);
         if(mRightButton != null)

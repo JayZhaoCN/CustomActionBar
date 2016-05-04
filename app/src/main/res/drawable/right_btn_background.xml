@@ -3,7 +3,7 @@
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="#ffffff"/>
+            <solid android:color="@color/titlebar_bg_color_dark"/>
             <corners android:bottomRightRadius="20dp" android:topRightRadius="20dp"/>
         </shape>
     </item>
@@ -14,8 +14,4 @@
             <corners android:bottomRightRadius="20dp" android:topRightRadius="20dp"/>
         </shape>
     </item>
-
-
-
-
 </selector>

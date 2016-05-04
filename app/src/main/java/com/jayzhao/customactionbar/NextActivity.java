@@ -3,6 +3,8 @@ package com.jayzhao.customactionbar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 import com.jayzhao.customactionbar.Widget.MyProgressBar;
+import com.jayzhao.customactionbar.Widget.SimpleDialogFragment;
 import com.jayzhao.customactionbar.Widget.SubItem;
 
 /**
@@ -54,6 +58,29 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
         myProgressBar = (MyProgressBar) findViewById(R.id.progressbar);
 
         initAnimation();
+
+        getRightButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDialogFragment fragment = new SimpleDialogFragment();
+
+                fragment.setOpClickListener(new MyDialogFragment.OnOpClickListener() {
+                    @Override
+                    public void onEmptyAreaClick(DialogFragment dialog) {
+                        dialog.dismiss();
+                    }
+                    @Override
+                    public void onRightClick(DialogFragment dialog) {
+                        dialog.dismiss();
+                    }
+                    @Override
+                    public void onLeftClick(DialogFragment dialog) {
+                        MyUtils.showToast(NextActivity.this, "Clicked");
+                    }
+                });
+                fragment.show(getFragmentManager(), null);
+            }
+        });
 
     }
 

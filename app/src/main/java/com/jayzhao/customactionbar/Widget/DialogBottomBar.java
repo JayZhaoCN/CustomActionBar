@@ -43,7 +43,6 @@ public class DialogBottomBar extends FrameLayout {
         mRightText.setText(rightText);
         mLeftText.setTextColor(leftColor);
         mRightText.setTextColor(rightColor);
-
     }
 
     public TextView getRightButton() {

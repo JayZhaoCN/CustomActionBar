@@ -50,7 +50,7 @@
         app:strokeDefaultColor="@color/user_agreement_text"
         app:strokeWidth="10dp"
         app:strokeColor="@color/colorAccent"
-        app:centertext="Stop"
+        app:centertext="oenxonvea"
         app:textColor="@color/item_light_title"
         />
 

@@ -43,6 +43,7 @@ public class MyProgressBar extends View {
     private RectF mBoundArc = null;
 
     ValueAnimator mAnimator = null;
+    private static String TAG = "MYProgressBar";
 
     public void setmProgress(int progress) {
         mProgress = progress;
@@ -113,7 +114,7 @@ public class MyProgressBar extends View {
         mProgressPaint.setStyle(Paint.Style.STROKE);
 
         mTextPaint = new Paint();
-        mTextPaint.setTextSize(60);
+        mTextPaint.setTextSize(20);
         mTextPaint.setColor(mTextColor);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
     }
@@ -147,7 +148,12 @@ public class MyProgressBar extends View {
         super.onDraw(canvas);
         canvas.drawOval(mBound, mBackgroundPaint);
         canvas.drawArc(mBoundArc, 0, (float) mProgress / 200 * 360, false, mProgressPaint);
-        canvas.drawText(mText, mRadius, mRadius, mTextPaint);
+
+        Paint.FontMetrics fm = mTextPaint.getFontMetrics();
+
+        //Log.e(TAG, fm.top + "");
+
+        canvas.drawText(mText, mRadius, mRadius - fm.bottom/2 - fm.top/2, mTextPaint);
     }
 
     public boolean onTouchEvent(MotionEvent event) {

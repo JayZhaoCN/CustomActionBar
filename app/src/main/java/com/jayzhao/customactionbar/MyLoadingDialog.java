@@ -11,6 +11,8 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import javax.security.auth.login.LoginException;
+
 /**
  * Created by hm on 16-4-1.
  */
@@ -23,17 +25,42 @@ public class MyLoadingDialog {
 
     private final String TAG = "MyLoadingDialog";
 
+    private OnLoadingDoneListener mListener = null;
+    private OnLoadingDoneDelayedListener mDelayedListener = null;
+
+    public interface OnLoadingDoneListener {
+        public void onLoadingDone();
+    }
+
+    public interface OnLoadingDoneDelayedListener {
+        public void onLoadingDoneDelayed();
+    }
+
+    public void setOnLoadingDoneListener(OnLoadingDoneListener l) {
+        mListener = l;
+    }
+
+    public void setOnLoadingDoneDelayedListener(OnLoadingDoneDelayedListener l) {
+        mDelayedListener = l;
+    }
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(msg.what == 1) {
-                mDialog.dismiss();
-                mDialog = null;
+            switch(msg.what) {
+                case 1:
+                    mDialog.dismiss();
+                    mDialog = null;
+                    break;
+                case 2:
+                    mListener.onLoadingDone();
+                    mDialog.dismiss();
+                    mDialog = null;
+                    break;
             }
         }
     };
-
 
     public MyLoadingDialog(Context context) {
         mContext = context;
@@ -46,6 +73,14 @@ public class MyLoadingDialog {
         mMyLoadingView.startLoading();
         mImageView = (ImageView) mDialog.findViewById(R.id.errorImage);
         mText = (TextView) mDialog.findViewById(R.id.tips);
+
+        mMyLoadingView.setOnLoadingEndListener(new MyLoadingView.OnLoadingEndListener() {
+            @Override
+            public void onLoadingEnd() {
+                mText.setText("加载成功");
+                mHandler.sendEmptyMessageDelayed(2, 600);
+            }
+        });
 
         mDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -68,5 +103,10 @@ public class MyLoadingDialog {
         mMyLoadingView.stopLoading();
 
         mHandler.sendEmptyMessageDelayed(1, 1000);
+    }
+
+    public void setSuccess() {
+        Log.e(TAG, "setSuccess");
+        mMyLoadingView.setSuccess();
     }
 }

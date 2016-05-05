@@ -32,7 +32,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         @Override
         public void handleMessage(Message msg) {
             if(msg.what == 1) {
-                mDialog.setError();
+                mDialog.setSuccess();
             }
             super.handleMessage(msg);
         }
@@ -72,9 +72,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
                     public void firstItemClick(View v) {
-
                         MyUtils.showToast(MainActivity.this, "Custom Toast");
-
                         myDialog.dismiss();
                     }
 
@@ -98,7 +96,6 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 myDialog.show();
             }
         });
-
     }
 
     public void click(View view) {
@@ -130,6 +127,12 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
             case R.id.promptDiglog:
                 mDialog = new MyLoadingDialog(this);
                 mDialog.showDialog();
+                mDialog.setOnLoadingDoneListener(new MyLoadingDialog.OnLoadingDoneListener() {
+                    @Override
+                    public void onLoadingDone() {
+                        MyUtils.showToast(MainActivity.this, "done");
+                    }
+                });
                 mHandler.sendEmptyMessageDelayed(1, 2000);
                 break;
             case R.id.nextPage:

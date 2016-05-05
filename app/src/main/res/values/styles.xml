@@ -49,18 +49,16 @@
         <item name="android:text">Jay Zhao</item>
     </style>
 
-   <style name="DimPanel">
+    <style name="DimPanelBase" parent="@android:style/Theme.Holo.Light.Panel">
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="DimPanel" parent="DimPanelBase">
         <item name="android:windowAnimationStyle">@android:style/Animation.InputMethod</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
-   <!--
-   android:backgroundDimEnabled表示对话框背景是否变暗，true表示变暗，false表示不变暗
-   android:windowIsFloating表示设置Activity为窗口式
-   android:windowTranslucentStatus表示透明状态栏
-   android:windowAnimationStyle表示窗口进入和推出的动画风格
-   -->
 
 
 

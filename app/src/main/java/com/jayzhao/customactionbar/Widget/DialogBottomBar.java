@@ -34,6 +34,7 @@ public class DialogBottomBar extends FrameLayout {
         int rightColor = ta.getColor(R.styleable.promptDialog_right_textColor, getResources().getColor(R.color.white_20_percent));
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
+        //这里为什么在layout文件中定义的layout属性都生效，是因为最外层的this是一个FrameLayout！
         inflater.inflate(R.layout.dialog_bottombar, this);
 
         mLeftText = (TextView) findViewById(R.id.left_text);

@@ -55,6 +55,8 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
         mValueAnimation = (TextView) findViewById(R.id.valueAnimation);
         mValueAnimation.setOnClickListener(this);
 
+        mStartButton.setOnClickListener(this);
+
         myProgressBar = (MyProgressBar) findViewById(R.id.progressbar);
 
         initAnimation();
@@ -119,6 +121,9 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
                 break;
             case R.id.valueAnimation:
                 startActivity(new Intent(NextActivity.this, AnimationTest.class));
+                break;
+            case R.id.start_button:
+                startActivity(new Intent(NextActivity.this, SildeActivity.class));
                 break;
         }
     }

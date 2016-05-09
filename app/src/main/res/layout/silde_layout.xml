@@ -1,0 +1,64 @@
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sliding_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    sothree:umanoShadowHeight="0dp"
+    sothree:umanoPanelHeight="200dp"
+    sothree:umanoParallaxOffset="20dp"
+    sothree:umanoScrollableView="@+id/listView"
+    sothree:umanoDragView="@+id/dragView">
+
+    <!--
+    umanoShadowHeight 表示下半部View上的边界阴影宽度，为0表示没有阴影
+    umanoPanelHeight表示下半部View默认宽度
+    umanoParallaxOffset不知道啥意思
+    当下半部View需要进行滑动（例如ListView）时，设置umanoScrollableView属性,来设置需要滑动的View id
+    -->
+
+    <!-- MAIN CONTENT -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:background="@color/titlebar_bg_color_dark"
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Main Content"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_gravity="bottom"
+            android:text="Sub Content"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+
+    <!-- SLIDING LAYOUT -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="248dp"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="false"
+        android:id="@+id/dragView">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

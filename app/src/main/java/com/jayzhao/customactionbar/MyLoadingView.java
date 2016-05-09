@@ -122,13 +122,13 @@ public class MyLoadingView extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(mStrokeWidth - 5);
+        mPaint.setStrokeWidth(mStrokeWidth - 7);
         mPaint.setColor(mColor);
 
         mDonePaint = new Paint();
         mDonePaint.setAntiAlias(true);
         mDonePaint.setStyle(Paint.Style.STROKE);
-        mDonePaint.setStrokeWidth(mStrokeWidth - 5);
+        mDonePaint.setStrokeWidth(mStrokeWidth - 7);
         mDonePaint.setColor(mColor);
         //mDonePaint.set
         //mDonePaint.setStrokeCap(Paint.Cap.ROUND);

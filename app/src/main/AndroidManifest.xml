@@ -28,6 +28,7 @@
         <activity android:name=".ChangeAnimation"/>
         <activity android:name=".NextActivity"/>
         <activity android:name=".AnimationTest"/>
+        <activity android:name=".SildeActivity"/>
     </application>
 
 </manifest>

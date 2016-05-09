@@ -27,6 +27,9 @@
 
 
 
+    <style name="ActionBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:displayOptions">homeAsUp</item>
+    </style>
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>

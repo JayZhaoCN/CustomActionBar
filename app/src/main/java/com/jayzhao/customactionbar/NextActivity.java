@@ -118,6 +118,7 @@ public class NextActivity extends MyBaseTitleActivity implements View.OnClickLis
         switch(v.getId()) {
             case R.id.subItem:
                 MyUtils.showToast(NextActivity.this, "you have clicked item!");
+                startActivity(new Intent(NextActivity.this, RefreshActivity.class));
                 break;
             case R.id.valueAnimation:
                 startActivity(new Intent(NextActivity.this, AnimationTest.class));

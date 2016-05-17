@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/home/hm/CustomActionBar/library/build/intermediates/res/merged/release/drawable/above_shadow.xml",
-        "source": "/home/hm/CustomActionBar/library/src/main/res/drawable/above_shadow.xml"
-    },
-    {
         "merged": "/home/hm/CustomActionBar/library/build/intermediates/res/merged/release/drawable/below_shadow.xml",
         "source": "/home/hm/CustomActionBar/library/src/main/res/drawable/below_shadow.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/library/build/intermediates/res/merged/release/drawable/above_shadow.xml",
+        "source": "/home/hm/CustomActionBar/library/src/main/res/drawable/above_shadow.xml"
     }
 ]

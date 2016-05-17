@@ -16,6 +16,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshWebView;
+
 /**
  * Created by hm on 16-4-8.
  */
@@ -24,27 +27,28 @@ public class MyWebActivity extends MyBaseTitleActivity {
     private WebView mWebView;
     private TextView mTips;
     private WebSettings mWebSettings;
-
     private static final String TAG = "MyWebActivity";
     private ProgressBar mProgressBar;
-
-
-
     private String mUrl;
+    private PullToRefreshWebView mRefreshWebView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_layout);
         setStyle(STYLE.SINGLE_BACK);
-
         mUrl = getIntent().getStringExtra("URL");
         setTitle("Surf Internet");
-
-        mWebView = (WebView) findViewById(R.id.webView);
-
+        mRefreshWebView = (PullToRefreshWebView) findViewById(R.id.refresh_holder);
+        mWebView = mRefreshWebView.getRefreshableView();
+        mRefreshWebView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<WebView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<WebView> refreshView) {
+                mWebView.reload();
+            }
+        });
         mProgressBar = (ProgressBar) findViewById(R.id.web_view_progress);
         mProgressBar.setVisibility(View.VISIBLE);
-
         mTips = (TextView) findViewById(R.id.tips);
         mTips.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,16 +56,12 @@ public class MyWebActivity extends MyBaseTitleActivity {
                 mWebView.reload();
             }
         });
-
-
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
         mWebSettings.setSupportZoom(true);
         mWebSettings.setBuiltInZoomControls(true);
         mWebSettings.setDisplayZoomControls(false);
-
         mWebView.loadUrl(mUrl);
-
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -73,13 +73,12 @@ public class MyWebActivity extends MyBaseTitleActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 mProgressBar.setVisibility(View.VISIBLE);
                 mTips.setVisibility(View.GONE);
-                //Toast.makeText(MyWebActivity.this, "OnPageStarted", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 mProgressBar.setVisibility(View.GONE);
-                //Toast.makeText(MyWebActivity.this, "OnPageFinished", Toast.LENGTH_SHORT).show();
+                mRefreshWebView.onRefreshComplete();
             }
 
             @Override
@@ -101,7 +100,6 @@ public class MyWebActivity extends MyBaseTitleActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         switch(keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 if(mWebView.canGoBack()) {

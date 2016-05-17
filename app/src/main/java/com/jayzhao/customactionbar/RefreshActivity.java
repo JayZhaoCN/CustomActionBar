@@ -15,7 +15,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 /**
  * Created by hm on 16-5-17.
  */
-public class RefreshActivity extends MyBaseTitleActivity {
+public class RefreshActivity extends MyBaseTitleActivity implements View.OnClickListener{
 
     private PullToRefreshListView mRefreshListView = null;
     private ListView mListView = null;
@@ -69,8 +69,16 @@ public class RefreshActivity extends MyBaseTitleActivity {
         mRefreshListView.getLoadingLayoutProxy(true, true).setPullLabel("下拉刷新");
         mRefreshListView.getLoadingLayoutProxy(true, true).setRefreshingLabel("正在刷新");
         mRefreshListView.getLoadingLayoutProxy(true, true).setReleaseLabel("松开刷新");
+        getRightButton().setOnClickListener(this);
+    }
 
-
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.right:
+                MyUtils.showToast(RefreshActivity.this, "Right Button Clicked!");
+                break;
+        }
     }
 
     class MyAdapter extends BaseAdapter {

@@ -75,7 +75,7 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 				break;
 			case VERTICAL:
 			default:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
+				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical_simple, this);
 				break;
 		}
 

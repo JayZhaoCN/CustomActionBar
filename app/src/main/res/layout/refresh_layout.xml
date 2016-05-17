@@ -4,16 +4,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
     <!--
         ptrMode表示刷新方式
+        ptrDrawableStart表示下拉的drawable资源
     -->
-
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/refresh_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:ptrMode="pullDownFromTop"
+        app:ptrAnimationStyle="flip"
+        app:ptrDrawableStart="@drawable/pulldown"
+        app:ptrHeaderBackground="@color/sleep_bg_light"
         />
-
+   <!-- <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/refresh_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:ptrMode="pullDownFromTop"
+        app:ptrAnimationStyle="rotate"
+        app:ptrDrawable="@drawable/progress_icon"
+        app:ptrHeaderBackground="@color/titlebar_bg_color"
+        />-->
 </LinearLayout>

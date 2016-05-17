@@ -65,6 +65,12 @@ public class RefreshActivity extends MyBaseTitleActivity {
                 }).start();
             }
         });
+        mRefreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mRefreshListView.getLoadingLayoutProxy(true, true).setPullLabel("下拉刷新");
+        mRefreshListView.getLoadingLayoutProxy(true, true).setRefreshingLabel("正在刷新");
+        mRefreshListView.getLoadingLayoutProxy(true, true).setReleaseLabel("松开刷新");
+
+
     }
 
     class MyAdapter extends BaseAdapter {

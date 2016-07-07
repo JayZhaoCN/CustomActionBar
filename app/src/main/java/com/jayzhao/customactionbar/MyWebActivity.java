@@ -3,6 +3,7 @@ package com.jayzhao.customactionbar;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Debug;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,12 +34,16 @@ public class MyWebActivity extends MyBaseTitleActivity {
     private ProgressBar mProgressBar;
     private String mUrl;
     private PullToRefreshWebView mRefreshWebView = null;
+    private EditText mEditText = null;
+    private Button mRightButton = null;
+    private TextView mTitleText = null;
+    private Button mSearchButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.web_layout);
-        setStyle(STYLE.SINGLE_BACK);
+        setStyle(STYLE.BACK_AND_EDIT);
         mUrl = getIntent().getStringExtra("URL");
         setTitle("Surf Internet");
         mRefreshWebView = (PullToRefreshWebView) findViewById(R.id.refresh_holder);
@@ -83,7 +90,7 @@ public class MyWebActivity extends MyBaseTitleActivity {
 
             @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                if(errorCode == WebViewClient.ERROR_HOST_LOOKUP) {
+                if (errorCode == WebViewClient.ERROR_HOST_LOOKUP) {
                     mTips.setVisibility(View.VISIBLE);
                 }
 
@@ -96,6 +103,34 @@ public class MyWebActivity extends MyBaseTitleActivity {
                 mProgressBar.setProgress(newProgress + 5);
             }
         });
+
+        mEditText = (EditText) findViewById(R.id.edit_text);
+        mRightButton = getRightButton();
+        mSearchButton = getSearchButton();
+        mSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "Search Button Clicked!");
+
+                String url = "www.baidu.com";//mEditText.getText().toString();
+                Log.e(TAG, "the url is :" + url);
+                mWebView.loadUrl(url);
+                mSearchButton.setVisibility(View.GONE);
+                mRightButton.setVisibility(View.VISIBLE);
+                mEditText.setVisibility(View.GONE);
+                //mTitleText.setVisibility(View.VISIBLE);
+            }
+        });
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                mWebView.loadUrl("www.baidu.com");
+                mWebView.reload();
+            }
+        }, 3000);
     }
 
     @Override

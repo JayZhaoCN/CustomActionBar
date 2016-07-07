@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,12 +20,11 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import static com.jayzhao.customactionbar.MyBaseTitleActivity.STYLE.BACK_AND_MORE;
 import static com.jayzhao.customactionbar.MyBaseTitleActivity.STYLE.FULL_SCREEN;
 import static com.jayzhao.customactionbar.MyBaseTitleActivity.STYLE.SINGLE_BACK;
 
 /**
- * Created by Administrator on 2016/4/7.
+ * Created by Zhao Jiabao on 2016/4/7.
  */
 public class MyBaseTitleActivity extends Activity {
 
@@ -35,13 +35,17 @@ public class MyBaseTitleActivity extends Activity {
 
     private View mContentView = null;
     private TextView mTitleText = null;
+    private EditText mEditText  = null;
+
+    private Button mSearchButton = null;
 
     private RelativeLayout mTitle;
 
     public enum STYLE {
         BACK_AND_MORE,
         SINGLE_BACK,
-        FULL_SCREEN
+        FULL_SCREEN,
+        BACK_AND_EDIT
     }
 
     private STYLE mStyle = SINGLE_BACK;
@@ -54,11 +58,21 @@ public class MyBaseTitleActivity extends Activity {
         mTitleText.setText(title);
     }
 
+    public TextView getTitleText() {
+        return mTitleText;
+    }
+
+    public EditText getEditText() {
+        return mEditText;
+    }
+
+    public Button getSearchButton() {
+        return mSearchButton;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_title_parent);
-
 
         mContentParent = (FrameLayout) findViewById(R.id.title_parent);
         mTitle = (RelativeLayout) findViewById(R.id.title);
@@ -66,6 +80,12 @@ public class MyBaseTitleActivity extends Activity {
         mTitleText = (TextView) findViewById(R.id.title_text);
 
         mLeftButton  = (Button) findViewById(R.id.left);
+        mLeftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mRightButton = (Button) findViewById(R.id.right);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -91,12 +111,7 @@ public class MyBaseTitleActivity extends Activity {
 
         switch(style) {
             case BACK_AND_MORE:
-                mLeftButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
+                //默认的样式，不用做操作
                 break;
             case SINGLE_BACK:
                 mRightButton.setVisibility(View.GONE);
@@ -111,6 +126,19 @@ public class MyBaseTitleActivity extends Activity {
                 mTitle.setVisibility(View.GONE);
                 updateView();
                 break;
+            case BACK_AND_EDIT:
+                mSearchButton = (Button) findViewById(R.id.search_button);
+                mRightButton.setBackgroundResource(R.drawable.edit_button);
+                mEditText = (EditText) findViewById(R.id.edit_text);
+                mRightButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mTitleText.setVisibility(View.GONE);
+                        mEditText.setVisibility(View.VISIBLE);
+                        mRightButton.setVisibility(View.GONE);
+                        mSearchButton.setVisibility(View.VISIBLE);
+                    }
+                });
             default:
                 break;
         }

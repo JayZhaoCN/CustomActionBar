@@ -39,6 +39,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <EditText
+            android:id="@+id/edit_text"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_width="260dp"
+            android:layout_height="30dp" />
+
         <Button
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
@@ -48,6 +55,17 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:id="@+id/right"/>
+
+        <Button
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:background="@drawable/edit_button"
+            android:layout_alignParentRight="true"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:id="@+id/search_button"/>
     </RelativeLayout>
 
 </RelativeLayout>

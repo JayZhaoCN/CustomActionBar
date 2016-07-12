@@ -189,7 +189,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 break;
             case R.id.webText:
                 intent = new Intent(MainActivity.this, MyWebActivity.class);
-                intent.putExtra("URL", "http://www.sina.com.cn/");
+                intent.putExtra("URL", "http://www.hao123.com");
                 startActivity(intent);
                 break;
             case R.id.changeAnimation:

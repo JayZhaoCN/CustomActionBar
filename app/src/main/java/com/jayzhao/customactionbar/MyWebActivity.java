@@ -1,6 +1,8 @@
 package com.jayzhao.customactionbar;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -74,8 +76,15 @@ public class MyWebActivity extends MyBaseTitleActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //在WebView中打开url
                 view.loadUrl(url);
                 return true;
+
+                //调用外部浏览器打开Url
+                /*Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return true;*/
             }
 
             @Override
@@ -99,6 +108,9 @@ public class MyWebActivity extends MyBaseTitleActivity {
             }
         });
 
+        /**
+         * 利用WebView.setWebChromeClient();方法可以响应加载进度变化
+         */
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -131,6 +143,11 @@ public class MyWebActivity extends MyBaseTitleActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Search Button Clicked!");
+                /**
+                 * 原来需要加上"http://"
+                 * 真是太蠢了
+                 */
+                mWebView.loadUrl("http://" + getEditText().getText());
             }
         });
     }

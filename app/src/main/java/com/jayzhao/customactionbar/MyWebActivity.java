@@ -131,6 +131,11 @@ public class MyWebActivity extends MyBaseTitleActivity {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Search Button Clicked!");
+                /**
+                 * 原来需要加上"http://"
+                 * 真是太蠢了
+                 */
+                mWebView.loadUrl("http://" + getEditText().getText());
             }
         });
     }

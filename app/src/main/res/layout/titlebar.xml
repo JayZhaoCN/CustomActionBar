@@ -40,6 +40,10 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:paddingLeft="3dp"
+            android:hint="输入网址"
+            android:textSize="14sp"
+            android:background="@color/white_55_percent"
             android:id="@+id/edit_text"
             android:visibility="gone"
             android:layout_centerInParent="true"
@@ -61,7 +65,7 @@
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
-            android:background="@drawable/edit_button"
+            android:background="@drawable/icon_goto"
             android:layout_alignParentRight="true"
             android:layout_width="28dp"
             android:layout_height="28dp"

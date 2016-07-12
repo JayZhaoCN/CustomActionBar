@@ -128,7 +128,7 @@ public class MyBaseTitleActivity extends Activity {
                 break;
             case BACK_AND_EDIT:
                 mSearchButton = (Button) findViewById(R.id.search_button);
-                mRightButton.setBackgroundResource(R.drawable.edit_button);
+                mRightButton.setBackgroundResource(R.drawable.edit_press);
                 mEditText = (EditText) findViewById(R.id.edit_text);
                 mRightButton.setOnClickListener(new View.OnClickListener() {
                     @Override

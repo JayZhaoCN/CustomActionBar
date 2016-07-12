@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -105,32 +107,32 @@ public class MyWebActivity extends MyBaseTitleActivity {
         });
 
         mEditText = (EditText) findViewById(R.id.edit_text);
+
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.e(TAG, "beforeTextChanged:" + s + " " + start + " " + count + " " + after);
+             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.e(TAG, "onTextChanged:" + s + " " + start + " "  + before + " " + count);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.e(TAG, "afterTextChanged:" + s);
+            }
+        });
+
         mRightButton = getRightButton();
         mSearchButton = getSearchButton();
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Search Button Clicked!");
-
-                String url = "www.baidu.com";//mEditText.getText().toString();
-                Log.e(TAG, "the url is :" + url);
-                mWebView.loadUrl(url);
-                mSearchButton.setVisibility(View.GONE);
-                mRightButton.setVisibility(View.VISIBLE);
-                mEditText.setVisibility(View.GONE);
-                //mTitleText.setVisibility(View.VISIBLE);
             }
         });
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                mWebView.loadUrl("www.baidu.com");
-                mWebView.reload();
-            }
-        }, 3000);
     }
 
     @Override

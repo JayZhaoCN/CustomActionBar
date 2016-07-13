@@ -1,5 +1,6 @@
 package com.jayzhao.customactionbar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -39,13 +41,13 @@ public class MyWebActivity extends MyBaseTitleActivity {
     private String mUrl;
     private PullToRefreshWebView mRefreshWebView = null;
     private EditText mEditText = null;
-    private Button mRightButton = null;
     private TextView mTitleText = null;
     private Button mSearchButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.web_layout);
         setStyle(STYLE.BACK_AND_EDIT);
         mUrl = getIntent().getStringExtra("URL");
@@ -118,7 +120,7 @@ public class MyWebActivity extends MyBaseTitleActivity {
             }
         });
 
-        mEditText = (EditText) findViewById(R.id.edit_text);
+        mEditText = getEditText();
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -137,17 +139,21 @@ public class MyWebActivity extends MyBaseTitleActivity {
             }
         });
 
-        mRightButton = getRightButton();
-        mSearchButton = getSearchButton();
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
+        //设置SearchButton按下监听事件
+        setSearchListener(new ISearch() {
             @Override
-            public void onClick(View v) {
+            public void onSearchClicked() {
                 Log.i(TAG, "Search Button Clicked!");
                 /**
                  * 原来需要加上"http://"
                  * 真是太蠢了
                  */
                 mWebView.loadUrl("http://" + getEditText().getText());
+                //标题栏返回普通样式
+                returnToNormal();
+                //隐藏系统软键盘
+                InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
             }
         });
     }

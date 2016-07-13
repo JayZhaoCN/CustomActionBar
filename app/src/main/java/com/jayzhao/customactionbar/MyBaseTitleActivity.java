@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -20,18 +22,19 @@ import android.widget.TextView;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import static com.jayzhao.customactionbar.MyBaseTitleActivity.STYLE.FULL_SCREEN;
-import static com.jayzhao.customactionbar.MyBaseTitleActivity.STYLE.SINGLE_BACK;
+
 
 /**
  * Created by Zhao Jiabao on 2016/4/7.
  */
-public class MyBaseTitleActivity extends Activity {
+public class MyBaseTitleActivity extends FragmentActivity implements View.OnClickListener {
 
     private static final String TAG = "MyBaseTitleActivity";
     private FrameLayout mContentParent;
     private Button mLeftButton;
     private Button mRightButton;
+
+    private ISearch mSearchListener = null;
 
     private View mContentView = null;
     private TextView mTitleText = null;
@@ -41,6 +44,39 @@ public class MyBaseTitleActivity extends Activity {
 
     private RelativeLayout mTitle;
 
+    @Override
+    public void onClick(View v) {
+        Log.e(TAG, "some button has been clicked");
+        switch(v.getId()) {
+            //任何情况下点击LeftButton都会返回上一级。
+            case R.id.left:
+                Log.e(TAG, "back click!");
+                finish();
+                break;
+            case R.id.right:
+                switch(mStyle) {
+                    case BACK_AND_EDIT:
+                        changeToEdit();
+                        /**
+                         * 下面的代码展示了如何调起软键盘
+                         */
+                        mEditText.setFocusable(true);
+                        mEditText.setFocusableInTouchMode(true);
+                        mEditText.requestFocus();
+                        InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                        break;
+                }
+                break;
+            case R.id.search_button:
+                mSearchListener.onSearchClicked();
+                break;
+        }
+    }
+
+    /**
+     * Sytle枚举
+     */
     public enum STYLE {
         BACK_AND_MORE,
         SINGLE_BACK,
@@ -48,7 +84,8 @@ public class MyBaseTitleActivity extends Activity {
         BACK_AND_EDIT
     }
 
-    private STYLE mStyle = SINGLE_BACK;
+    /**默认的风格是BACK_AND_MORE*/
+    private STYLE mStyle = STYLE.BACK_AND_MORE;
 
     public Button getRightButton() {
         return mRightButton;
@@ -80,6 +117,7 @@ public class MyBaseTitleActivity extends Activity {
         mTitleText = (TextView) findViewById(R.id.title_text);
 
         mLeftButton  = (Button) findViewById(R.id.left);
+        //为什么？？？
         mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,24 +141,31 @@ public class MyBaseTitleActivity extends Activity {
         View statusView = findViewById(R.id.status_view);
 
         statusView.getLayoutParams().height = x;
-
     }
 
+    /**
+     * 设置显示风格
+     * @param style 显示风格
+     */
     public void setStyle(STYLE style) {
         mStyle = style;
-
         switch(style) {
             case BACK_AND_MORE:
+                /*mLeftButton.setClickable(true);
+                mLeftButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(v.getId() == R.id.left) {
+                            Log.e(TAG, "fuck clicked");
+                            finish();
+                        }
+
+                    }
+                });*/
                 //默认的样式，不用做操作
                 break;
             case SINGLE_BACK:
                 mRightButton.setVisibility(View.GONE);
-                mLeftButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
                 break;
             case FULL_SCREEN:
                 mTitle.setVisibility(View.GONE);
@@ -130,18 +175,33 @@ public class MyBaseTitleActivity extends Activity {
                 mSearchButton = (Button) findViewById(R.id.search_button);
                 mRightButton.setBackgroundResource(R.drawable.edit_press);
                 mEditText = (EditText) findViewById(R.id.edit_text);
-                mRightButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mTitleText.setVisibility(View.GONE);
-                        mEditText.setVisibility(View.VISIBLE);
-                        mRightButton.setVisibility(View.GONE);
-                        mSearchButton.setVisibility(View.VISIBLE);
-                    }
-                });
+                //BACK_AND_EDIT模式下，点击RightButton会转换编辑模式。
+                mRightButton.setOnClickListener(this);
+                mSearchButton.setOnClickListener(this);
+                break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 将标题栏转换为编辑模式
+     */
+    public void changeToEdit() {
+        mTitleText.setVisibility(View.GONE);
+        mEditText.setVisibility(View.VISIBLE);
+        mRightButton.setVisibility(View.GONE);
+        mSearchButton.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 将标题栏转换为正常模式
+     */
+    public void returnToNormal() {
+        mTitleText.setVisibility(View.VISIBLE);
+        mEditText.setVisibility(View.GONE);
+        mRightButton.setVisibility(View.VISIBLE);
+        mSearchButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -155,7 +215,6 @@ public class MyBaseTitleActivity extends Activity {
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         params.gravity = Gravity.TOP;
-
         setContentView(view, params);
     }
 
@@ -175,11 +234,13 @@ public class MyBaseTitleActivity extends Activity {
     }
 
     private void updateView() {
-        if(mContentView != null && mStyle == FULL_SCREEN) {
-            //Log.e(TAG, "mContentView is not null");
-            //直接从mContentView中拿到的LayoutParams似乎是NULL，具体为什么不知道。
-            //mContentView.getLayoutParams();  //the value is NULL
-            //(mContentParent.addView())，当然是null啊
+        if(mContentView != null && mStyle == STYLE.FULL_SCREEN) {
+            /**
+               Log.e(TAG, "mContentView is not null");
+               直接从mContentView中拿到的LayoutParams似乎是NULL，具体为什么不知道。
+               mContentView.getLayoutParams();  //the value is NULL
+               (mContentParent.addView())，当然是null啊
+             */
             if(mContentParent.getChildAt(1) != null) {
                 //Log.e(TAG, "child is not null");
                 FrameLayout.LayoutParams params =
@@ -222,5 +283,11 @@ public class MyBaseTitleActivity extends Activity {
         return false;
     }
 
+    public void setSearchListener(ISearch listener) {
+        this.mSearchListener = listener;
+    }
 
+    public interface ISearch {
+        void onSearchClicked();
+    }
 }

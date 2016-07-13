@@ -29,7 +29,7 @@
         android:max="105"
         android:progress="5"
         android:layout_marginTop="-8dp"
-        android:progressTint="@color/split_color"
+        android:progressTint="@color/bg_color_blue_dark"
         android:progressTintMode="src_in"
         android:progressBackgroundTint="@android:color/transparent"
         android:progressBackgroundTintMode="src_in"

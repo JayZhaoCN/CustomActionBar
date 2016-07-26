@@ -1,6 +1,7 @@
 package com.jayzhao.customactionbar;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,15 +22,33 @@ public class ExamActivity extends MyBaseTitleActivity implements View.OnClickLis
     private List<Question> mQuestionList = null;
     private int mCorrectAmount = 0;
 
+    private static final String TAG = "ExamActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /**
+         * 用于恢复
+         */
+        if(savedInstanceState != null) {
+            mQuestionIndex = savedInstanceState.getInt("IndexNow");
+            Log.d(TAG, "savedInstanceState is not null  " + mQuestionIndex);
+        }
+
+
         setContentView(R.layout.activity_exam);
         setStyle(STYLE.SINGLE_BACK);
         setTitle("测试");
 
         initViews();
         initDatas();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState executed!");
+        outState.putInt("IndexNow", mQuestionIndex);
     }
 
     private void initViews() {
@@ -83,7 +102,7 @@ public class ExamActivity extends MyBaseTitleActivity implements View.OnClickLis
                             mCorrectAmount ++;
                         }
                     }
-                    MyUtils.showToast(ExamActivity.this, "没有问题啦!" + "\n总共有" + mQuestionList.size() + "题，" + "答对了" + mCorrectAmount + "题"
+                    MyUtils.showToastLong(ExamActivity.this, "没有问题啦!" + "\n总共有" + mQuestionList.size() + "题，" + "答对了" + mCorrectAmount + "题"
                     + "\n正确率为" + (float)mCorrectAmount/mQuestionList.size());
                     mQuestionIndex = 0;
                     mCorrectAmount = 0;

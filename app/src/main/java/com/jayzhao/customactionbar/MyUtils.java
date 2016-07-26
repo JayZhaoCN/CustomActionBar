@@ -30,6 +30,15 @@ public class MyUtils {
         myToast.show();
     }
 
+    public static void showToastLong(Context context, String str) {
+        if(myToast == null) {
+            myToast = Toast.makeText(context, str, Toast.LENGTH_LONG);
+        } else {
+            myToast.setText(str);
+        }
+        myToast.show();
+    }
+
     public static void showIconToast(Context context, String str, int resId) {
 
         if(myIconToast == null) {

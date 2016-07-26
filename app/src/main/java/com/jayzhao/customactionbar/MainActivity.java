@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     private TextView mChangeAnimation;
     private TextView mPromptDialogText;
     private TextView mNextPage;
+    private TextView mFullScreen;
 
     private MyLoadingDialog mDialog;
 
@@ -89,11 +91,86 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         }
     };
 
+    /**
+     * 关于onSaveInstanceState()和onRestoreInstanceState()这两个方法，请看这篇博文：
+     * http://www.cnblogs.com/hanyonglu/archive/2012/03/28/2420515.html
+     */
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause>>>>>>");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume>>>>>>");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart>>>>>>");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestoroy>>>>>>");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        Log.i(TAG, "onSaveInstanceState>>>>>>");
+        savedInstanceState.putString("Name:", "Jay Zhao");
+        savedInstanceState.putInt("Age:", 23);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop>>>>>>");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i(TAG, "onRestoreInstanceState>>>>>>");
+    }
+
+    private void initViews() {
+        mFullScreen = (TextView) findViewById(R.id.full_screen);
+        mFullScreen.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.i(TAG, "fullScreen Long Click!");
+                Intent intent = new Intent(MainActivity.this, ExamActivity.class);
+                startActivity(intent);
+                /**
+                 * onLongClick返回true表示事件被LongClick消费，不会触发其他事件。
+                 * 返回false则会触发其他事件，例如onClick
+                 */
+                return true;
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
+        initViews();
+
+        if(savedInstanceState != null) {
+            Log.i(TAG, "savedInstanceState: >>>>>>" + savedInstanceState.getString("Name:"));
+        }
+
+        Log.i(TAG, "onCreate>>>>>>");
         setStyle(STYLE.BACK_AND_MORE);
 
         /**

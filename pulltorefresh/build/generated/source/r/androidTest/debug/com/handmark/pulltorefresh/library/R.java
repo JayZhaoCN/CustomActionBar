@@ -47,6 +47,10 @@ public final class R {
 		public static final int indicator_arrow = 0x7f020002;
 		public static final int indicator_bg_bottom = 0x7f020003;
 		public static final int indicator_bg_top = 0x7f020004;
+		public static final int loading_progress = 0x7f020005;
+		public static final int progress_icon = 0x7f020006;
+		public static final int pulldown = 0x7f020007;
+		public static final int pullup = 0x7f020008;
 	}
 	public static final class id {
 		public static final int both = 0x7f060003;
@@ -70,6 +74,7 @@ public final class R {
 	public static final class layout {
 		public static final int pull_to_refresh_header_horizontal = 0x7f030000;
 		public static final int pull_to_refresh_header_vertical = 0x7f030001;
+		public static final int pull_to_refresh_header_vertical_simple = 0x7f030002;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f050003;

@@ -96,7 +96,7 @@ public class MyLoadingView extends View {
         points[7] = 122 / 378f * width;
     }
 
-    public void obtainStyledAttr(AttributeSet attrs, int defStyleAttr) {
+    public void obtainStyledAttr(AttributeSet attrs, int defStyleAttr)   {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.MyLoadingView, 0, defStyleAttr);
         mText = ta.getString(R.styleable.MyLoadingView_text);
         mColor = ta.getColor(R.styleable.MyLoadingView_colorz, Color.WHITE);

@@ -197,6 +197,15 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mRecyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
         mRecyclerViewText.setOnClickListener(this);
 
+        mRecyclerViewText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BezierActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
+
         mTableText = (TextView) findViewById(R.id.tableLayoutText);
         mTableText.setOnClickListener(this);
 
@@ -216,7 +225,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
 
-                final MyAlertDialog dialog = new MyAlertDialog(MainActivity.this);
+                MyAlertDialog dialog = new MyAlertDialog(MainActivity.this);
                 final Dialog myDialog = dialog.getDialog(3, "Toast", "Custom Toast", "Custom Toast 2");
                 dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override

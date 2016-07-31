@@ -1,14 +1,26 @@
 [
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_top.xml",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_top.xml"
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     },
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable/loading_progress.xml",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable/loading_progress.xml"
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_progress.xml",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\loading_progress.xml"
     },
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable/indicator_bg_bottom.xml",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable/indicator_bg_bottom.xml"
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\loading_progress.xml",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\loading_progress.xml"
+    },
+    {
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+    },
+    {
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     }
 ]

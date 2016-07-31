@@ -1,14 +1,26 @@
 [
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/pullup.png",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/pullup.png"
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\pullup.png",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\pullup.png"
     },
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/progress_icon.png",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/progress_icon.png"
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\progress_icon.png",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\progress_icon.png"
     },
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/pulldown.png",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/pulldown.png"
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\pulldown.png",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\pulldown.png"
+    },
+    {
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\pulldown.png",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\pulldown.png"
+    },
+    {
+        "merged": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\progress_icon.png",
+        "source": "E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\progress_icon.png"
+    },
+    {
+        "merged": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\pullup.png",
+        "source": "E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\pullup.png"
     }
 ]

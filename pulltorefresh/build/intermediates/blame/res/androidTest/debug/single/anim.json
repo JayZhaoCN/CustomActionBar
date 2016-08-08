@@ -4,15 +4,47 @@
         "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml"
     },
     {
+        "merged": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+    },
+    {
         "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_top.xml",
         "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_top.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_bottom.xml",
+        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml"
     },
     {
         "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_bottom.xml",
         "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml"
     },
     {
-        "merged": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_bottom.xml",
-        "source": "/home/hm/CustomActionBar/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml"
+        "merged": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "/home/hm/CustomActionBar/E:\\home\\hm\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+    },
+    {
+        "merged": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "/home/hm/CustomActionBar/E:\\CustomActionBar\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
     }
 ]

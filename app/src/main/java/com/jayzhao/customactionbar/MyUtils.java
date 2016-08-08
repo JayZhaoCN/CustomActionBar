@@ -23,6 +23,11 @@ public class MyUtils {
     private static Toast myIconToast;
     private static Toast myCustomToast;
 
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
     public static void showToast(Context context, String str) {
         if(myToast == null) {
             myToast = Toast.makeText(context, str, Toast.LENGTH_SHORT);

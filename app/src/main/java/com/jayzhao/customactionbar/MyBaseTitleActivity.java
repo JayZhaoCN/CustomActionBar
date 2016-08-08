@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 
 
 /**
- * Created by Zhao Jiabao on 2016/4/7.
+ * Created by Jay on 2016/4/7.
  */
 public class MyBaseTitleActivity extends FragmentActivity implements View.OnClickListener {
 
@@ -46,6 +46,9 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
 
     private View mStatusView = null;
     private ViewGroup mTitleParent = null;
+
+    /**默认的风格是BACK_AND_MORE*/
+    private STYLE mStyle = STYLE.BACK_AND_MORE;
 
     @Override
     public void onClick(View v) {
@@ -87,9 +90,10 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
         BACK_AND_EDIT
     }
 
-    /**默认的风格是BACK_AND_MORE*/
-    private STYLE mStyle = STYLE.BACK_AND_MORE;
-
+    /**
+     * 得到右边的Button
+     * @return
+     */
     public Button getRightButton() {
         return mRightButton;
     }
@@ -102,14 +106,26 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
         mTitleText.setText(title);
     }
 
+    /**
+     * 得到标题所对应的TextView
+     * @return TextView
+     */
     public TextView getTitleText() {
         return mTitleText;
     }
 
+    /**
+     * 得到标题栏上的编辑框
+     * @return EditText
+     */
     public EditText getEditText() {
         return mEditText;
     }
 
+    /**
+     * 得到搜索按钮
+     * @return Search Button
+     */
     public Button getSearchButton() {
         return mSearchButton;
     }
@@ -160,17 +176,6 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
         mStyle = style;
         switch(style) {
             case BACK_AND_MORE:
-                /*mLeftButton.setClickable(true);
-                mLeftButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(v.getId() == R.id.left) {
-                            Log.e(TAG, "fuck clicked");
-                            finish();
-                        }
-
-                    }
-                });*/
                 //默认的样式，不用做操作
                 break;
             case SINGLE_BACK:
@@ -285,11 +290,6 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
-    }
-
-    public static int px2dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
     }
 
     public static boolean setMiuiStatusBarDarkMode(Activity activity, boolean darkmode) {

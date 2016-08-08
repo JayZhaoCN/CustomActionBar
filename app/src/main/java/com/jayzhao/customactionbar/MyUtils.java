@@ -3,7 +3,9 @@ package com.jayzhao.customactionbar;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,6 +114,14 @@ public class MyUtils {
         myCustomToast.show();
     }
 
+    public static float sp2px(Context context, float sp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics);
+    }
 
+    public static float dp2px(Context context, float dp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
+    }
 
 }

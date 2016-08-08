@@ -31,6 +31,7 @@
         <activity android:name=".RefreshActivity"/>
         <activity android:name=".BezierActivity"/>
         <activity android:name=".ExamActivity"/>
+        <activity android:name=".TestViewActivity"/>
     </application>
 
 </manifest>

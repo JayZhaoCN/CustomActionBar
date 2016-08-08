@@ -208,6 +208,13 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mTableText = (TextView) findViewById(R.id.tableLayoutText);
         mTableText.setOnClickListener(this);
+        mTableText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(MainActivity.this, TestViewActivity.class));
+                return true;
+            }
+        });
 
         mWebText = (TextView) findViewById(R.id.webText);
         mWebText.setOnClickListener(this);

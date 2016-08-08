@@ -80,8 +80,8 @@ public class AnimationTest extends MyBaseTitleActivity implements View.OnClickLi
                 break;
             case R.id.TranslateAnimation:
                 TranslateAnimation translate = new TranslateAnimation(0, 400, 0, 400);
-                translate.setRepeatCount(3);
-                translate.setRepeatMode(Animation.REVERSE);
+                /*translate.setRepeatCount(3);
+                translate.setRepeatMode(Animation.REVERSE);*/
                 translate.setDuration(3000);
                 mTranslateAnimation.startAnimation(translate);
 

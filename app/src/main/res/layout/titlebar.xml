@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_below="@id/status_view"
         android:layout_width="match_parent"
-        android:id="@+id/title_parent"
+        android:id="@+id/title_container"
         android:layout_height="@dimen/title_height"
         android:background="@color/titlebar_bg_color">
 

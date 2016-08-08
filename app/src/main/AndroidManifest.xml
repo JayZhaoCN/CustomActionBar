@@ -32,6 +32,9 @@
         <activity android:name=".BezierActivity"/>
         <activity android:name=".ExamActivity"/>
         <activity android:name=".TestViewActivity"/>
+
+        <!--Another World-->
+        <activity android:name=".another_world.AnotherMainActivity"/>
     </application>
 
 </manifest>

@@ -44,6 +44,9 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
 
     private RelativeLayout mTitle;
 
+    private View mStatusView = null;
+    private ViewGroup mTitleParent = null;
+
     @Override
     public void onClick(View v) {
         Log.e(TAG, "some button has been clicked");
@@ -91,6 +94,10 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
         return mRightButton;
     }
 
+    /**
+     * 设置Activity的标题
+     * @param title 标题
+     */
     public void setTitle(String title) {
         mTitleText.setText(title);
     }
@@ -138,9 +145,11 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
 
         int x = getStatusBarHeight();
 
-        View statusView = findViewById(R.id.status_view);
+        mTitleParent = (ViewGroup) findViewById(R.id.title_container);
 
-        statusView.getLayoutParams().height = x;
+        mStatusView = findViewById(R.id.status_view);
+
+        mStatusView.getLayoutParams().height = x;
     }
 
     /**
@@ -182,6 +191,22 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
             default:
                 break;
         }
+    }
+
+    /**
+     * 需要注意的是，子类在继承时。该方法需要在super.onCreate()方法之后调用，否则颜色的设置可能不起作用
+     * @param style
+     * @param color
+     */
+    public void setStyle(STYLE style, int color) {
+        setStyle(style);
+        if(mStatusView != null) {
+            mStatusView.setBackgroundResource(color);
+        }
+        if(null != mTitleParent) {
+            mTitleParent.setBackgroundResource(color);
+        }
+
     }
 
     /**

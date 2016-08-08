@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jayzhao.customactionbar.Widget.MyDialogFragment;
+import com.jayzhao.customactionbar.another_world.AnotherMainActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -221,6 +222,13 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mChangeAnimation = (TextView) findViewById(R.id.changeAnimation);
         mChangeAnimation.setOnClickListener(this);
+        mChangeAnimation.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(MainActivity.this, AnotherMainActivity.class));
+                return true;
+            }
+        });
 
         mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
         mPromptDialogText.setOnClickListener(this);

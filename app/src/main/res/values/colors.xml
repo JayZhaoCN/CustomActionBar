@@ -47,6 +47,7 @@
     <color name="bg_mode_weight">#00a388</color>
     <color name="bg_color_blue_dark">#1879cb</color>
     <color name="bg_color_red">#c84d67</color>
+    <color name="bg_color_red_dark">#993b57</color>
     <color name="disable_text_color_dark">#33ffffff</color>
 
     <color name="split_color">#FFe5e5e5</color>

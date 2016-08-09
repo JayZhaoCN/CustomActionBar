@@ -17,9 +17,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //判断savedInstanceState是否为空可以保证屏幕翻转时不做多余的操作。
         if (savedInstanceState == null) {
             /**
-             *
+             *这两种写法应该是一样的
              */
             /*getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, ItemsFragment.newInstance())

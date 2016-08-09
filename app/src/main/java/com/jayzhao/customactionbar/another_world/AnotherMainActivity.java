@@ -1,5 +1,6 @@
 package com.jayzhao.customactionbar.another_world;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.BinderThread;
 import android.util.Log;
@@ -37,6 +38,6 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     @OnClick(R.id.recycler_view_new)
     public void onClick() {
         Log.i(TAG, "ButterKnife");
-
+        startActivity(new Intent(AnotherMainActivity.this, MyDetailActivity.class));
     }
 }

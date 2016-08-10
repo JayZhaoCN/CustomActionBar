@@ -91,28 +91,28 @@ public class RecyclerViewActivity extends MyBaseTitleActivity implements View.On
 
                 mMyAlertDialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
-                    public void firstItemClick(View v) {
+                    public void firstItemClick(View v, Dialog realDialog) {
                         mStyle = LINEAR_VERTICAL;
                         mDialog.cancel();
                         initRecyclerView();
                     }
 
                     @Override
-                    public void secondItemClick(View v) {
+                    public void secondItemClick(View v, Dialog realDialog) {
                         mStyle = LINEAR_HORIZONTAL;
                         mDialog.cancel();
                         initRecyclerView();
                     }
 
                     @Override
-                    public void thirdItemClick(View v) {
+                    public void thirdItemClick(View v, Dialog realDialog) {
                         mStyle = GRID_VERTICAL;
                         mDialog.cancel();
                         initRecyclerView();
                     }
 
                     @Override
-                    public void fourthItemClick(View v) {
+                    public void fourthItemClick(View v, Dialog realDialog) {
                         mStyle = GRID_HORIZONTAL;
                         mDialog.cancel();
                         initRecyclerView();

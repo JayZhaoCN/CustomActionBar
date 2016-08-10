@@ -244,25 +244,25 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 final Dialog myDialog = dialog.getDialog(3, "Toast", "Custom Toast", "Custom Toast 2");
                 dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
-                    public void firstItemClick(View v) {
+                    public void firstItemClick(View v, Dialog realDialog) {
                         MyUtils.showToast(MainActivity.this, "Custom Toast");
                         myDialog.dismiss();
                     }
 
                     @Override
-                    public void secondItemClick(View v) {
+                    public void secondItemClick(View v, Dialog realDialog) {
                         MyUtils.showIconToast(MainActivity.this, "Icon Toast!", R.mipmap.ic_launcher);
                         myDialog.dismiss();
                     }
 
                     @Override
-                    public void thirdItemClick(View v) {
+                    public void thirdItemClick(View v, Dialog realDialog) {
                         MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
                         myDialog.dismiss();
                     }
 
                     @Override
-                    public void fourthItemClick(View v) {
+                    public void fourthItemClick(View v, Dialog realDialog) {
 
                     }
                 });

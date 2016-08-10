@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 /**
- * Created by Jay Zhao on 16-4-12.
+ * Created by Jay on 16-4-12.
  */
 public class MyAlertDialog {
     private Dialog mDialog;
@@ -59,7 +59,7 @@ public class MyAlertDialog {
             text1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mOnItemClickListener.firstItemClick(v);
+                    mOnItemClickListener.firstItemClick(v, mDialog);
                 }
             });
 
@@ -70,7 +70,7 @@ public class MyAlertDialog {
                 text2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemClickListener.secondItemClick(v);
+                        mOnItemClickListener.secondItemClick(v, mDialog);
                     }
                 });
             }
@@ -82,7 +82,7 @@ public class MyAlertDialog {
                 text3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemClickListener.thirdItemClick(v);
+                        mOnItemClickListener.thirdItemClick(v, mDialog);
                     }
                 });
             }
@@ -94,7 +94,7 @@ public class MyAlertDialog {
                 text4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnItemClickListener.fourthItemClick(v);
+                        mOnItemClickListener.fourthItemClick(v, mDialog);
                     }
                 });
             }
@@ -111,31 +111,31 @@ public class MyAlertDialog {
     }
 
     public interface MyOnItemClickListener {
-        void firstItemClick(View v);
-        void secondItemClick(View v);
-        void thirdItemClick(View v);
-        void fourthItemClick(View v);
+        void firstItemClick(View v, Dialog realDialog);
+        void secondItemClick(View v,Dialog realDialog);
+        void thirdItemClick(View v, Dialog realDialog);
+        void fourthItemClick(View v, Dialog realDialog);
     }
 
-    public class MyOnItemClickListenerAdapter implements MyOnItemClickListener {
+    public static class MyOnItemClickListenerAdapter implements MyOnItemClickListener {
 
         @Override
-        public void firstItemClick(View v) {
+        public void firstItemClick(View v, Dialog dialog) {
 
         }
 
         @Override
-        public void secondItemClick(View v) {
+        public void secondItemClick(View v, Dialog dialog) {
 
         }
 
         @Override
-        public void thirdItemClick(View v) {
+        public void thirdItemClick(View v, Dialog dialog) {
 
         }
 
         @Override
-        public void fourthItemClick(View v) {
+        public void fourthItemClick(View v, Dialog dialog) {
 
         }
     }

@@ -68,26 +68,26 @@ public class BezierActivity extends MyBaseTitleActivity {
                 final Dialog myDialog = dialog.getDialog(2, "二阶贝塞尔", "三阶贝塞尔");
                 dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
-                    public void firstItemClick(View v) {
+                    public void firstItemClick(View v, Dialog realDialog) {
                         mBezier2.setVisibility(View.VISIBLE);
                         mBezier3Container.setVisibility(View.GONE);
                         myDialog.dismiss();
                     }
 
                     @Override
-                    public void secondItemClick(View v) {
+                    public void secondItemClick(View v, Dialog realDialog) {
                         mBezier2.setVisibility(View.GONE);
                         mBezier3Container.setVisibility(View.VISIBLE);
                         myDialog.dismiss();
                     }
 
                     @Override
-                    public void thirdItemClick(View v) {
+                    public void thirdItemClick(View v, Dialog realDialog) {
 
                     }
 
                     @Override
-                    public void fourthItemClick(View v) {
+                    public void fourthItemClick(View v, Dialog realDialog) {
 
                     }
                 });

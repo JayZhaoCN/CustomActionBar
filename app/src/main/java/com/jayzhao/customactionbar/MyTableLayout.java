@@ -41,24 +41,24 @@ public class MyTableLayout extends MyBaseTitleActivity implements View.OnClickLi
 
                 mMyAlertDialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
-                    public void firstItemClick(View v) {
+                    public void firstItemClick(View v, Dialog realDialog) {
                         MyTableLayout.this.setContentView(R.layout.table_layout);
                         mDialog.cancel();
                     }
 
                     @Override
-                    public void secondItemClick(View v) {
+                    public void secondItemClick(View v, Dialog realDialog) {
                         MyTableLayout.this.setContentView(R.layout.table_layout2);
                         mDialog.cancel();
                     }
 
                     @Override
-                    public void thirdItemClick(View v) {
+                    public void thirdItemClick(View v, Dialog realDialog) {
 
                     }
 
                     @Override
-                    public void fourthItemClick(View v) {
+                    public void fourthItemClick(View v, Dialog realDialog) {
 
                     }
                 });

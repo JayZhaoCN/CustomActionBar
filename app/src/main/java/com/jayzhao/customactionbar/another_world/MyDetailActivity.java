@@ -11,6 +11,7 @@ import android.view.View;
 import com.jayzhao.customactionbar.MyAlertDialog;
 import com.jayzhao.customactionbar.MyBaseTitleActivity;
 import com.jayzhao.customactionbar.R;
+import com.jayzhao.customactionbar.Widget.MyDialogBuilder;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,32 +38,22 @@ public class MyDetailActivity extends MyBaseTitleActivity {
         getRightButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final MyAlertDialog alertDialog = new MyAlertDialog(MyDetailActivity.this);
-                final Dialog realDialog = alertDialog.getDialog(2, "Linear RecyclerView", "Grid RecyclerView");
-                alertDialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
-                    @Override
-                    public void firstItemClick(View v) {
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(MyDetailActivity.this));
-                        realDialog.dismiss();
-                    }
+                MyDialogBuilder builder = new MyDialogBuilder(MyDetailActivity.this);
+                Dialog dialog = builder.setDatas(2, "Linear RecyclerView", "Grid RecyclerView")
+                        .setListener(new MyAlertDialog.MyOnItemClickListenerAdapter() {
+                            @Override
+                            public void firstItemClick(View v, Dialog dialog) {
+                                mRecyclerView.setLayoutManager(new LinearLayoutManager(MyDetailActivity.this));
+                                dialog.dismiss();
+                            }
 
-                    @Override
-                    public void secondItemClick(View v) {
-                        mRecyclerView.setLayoutManager(new GridLayoutManager(MyDetailActivity.this, 3));
-                        realDialog.dismiss();
-                    }
-
-                    @Override
-                    public void thirdItemClick(View v) {
-
-                    }
-
-                    @Override
-                    public void fourthItemClick(View v) {
-
-                    }
-                });
-                realDialog.show();
+                            @Override
+                            public void secondItemClick(View v, Dialog dialog) {
+                                mRecyclerView.setLayoutManager(new GridLayoutManager(MyDetailActivity.this, 3));
+                                dialog.dismiss();
+                            }
+                        }).getRealDialog();
+                dialog.show();
             }
         });
     }

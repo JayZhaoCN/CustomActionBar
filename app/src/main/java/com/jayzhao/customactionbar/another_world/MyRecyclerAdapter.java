@@ -80,8 +80,17 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
         @OnClick(R.id.child_text)
         public void onClick() {
-            Log.i(TAG, "onClick" + mChildText.getText());
-            MyUtils.showToast(mContext, mChildText.getText() + "");
+            Log.i(TAG, "onClick " + mChildText.getText());
+            if(mChildText.getText().equals("剑圣")) {
+                /**
+                 * 删除一个元素后记得notify一下
+                 */
+                mDatas.remove(0);
+                notifyItemRemoved(0);
+            } else {
+                mDatas.add(0, "BurNIng");
+                notifyItemInserted(0);
+            }
         }
     }
 }

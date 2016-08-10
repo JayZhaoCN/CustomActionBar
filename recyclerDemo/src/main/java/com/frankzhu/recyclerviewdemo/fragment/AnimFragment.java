@@ -3,6 +3,7 @@ package com.frankzhu.recyclerviewdemo.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -74,6 +75,7 @@ public class AnimFragment extends Fragment {
         }
         mAdapter = new AnimAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 //        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 

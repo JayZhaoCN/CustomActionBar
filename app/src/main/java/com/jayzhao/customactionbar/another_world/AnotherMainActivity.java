@@ -22,6 +22,8 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
      * 额，这里不可以是private的
      */
     TextView mRecyclerText = null;
+    @Bind(R.id.list_view)
+    TextView mListText = null;
 
     private static final String TAG = "AnotherMainActivity";
 
@@ -39,5 +41,10 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     public void onClick() {
         Log.i(TAG, "ButterKnife");
         startActivity(new Intent(AnotherMainActivity.this, MyDetailActivity.class));
+    }
+
+    @OnClick(R.id.list_view)
+    public void onListClick() {
+        startActivity(new Intent(AnotherMainActivity.this, MyListActivity.class));
     }
 }

@@ -36,6 +36,7 @@
         <!--Another World-->
         <activity android:name=".another_world.AnotherMainActivity"/>
         <activity android:name=".another_world.MyDetailActivity"/>
+        <activity android:name=".another_world.MyListActivity"/>
     </application>
 
 </manifest>

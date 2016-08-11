@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+    <com.jayzhao.customactionbar.another_world.Widget.MyListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/my_list"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#FFFFFFFF"/>

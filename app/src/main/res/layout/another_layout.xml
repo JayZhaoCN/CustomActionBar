@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -41,4 +42,43 @@
         android:clickable="true"
         android:layout_marginLeft="10dp"
         />
+
+    <com.jayzhao.customactionbar.another_world.Widget.MyProgressView
+        android:id="@+id/my_progress_view"
+        app:picture="@mipmap/icon_sport_result_notify"
+        app:strokeWidth1="2dp"
+        app:strokeColor1="@color/weight_bg"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/start_loading_text"
+            android:background="@drawable/another_button_background"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:text="Start"
+            android:clickable="true"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_toRightOf="@id/start_loading_text"
+            android:id="@+id/stop_loading_text"
+            android:background="@drawable/another_button_background"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="38dp"
+            android:text="Stop"
+            android:clickable="true"
+            android:layout_marginLeft="30dp"
+            />
+    </RelativeLayout>
 </LinearLayout>

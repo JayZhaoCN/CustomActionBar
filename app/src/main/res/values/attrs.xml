@@ -77,4 +77,10 @@
         <attr name="pointerRadius" format="dimension"/>
         <attr name="showViewText" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ProgressView">
+        <attr name="picture" format="reference"/>
+        <attr name="strokeColor1" format="color"/>
+        <attr name="strokeWidth1" format="dimension"/>
+    </declare-styleable>
 </resources>

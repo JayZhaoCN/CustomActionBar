@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.graphics.*;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.*;
 import android.widget.Scroller;
 
@@ -948,8 +949,10 @@ public class PieChart extends ViewGroup {
             return true;
         }
 
+        //onFling事件在手指离开屏幕的瞬间触发，会的到屏幕滑动的速度
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            Log.i("JayZhao ", "onFling!" + "velocityX: " + velocityX + " velocityY: " + velocityY);
             // Set up the Scroller for a fling
             float scrollTheta = vectorToScalarScroll(
                     velocityX,

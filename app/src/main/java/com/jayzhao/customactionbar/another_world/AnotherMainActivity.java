@@ -24,6 +24,8 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     TextView mRecyclerText = null;
     @Bind(R.id.list_view)
     TextView mListText = null;
+    @Bind(R.id.custom_view)
+    TextView mCustomViewText = null;
 
     private static final String TAG = "AnotherMainActivity";
 
@@ -46,5 +48,10 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     @OnClick(R.id.list_view)
     public void onListClick() {
         startActivity(new Intent(AnotherMainActivity.this, MyListActivity.class));
+    }
+
+    @OnClick(R.id.custom_view)
+    public void onCustomViewClick() {
+        startActivity(new Intent(AnotherMainActivity.this, CustomViewActivity.class));
     }
 }

@@ -45,9 +45,9 @@
 
     <com.jayzhao.customactionbar.another_world.Widget.MyProgressView
         android:id="@+id/my_progress_view"
-        app:picture="@mipmap/icon_sport_result_notify"
         app:strokeWidth1="2dp"
         app:strokeColor1="@color/weight_bg"
+        app:style="PROGRESS"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_width="200dp"

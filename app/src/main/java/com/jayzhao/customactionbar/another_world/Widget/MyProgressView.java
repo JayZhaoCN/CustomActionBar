@@ -43,6 +43,15 @@ public class MyProgressView extends View {
 
     private ValueAnimator mAnimator = null;
 
+
+    public static final int LOADING = 0;
+    public static final int PROGRESS = 1;
+
+    //默认的样式为LOADING
+    private int mStyle = LOADING;
+
+    private int mProgressAngle = 90;
+
     public MyProgressView(Context context) {
         this(context, null);
     }
@@ -65,7 +74,7 @@ public class MyProgressView extends View {
         mPaint.setColor(mStrokeColor);
         mPaint.setStrokeWidth(mStrokeWidth);
         //不太明白这句代码是做什么用的
-        //mPaint.setStrokeCap(Paint.Cap.SQUARE);
+        //mPaint.setStrokeCap(Paint.Cap.ROUND);
 
         //不自动Loading
         //startLoading();
@@ -76,7 +85,12 @@ public class MyProgressView extends View {
         mStrokeColor = ta.getColor(R.styleable.ProgressView_strokeColor1, getResources().getColor(R.color.blue_light));
         mStrokeWidth = ta.getDimensionPixelOffset(R.styleable.ProgressView_strokeWidth1, 10);
         mCenterDrawable = ta.getDrawable(R.styleable.ProgressView_picture);
+        if(mCenterDrawable == null) {
+            mCenterDrawable = getResources().getDrawable(R.drawable.icon_scale);
+        }
         Log.i(TAG, "" + mStrokeWidth);
+        //默认样式为LOADING
+        mStyle = ta.getInt(R.styleable.ProgressView_style, LOADING);
         ta.recycle();
     }
 
@@ -142,69 +156,99 @@ public class MyProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        initGradient();
-        canvas.drawCircle(mWidth / 2, mHeight / 2, (mHeight - mStrokeWidth) / 2, mPaint);
-        mCenterDrawable.setBounds(mWidth/2 - mCenterDrawable.getIntrinsicWidth()/2,
-                mHeight/2 - mCenterDrawable.getIntrinsicHeight()/2,
-                mWidth/2 + mCenterDrawable.getIntrinsicWidth()/2,
-                mHeight/2 + mCenterDrawable.getIntrinsicHeight()/2);
-        mCenterDrawable.draw(canvas);
-        //drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, drawable2Bitmap(mCenterDrawable), null);
+        switch (mStyle) {
+            case LOADING:
+                initGradient();
+                //圆心X，圆心Y，半径，画笔
+                canvas.drawCircle(mWidth / 2, mHeight / 2, (mHeight - mStrokeWidth) / 2, mPaint);
+                //设置中心图像的位置
+                mCenterDrawable.setBounds(mWidth/2 - mCenterDrawable.getIntrinsicWidth()/2,
+                        mHeight/2 - mCenterDrawable.getIntrinsicHeight()/2,
+                        mWidth/2 + mCenterDrawable.getIntrinsicWidth()/2,
+                        mHeight/2 + mCenterDrawable.getIntrinsicHeight()/2);
+                mCenterDrawable.draw(canvas);
+                //这个方法比较繁琐
+                //drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, drawable2Bitmap(mCenterDrawable), null);
+                break;
+            case PROGRESS:
+                canvas.drawArc(mStrokeWidth/2, mStrokeWidth/2, mWidth - mStrokeWidth/2, mHeight - mStrokeWidth/2, 0, mProgressAngle, false, mPaint);
+                break;
+            default:
+            break;
+        }
+    }
+
+    /**
+     * 设置当前的Progress
+     * @param progress 进度，从0 - 365
+     */
+    public void setProgress(int progress) {
+        if(mStyle == PROGRESS) {
+            mProgressAngle = progress;
+            Log.i(TAG, "setProgress : " + mProgressAngle);
+            invalidate();
+        }
     }
 
     public void startLoading() {
-        if(mAnimator == null) {
-            mAnimator = ValueAnimator.ofFloat(0, 1);
-            mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator animation) {
-                    offsetAngle = (int)((Float)animation.getAnimatedValue() * 360);
-                    Log.i("JayZhao ", "offsetAngle " + offsetAngle);
-                    postInvalidateOnAnimation();
-                }
-            });
-            mAnimator.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
+        if(mStyle == LOADING) {
+            if(mAnimator == null) {
+                mAnimator = ValueAnimator.ofFloat(0, 1);
+                mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        offsetAngle = (int)((Float)animation.getAnimatedValue() * 360);
+                        Log.i("JayZhao ", "offsetAngle " + offsetAngle);
+                        postInvalidateOnAnimation();
+                    }
+                });
+                mAnimator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationEnd(Animator animation) {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationCancel(Animator animation) {
-                    offsetAngle = 0;
-                    postInvalidateOnAnimation();
-                }
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+                        offsetAngle = 0;
+                        postInvalidateOnAnimation();
+                    }
 
-                @Override
-                public void onAnimationRepeat(Animator animation) {
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
 
-                }
-            });
-            mAnimator.setInterpolator(new LinearInterpolator());
-            mAnimator.setDuration(5000);
-            mAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        }
-        if(!mAnimator.isStarted()) {
-            mAnimator.start();
+                    }
+                });
+                mAnimator.setInterpolator(new LinearInterpolator());
+                mAnimator.setDuration(5000);
+                //mAnimator.setRepeatMode(ValueAnimator.REVERSE);
+                mAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            }
+            if(!mAnimator.isStarted()) {
+                mAnimator.start();
+            }
         }
     }
 
     public void stopLoading() {
-        if(mAnimator == null) {
-            return;
-        }
-        if(mAnimator.isRunning()) {
-            mAnimator.cancel();
-            mAnimator = null;
+        if(mStyle == LOADING) {
+            if(mAnimator == null) {
+                return;
+            }
+            if(mAnimator.isRunning()) {
+                mAnimator.cancel();
+                mAnimator = null;
+            }
         }
     }
 
     private void initGradient() {
+        //颜色的渐变
         if(mSweepGradient == null) {
             mSweepGradient = new SweepGradient(mWidth / 2, mHeight / 2, getResources().getColor(R.color.transparency), mStrokeColor);
             mPaint.setShader(mSweepGradient);

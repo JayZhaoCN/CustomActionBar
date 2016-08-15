@@ -79,6 +79,10 @@
     </declare-styleable>
 
     <declare-styleable name="ProgressView">
+        <attr name="style" >
+            <enum name="LOADING" value="0" />
+            <enum name="PROGRESS" value="1" />
+        </attr>
         <attr name="picture" format="reference"/>
         <attr name="strokeColor1" format="color"/>
         <attr name="strokeWidth1" format="dimension"/>

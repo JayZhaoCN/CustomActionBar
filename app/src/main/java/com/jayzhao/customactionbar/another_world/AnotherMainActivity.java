@@ -1,9 +1,11 @@
 package com.jayzhao.customactionbar.another_world;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.BinderThread;
 import android.util.Log;
+import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
 import com.jayzhao.customactionbar.MyBaseTitleActivity;
@@ -23,14 +25,19 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
      * 额，这里不可以是private的
      */
     TextView mRecyclerText = null;
+
     @Bind(R.id.list_view)
     TextView mListText = null;
+
     @Bind(R.id.custom_view)
     TextView mCustomViewText = null;
+
     @Bind(R.id.my_progress_view)
     MyProgressView mProgressView = null;
+
     @Bind(R.id.start_loading_text)
     TextView mStartLoadingText = null;
+
     @Bind(R.id.stop_loading_text)
     TextView mStopLoadingText = null;
 
@@ -43,6 +50,20 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         setContentView(R.layout.another_layout);
         setTitle("Another Home");
         ButterKnife.bind(this);
+
+        /**
+         * 模拟进度变化
+         */
+        ValueAnimator progressAnimator = ValueAnimator.ofInt(0, 365);
+        progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mProgressView.setProgress((int) animation.getAnimatedValue());
+            }
+        });
+        progressAnimator.setInterpolator(new LinearInterpolator());
+        progressAnimator.setDuration(5000);
+        progressAnimator.start();
     }
 
     @OnClick(R.id.recycler_view_new)

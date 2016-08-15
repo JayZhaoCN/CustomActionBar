@@ -54,16 +54,20 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         /**
          * 模拟进度变化
          */
-        ValueAnimator progressAnimator = ValueAnimator.ofInt(0, 365);
+      /*ValueAnimator progressAnimator = ValueAnimator.ofInt(0, 360);
         progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                mProgressView.setProgress((int) animation.getAnimatedValue());
+                int progress = (int) animation.getAnimatedValue();
+                mProgressView.setProgress(progress);
+                if(progress == 360) {
+                    mProgressView.setCenterText("Loading Done!");
+                }
             }
         });
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.setDuration(5000);
-        progressAnimator.start();
+        progressAnimator.start();*/
     }
 
     @OnClick(R.id.recycler_view_new)

@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.SweepGradient;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -20,6 +21,10 @@ import com.jayzhao.customactionbar.R;
 /**
  * Created by Jay on 16-8-12.
  */
+
+/**
+ * 这次添加文字
+ */
 public class MyProgressView extends View {
 
     private static final String TAG = "MyProgressView";
@@ -28,12 +33,15 @@ public class MyProgressView extends View {
     private float mStrokeWidth = 0;
     private Context mContext = null;
 
+    private String mCenterText = null;
+
     private Drawable mCenterDrawable = null;
 
     private int mWidth = 0;
     private int mHeight = 0;
 
     private Paint mPaint = null;
+    private Paint mTextPaint = null;
 
     private SweepGradient mSweepGradient = null;
 
@@ -41,6 +49,7 @@ public class MyProgressView extends View {
 
     private ValueAnimator mAnimator = null;
 
+    private Rect mTargetRect = null;
 
     public static final int LOADING = 0;
     public static final int PROGRESS = 1;
@@ -74,6 +83,12 @@ public class MyProgressView extends View {
         //不太明白这句代码是做什么用的
         //mPaint.setStrokeCap(Paint.Cap.ROUND);
 
+        mTextPaint = new Paint();
+        mTextPaint.setTextSize(MyUtils.sp2px(mContext, 20f));
+        mTextPaint.setColor(getResources().getColor(R.color.bg_color_red));
+        mTextPaint.setTextAlign(Paint.Align.CENTER);
+        mTextPaint.setAntiAlias(true);
+
         //不自动Loading
         //startLoading();
     }
@@ -89,6 +104,10 @@ public class MyProgressView extends View {
         Log.i(TAG, "" + mStrokeWidth);
         //默认样式为LOADING
         mStyle = ta.getInt(R.styleable.ProgressView_style, LOADING);
+        mCenterText = ta.getString(R.styleable.ProgressView_centerText);
+        if(null == mCenterText) {
+            mCenterText = "Default Text";
+        }
         ta.recycle();
     }
 
@@ -123,7 +142,29 @@ public class MyProgressView extends View {
                 MyUtils.drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, MyUtils.drawable2Bitmap(mCenterDrawable), null);
                 break;
             case PROGRESS:
-                canvas.drawArc(mStrokeWidth/2, mStrokeWidth/2, mWidth - mStrokeWidth/2, mHeight - mStrokeWidth/2, 0, mProgressAngle, false, mPaint);
+                if(mTargetRect == null) {
+                    mTargetRect = new Rect(0, 0, mWidth, mHeight);
+                }
+                mTextPaint.setTextAlign(Paint.Align.CENTER);
+                Paint.FontMetricsInt fontMetricsInt = mTextPaint.getFontMetricsInt();
+                Log.i(TAG + "_FontMetricsInt", "Ascent: " + fontMetricsInt.ascent);
+                Log.i(TAG + "_FontMetricsInt", "Descent: " + fontMetricsInt.descent);
+                Log.i(TAG + "_FontMetricsInt", "Bottom: " + fontMetricsInt.bottom);
+                Log.i(TAG + "_FontMetricsInt", "Top: " + fontMetricsInt.top);
+                Log.i(TAG + "_FontMetricsInt", "Leading: " + fontMetricsInt.leading);
+
+                /**
+                 * 如何让drawText()的文字垂直方向上居中，这种写法应该作为普遍写法。
+                 * mHeight是矩形的高度
+                 * 具体可以参考这篇博文:
+                 * http://blog.csdn.net/hursing/article/details/18703599
+                 */
+                int baseline = (mHeight - fontMetricsInt.bottom - fontMetricsInt.top) / 2;
+                Log.i(TAG + "_Test", "Baseline is: " + baseline);
+                Log.i(TAG + "_Test",  "Height is: " + mHeight);
+                canvas.drawArc(mStrokeWidth / 2, mStrokeWidth / 2, mWidth - mStrokeWidth / 2, mHeight - mStrokeWidth / 2, 0, mProgressAngle, false, mPaint);
+                canvas.drawText(mCenterText, mTargetRect.centerX(), baseline, mTextPaint);
+                //canvas.drawRect(mTargetRect, mPaint);
                 break;
             default:
             break;
@@ -132,12 +173,23 @@ public class MyProgressView extends View {
 
     /**
      * 设置当前的Progress
-     * @param progress 进度，从0 - 365
+     * @param progress 进度，从0 - 360
      */
     public void setProgress(int progress) {
         if(mStyle == PROGRESS) {
             mProgressAngle = progress;
             Log.i(TAG, "setProgress : " + mProgressAngle);
+            invalidate();
+        }
+    }
+
+    /**
+     * 设置中心文字
+     * @param centerText
+     */
+    public void setCenterText(String centerText) {
+        if(mStyle == PROGRESS) {
+            mCenterText = centerText;
             invalidate();
         }
     }

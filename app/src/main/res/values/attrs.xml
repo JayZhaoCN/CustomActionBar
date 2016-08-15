@@ -83,6 +83,7 @@
             <enum name="LOADING" value="0" />
             <enum name="PROGRESS" value="1" />
         </attr>
+        <attr name="centerText" format="string|reference"/>
         <attr name="picture" format="reference"/>
         <attr name="strokeColor1" format="color"/>
         <attr name="strokeWidth1" format="dimension"/>

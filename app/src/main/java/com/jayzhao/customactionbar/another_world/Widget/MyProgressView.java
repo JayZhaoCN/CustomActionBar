@@ -4,12 +4,10 @@ import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.SweepGradient;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -201,6 +199,9 @@ public class MyProgressView extends View {
         }
     }
 
+    /**
+     * 初始化Gradient
+     */
     private void initGradient() {
         //颜色的渐变
         if(mSweepGradient == null) {

@@ -107,52 +107,6 @@ public class MyProgressView extends View {
         setMeasuredDimension(mWidth, mHeight);
     }
 
-    public static void drawBitmapCenter(Canvas canvas, float x, float y, float scale, Bitmap bitmap, Paint paint) {
-        drawBitmapCenter(canvas, x, y, scale, true, true, bitmap, paint);
-    }
-
-
-    public static void drawBitmapCenter(Canvas canvas, float x, float y, float scale, boolean horizonCenter,
-                                        boolean verticalCenter, Bitmap bitmap, Paint paint) {
-        float offsetX = x;
-        float offsetY = y;
-        if (horizonCenter) {
-            offsetX -= bitmap.getWidth() * scale / 2;
-        }
-        if (verticalCenter) {
-            offsetY -= bitmap.getHeight() * scale / 2;
-        }
-
-        Matrix matrix = new Matrix();
-        matrix.setScale(scale, scale);
-        matrix.postTranslate(offsetX, offsetY);
-
-        canvas.drawBitmap(bitmap, matrix, paint);
-    }
-
-    public static Bitmap drawable2Bitmap(Drawable drawable) {
-        Bitmap bitmap = null;
-
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if (bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
-            }
-        }
-
-        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
-    }
-
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -168,7 +122,7 @@ public class MyProgressView extends View {
                         mHeight/2 + mCenterDrawable.getIntrinsicHeight()/2);
                 mCenterDrawable.draw(canvas);
                 //这个方法比较繁琐
-                //drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, drawable2Bitmap(mCenterDrawable), null);
+                MyUtils.drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, MyUtils.drawable2Bitmap(mCenterDrawable), null);
                 break;
             case PROGRESS:
                 canvas.drawArc(mStrokeWidth/2, mStrokeWidth/2, mWidth - mStrokeWidth/2, mHeight - mStrokeWidth/2, 0, mProgressAngle, false, mPaint);

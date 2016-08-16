@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<WebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>-->
-
     <com.handmark.pulltorefresh.library.PullToRefreshWebView
         android:id="@+id/refresh_holder"
         android:layout_width="match_parent"
@@ -18,7 +13,7 @@
         app:ptrMode="pullDownFromTop"
         app:ptrAnimationStyle="flip"
         app:ptrDrawableStart="@drawable/pulldown"
-        app:ptrHeaderBackground="@color/sleep_bg_light"
+        app:ptrHeaderBackground="@color/succ_connect_bg"
         />
 
     <ProgressBar
@@ -29,7 +24,7 @@
         android:max="105"
         android:progress="5"
         android:layout_marginTop="-8dp"
-        android:progressTint="@color/bg_color_blue_dark"
+        android:progressTint="@color/white_55_percent"
         android:progressTintMode="src_in"
         android:progressBackgroundTint="@android:color/transparent"
         android:progressBackgroundTintMode="src_in"

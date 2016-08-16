@@ -30,20 +30,22 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshWebView;
 
 /**
- * Created by hm on 16-4-8.
+ * Created by Jay on 16-4-8.
+ * 通用的展示Web页面的Activity
  */
 public class MyWebActivity extends MyBaseTitleActivity {
-
-    private WebView mWebView;
-    private TextView mTips;
-    private WebSettings mWebSettings;
     private static final String TAG = "MyWebActivity";
-    private ProgressBar mProgressBar;
-    private String mUrl;
-    private PullToRefreshWebView mRefreshWebView = null;
+
+    private TextView mTips = null;
+    private WebView mWebView = null;
     private EditText mEditText = null;
     private TextView mTitleText = null;
     private Button mSearchButton = null;
+    private ProgressBar mProgressBar = null;
+    private PullToRefreshWebView mRefreshWebView = null;
+
+    private String mUrl;
+    private WebSettings mWebSettings = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +54,19 @@ public class MyWebActivity extends MyBaseTitleActivity {
         setContentView(R.layout.web_layout);
         setStyle(STYLE.BACK_AND_EDIT);
         mUrl = getIntent().getStringExtra("URL");
-        setTitle("Surf Internet");
+        setTitle(TAG);
+
         mRefreshWebView = (PullToRefreshWebView) findViewById(R.id.refresh_holder);
         mWebView = mRefreshWebView.getRefreshableView();
+
+        //设置下拉刷新的响应事件
         mRefreshWebView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<WebView>() {
             @Override
             public void onRefresh(PullToRefreshBase<WebView> refreshView) {
                 mWebView.reload();
             }
         });
+
         mProgressBar = (ProgressBar) findViewById(R.id.web_view_progress);
         mProgressBar.setVisibility(View.VISIBLE);
         mTips = (TextView) findViewById(R.id.tips);
@@ -70,12 +76,14 @@ public class MyWebActivity extends MyBaseTitleActivity {
                 mWebView.reload();
             }
         });
+
         mWebSettings = mWebView.getSettings();
         mWebSettings.setJavaScriptEnabled(true);
         mWebSettings.setSupportZoom(true);
         mWebSettings.setBuiltInZoomControls(true);
         mWebSettings.setDisplayZoomControls(false);
         mWebView.loadUrl(mUrl);
+
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -92,12 +100,15 @@ public class MyWebActivity extends MyBaseTitleActivity {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                Log.i(TAG, "onPageStarted");
                 mProgressBar.setVisibility(View.VISIBLE);
                 mTips.setVisibility(View.GONE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
+                Log.i(TAG, "onPageFinished");
+                mProgressBar.setProgress(5);
                 mProgressBar.setVisibility(View.GONE);
                 mRefreshWebView.onRefreshComplete();
             }
@@ -107,7 +118,6 @@ public class MyWebActivity extends MyBaseTitleActivity {
                 if (errorCode == WebViewClient.ERROR_HOST_LOOKUP) {
                     mTips.setVisibility(View.VISIBLE);
                 }
-
             }
         });
 
@@ -122,23 +132,6 @@ public class MyWebActivity extends MyBaseTitleActivity {
         });
 
         mEditText = getEditText();
-
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                Log.e(TAG, "beforeTextChanged:" + s + " " + start + " " + count + " " + after);
-             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.e(TAG, "onTextChanged:" + s + " " + start + " "  + before + " " + count);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Log.e(TAG, "afterTextChanged:" + s);
-            }
-        });
 
         //设置SearchButton按下监听事件
         setSearchListener(new ISearch() {

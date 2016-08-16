@@ -38,6 +38,7 @@
         <activity android:name=".another_world.MyDetailActivity"/>
         <activity android:name=".another_world.MyListActivity"/>
         <activity android:name=".another_world.CustomViewActivity"/>
+        <activity android:name=".another_world.FragmentAnimationActivity"/>
     </application>
 
 </manifest>

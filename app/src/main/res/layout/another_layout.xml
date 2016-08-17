@@ -54,6 +54,17 @@
         android:layout_width="200dp"
         android:layout_height="200dp" />
 
+ <!--   <com.jayzhao.customactionbar.another_world.Widget.CustomWeiboLoadingView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        app:endColor="@color/device_mili_bg"
+        app:startColor="@color/transparency"
+        app:strokeWidth2="3dp"
+        app:radius1="25dp"
+        app:radius2="13dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />-->
+
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"

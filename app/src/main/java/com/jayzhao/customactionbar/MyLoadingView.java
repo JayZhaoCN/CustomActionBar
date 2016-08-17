@@ -54,7 +54,7 @@ public class MyLoadingView extends View {
     private OnLoadingEndListener mListener = null;
 
     public interface OnLoadingEndListener {
-        public void onLoadingEnd();
+        void onLoadingEnd();
     }
 
     public void setOnLoadingEndListener(OnLoadingEndListener l) {

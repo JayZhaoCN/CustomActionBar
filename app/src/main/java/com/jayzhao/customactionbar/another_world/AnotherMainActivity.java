@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.jayzhao.customactionbar.MyBaseTitleActivity;
 import com.jayzhao.customactionbar.R;
 import com.jayzhao.customactionbar.another_world.Widget.MyProgressView;
+import com.jayzhao.customactionbar.another_world.Widget.WeiboLoadingDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,8 +33,8 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     @Bind(R.id.custom_view)
     TextView mCustomViewText = null;
 
-    @Bind(R.id.my_progress_view)
-    MyProgressView mProgressView = null;
+    /*@Bind(R.id.my_progress_view)
+    MyProgressView mProgressView = null;*/
 
     @Bind(R.id.start_loading_text)
     TextView mStartLoadingText = null;
@@ -88,11 +89,15 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
 
     @OnClick(R.id.start_loading_text)
     public void startLoading() {
-        mProgressView.startLoading();
+
+        WeiboLoadingDialog dialog = new WeiboLoadingDialog();
+        dialog.show(getSupportFragmentManager(), "WeiboLoadingDialog");
+
+        //mProgressView.startLoading();
     }
 
     @OnClick(R.id.stop_loading_text)
     public void stopLoading() {
-        mProgressView.stopLoading();
+        //mProgressView.stopLoading();
     }
 }

@@ -139,7 +139,7 @@ public class MyProgressView extends View {
                         mHeight/2 + mCenterDrawable.getIntrinsicHeight()/2);
                 mCenterDrawable.draw(canvas);
                 //这个方法比较繁琐
-                MyUtils.drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, MyUtils.drawable2Bitmap(mCenterDrawable), null);
+                //MyUtils.drawBitmapCenter(canvas, mWidth / 2, mHeight / 2, 2.0f, MyUtils.drawable2Bitmap(mCenterDrawable), null);
                 break;
             case PROGRESS:
                 if(mTargetRect == null) {
@@ -255,7 +255,10 @@ public class MyProgressView extends View {
      * 初始化Gradient
      */
     private void initGradient() {
-        //颜色的渐变
+        /**
+         * 颜色的渐变,参考下面这篇博文：
+         * http://www.cnblogs.com/tianzhijiexian/p/4298660.html
+         */
         if(mSweepGradient == null) {
             mSweepGradient = new SweepGradient(mWidth / 2, mHeight / 2, getResources().getColor(R.color.transparency), mStrokeColor);
             mPaint.setShader(mSweepGradient);

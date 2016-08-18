@@ -12,6 +12,7 @@ import com.jayzhao.customactionbar.MyBaseTitleActivity;
 import com.jayzhao.customactionbar.R;
 import com.jayzhao.customactionbar.another_world.Widget.MyProgressView;
 import com.jayzhao.customactionbar.another_world.Widget.WeiboLoadingDialog;
+import com.jayzhao.customactionbar.another_world.Widget.WeiboPictureDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,11 +31,8 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     @Bind(R.id.list_view)
     TextView mListText = null;
 
-    @Bind(R.id.custom_view)
-    TextView mCustomViewText = null;
-
-    /*@Bind(R.id.my_progress_view)
-    MyProgressView mProgressView = null;*/
+    @Bind(R.id.my_progress_view)
+    MyProgressView mProgressView = null;
 
     @Bind(R.id.start_loading_text)
     TextView mStartLoadingText = null;
@@ -55,20 +53,25 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         /**
          * 模拟进度变化
          */
-      /*ValueAnimator progressAnimator = ValueAnimator.ofInt(0, 360);
+      final ValueAnimator progressAnimator = ValueAnimator.ofInt(0, 360);
         progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int progress = (int) animation.getAnimatedValue();
                 mProgressView.setProgress(progress);
-                if(progress == 360) {
+                if (progress == 360) {
                     mProgressView.setCenterText("Loading Done!");
                 }
             }
         });
         progressAnimator.setInterpolator(new LinearInterpolator());
         progressAnimator.setDuration(5000);
-        progressAnimator.start();*/
+        mProgressView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressAnimator.start();
+            }
+        }, 3000);
     }
 
     @OnClick(R.id.recycler_view_new)
@@ -82,22 +85,18 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         startActivity(new Intent(AnotherMainActivity.this, MyListActivity.class));
     }
 
-    @OnClick(R.id.custom_view)
-    public void onCustomViewClick() {
-        startActivity(new Intent(AnotherMainActivity.this, CustomViewActivity.class));
-    }
-
     @OnClick(R.id.start_loading_text)
     public void startLoading() {
 
         WeiboLoadingDialog dialog = new WeiboLoadingDialog();
         dialog.show(getSupportFragmentManager(), "WeiboLoadingDialog");
 
-        //mProgressView.startLoading();
+        mProgressView.startLoading();
     }
 
     @OnClick(R.id.stop_loading_text)
     public void stopLoading() {
-        //mProgressView.stopLoading();
+        WeiboPictureDialog dialog = new WeiboPictureDialog();
+        dialog.show(getSupportFragmentManager(), "WeiboPictureDialog");
     }
 }

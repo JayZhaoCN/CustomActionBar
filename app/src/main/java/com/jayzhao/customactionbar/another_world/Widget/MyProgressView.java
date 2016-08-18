@@ -57,7 +57,7 @@ public class MyProgressView extends View {
     //默认的样式为LOADING
     private int mStyle = LOADING;
 
-    private int mProgressAngle = 90;
+    private int mProgressAngle = 0;
 
     public MyProgressView(Context context) {
         this(context, null);

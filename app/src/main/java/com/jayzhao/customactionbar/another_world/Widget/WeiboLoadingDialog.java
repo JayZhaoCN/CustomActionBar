@@ -40,7 +40,6 @@ public class WeiboLoadingDialog extends DialogFragment {
          */
         int theme = R.style.WeiboLoadingDialog;
         setStyle(style, theme);
-
     }
 
     @Override

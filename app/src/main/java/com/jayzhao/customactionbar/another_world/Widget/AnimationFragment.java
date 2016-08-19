@@ -1,6 +1,5 @@
 package com.jayzhao.customactionbar.another_world.Widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;

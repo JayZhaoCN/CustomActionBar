@@ -146,19 +146,6 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
     private void initViews() {
         mFullScreen = (TextView) findViewById(R.id.full_screen);
-        mFullScreen.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Log.i(TAG, "fullScreen Long Click!");
-                Intent intent = new Intent(MainActivity.this, ExamActivity.class);
-                startActivity(intent);
-                /**
-                 * onLongClick返回true表示事件被LongClick消费，不会触发其他事件。
-                 * 返回false则会触发其他事件，例如onClick
-                 */
-                return true;
-            }
-        });
     }
 
     @Override

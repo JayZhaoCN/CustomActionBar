@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.jayzhao.customactionbar.R;
 
 /**
- * Created by hm on 16-5-4.
+ * Created by Jay on 16-5-4.
  * 使用说明：
  * 可以更改布局，可以自定义布局中所有的View特性
  */
@@ -25,9 +25,8 @@ public class SimpleDialogFragment extends MyDialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
-
-        TextView a = (TextView) view.findViewById(R.id.dialog_title);
-        a.setText("可以自定义View的任何特性");
+        TextView titleText = (TextView) view.findViewById(R.id.dialog_title);
+        titleText.setText("参照MIUI的下方弹出提示框");
         return view;
     }
 }

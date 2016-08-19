@@ -63,6 +63,7 @@
     <color name="black_60_percent">#99000000</color>
     <color name="black_80_percent">#CC000000</color>
     <color name="selected_origin">#FFFF7200</color>
+    <color name="stroke_line">#4D000000</color>
 
     <!-- smart play color -->
     <color name="smartdevice_color">@color/blue_dark</color>

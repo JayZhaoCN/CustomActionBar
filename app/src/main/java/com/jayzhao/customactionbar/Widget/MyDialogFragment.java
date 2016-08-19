@@ -27,26 +27,57 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
     private TextView mRightButton = null;
 
     public interface OnOpClickListener {
-        public void onEmptyAreaClick(DialogFragment dialog);
-        public void onRightClick(DialogFragment dialog);
-        public void onLeftClick(DialogFragment dialog);
+        void onEmptyAreaClick(DialogFragment dialog);
+        void onRightClick(DialogFragment dialog);
+        void onLeftClick(DialogFragment dialog);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(inflateLayout(), container, false);
+        View view;
+        //这段代码的写法的合理性有待商榷
+        if(inflateLayout() != 0) {
+            view = inflater.inflate(inflateLayout(), container, false);
+        } else {
+            try {
+                throw new Exception("make sure that method inflateLayout() must be override and not return zero!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
         mEmptyArea = view.findViewById(R.id.dlg_empty_area_btn);
         mRightButton = (TextView) view.findViewById(R.id.right_text);
         mLeftButton = (TextView) view.findViewById(R.id.left_text);
 
         //这三个控件是有可能找不到的
-        if(mEmptyArea != null)
+        //因为可能继承的Fragment的布局文件中没有定义这几个控件
+        if(mEmptyArea != null) {
             mEmptyArea.setOnClickListener(this);
-        if(mRightButton != null)
+            try {
+                throw new Exception("请定义id为R.id.dlg_empty_area_btn的控件");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if(mRightButton != null) {
             mRightButton.setOnClickListener(this);
-        if(mLeftButton != null)
+            try {
+                throw new Exception("请定义id为R.id.right_text的控件");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if(mLeftButton != null) {
             mLeftButton.setOnClickListener(this);
+            try {
+                throw new Exception("请定义id为R.id.left_text的控件");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return view;
     }
 
@@ -67,6 +98,7 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.dlg_empty_area_btn:
                 dismiss();
+                mListener.onEmptyAreaClick(this);
                 break;
             case R.id.left_text:
                 mListener.onLeftClick(this);

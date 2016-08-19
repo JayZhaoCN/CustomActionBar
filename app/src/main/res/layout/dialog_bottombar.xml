@@ -4,45 +4,46 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="22.5dp"
-    android:layout_marginLeft="22.5dp"
-    android:layout_marginRight="22.5dp"
-    android:gravity="center"
-    android:layout_marginTop="10dp"
     >
 
-    <TextView
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@drawable/left_btn_background"
-        android:text="Left"
-        android:id="@+id/left_text"
-        android:layout_weight="1"
-        android:clickable="true"
-        />
+    <!--
+        我也是醉了，为什么预览界面在android 6.0下是正确的，改到之前的版本就是错的？
+        郁闷了好半天。。。
+    -->
 
-    <View
-        android:background="@color/black_50_percent"
-        android:layout_width="1px"
-        android:layout_height="40dp"/>
+        <LinearLayout
+            android:layout_margin="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/dialog_bottom_bar_background"
+            >
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/left_btn_background"
+                android:text="Left"
+                android:id="@+id/left_text"
+                android:layout_weight="1"
+                android:clickable="true"
+                />
 
+            <View
+                android:background="@color/stroke_line"
+                android:layout_width="1px"
+                android:layout_height="40dp"/>
 
-    <TextView
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:background="@drawable/right_btn_background"
-        android:text="right"
-        android:id="@+id/right_text"
-        android:layout_weight="1"
-        android:clickable="true"
-        />
-
+            <TextView
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/right_btn_background"
+                android:text="right"
+                android:id="@+id/right_text"
+                android:layout_weight="1"
+                android:clickable="true"
+                />
+    </LinearLayout>
 </LinearLayout>

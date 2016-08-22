@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -152,6 +153,21 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        float density = metrics.density;
+        int densityDPI = metrics.densityDpi;
+
+        /**
+         * 使用dp可以保证在不同的设备上显示效果大致相同
+         */
+        Log.i(TAG + " widthPixels", width + "");
+        Log.i(TAG + " heightPixels", height + "");
+        Log.i(TAG + " density", density + "");
+        Log.i(TAG + " densityDPI", densityDPI + "");
 
         initViews();
 

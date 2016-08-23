@@ -137,7 +137,7 @@ public class WeekActiveCircleView extends View {
         mUnitText = "分钟";
 
         //开始加载动画
-        startLoading();
+        //startLoading();
     }
 
     @Override
@@ -163,9 +163,9 @@ public class WeekActiveCircleView extends View {
         canvas.drawText(mUnitText, mRect.centerX() + mCenterTextWidth / 2 + 10, mRect.centerY() + mCenterTextHeight / 2, mUnitTextPaint);
     }
 
-    private void startLoading() {
+    public void startLoading() {
         if(mAnimator == null) {
-            //暂时写死，等UI和服务端处接口再完善。
+            //暂时写死，等UI和服务端出接口再完善。
             mAnimator = ValueAnimator.ofInt(0, 100);
             mAnimator.setDuration(800);
             mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

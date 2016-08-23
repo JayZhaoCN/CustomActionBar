@@ -1,11 +1,14 @@
 package com.jayzhao.customactionbar.Widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +40,7 @@ public class WeekActiveTimeView extends View {
     private Paint mTextPaint = null;
     private Paint mBaseLinePaint = null;
     private Paint mColumnPaint = null;
+    private Paint mTimePaint = null;
 
     private Resources mResources = null;
 
@@ -50,6 +54,8 @@ public class WeekActiveTimeView extends View {
     private int mTextBaseLine = 0;
 
     private ValueAnimator mAnimator = null;
+
+    private boolean isDrawText = false;
 
     public WeekActiveTimeView(Context context) {
         this(context, null);
@@ -73,24 +79,38 @@ public class WeekActiveTimeView extends View {
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setColor(mResources.getColor(R.color.black_60_percent));
 
+        mTimePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mTimePaint.setTextSize(MyUtils.sp2px(mContext, 12f));
+        mTimePaint.setTextAlign(Paint.Align.CENTER);
+        mTimePaint.setColor(mResources.getColor(R.color.black_60_percent));
+
         mBaseLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBaseLinePaint.setColor(mResources.getColor(R.color.black_10_percent));
 
         mColumnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mColumnPaint.setColor(mResources.getColor(R.color.blue_light));
 
+
         mBaseLineFontMetrics = mTextPaint.getFontMetricsInt();
 
         //先暂时做成这样
-        mAnimator = ValueAnimator.ofFloat(0f, 1f);
+        mAnimator = ValueAnimator.ofInt(0, 1000);
         mAnimator.setDuration(800);
         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 for (int i = 0; i < mWeeks.length; i++) {
-                    mColumnHeight[i] = (int) (mActiveTimes[i] * (float) animation.getAnimatedValue());
+                    mColumnHeight[i] = (mActiveTimes[i] * (int)animation.getAnimatedValue()) / 1000;
+                    Log.i(TAG, "mColumnHeight： " + mColumnHeight[i]);
                     postInvalidateOnAnimation();
                 }
+            }
+        });
+        mAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                isDrawText = true;
             }
         });
     }
@@ -108,16 +128,24 @@ public class WeekActiveTimeView extends View {
 
     private boolean mIsStarted = false;
 
+    public void startLoading() {
+        if(mAnimator != null) {
+            if(!mAnimator.isRunning()) {
+                mAnimator.start();
+            }
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawRect(mBaseLineRect, mBaseLinePaint);
 
-        if(!mIsStarted) {
+        /*if(!mIsStarted) {
             mAnimator.start();
             mIsStarted = true;
-        }
+        }*/
 
         for(int i=0; i< mWeeks.length; i++) {
             canvas.drawText(mWeeks[i], mWidth / 7 * i + mWidth / 14, mTextBaseLine, mTextPaint);
@@ -125,6 +153,11 @@ public class WeekActiveTimeView extends View {
             mColumnRect.right = mWidth / 7 * (i + 1) - 10;
             mColumnRect.top = mHeight - mBaseLineHeight - mColumnHeight[i] * 4;
             canvas.drawRect(mColumnRect, mColumnPaint);
+
+            //画柱子上的刻度
+            if(isDrawText) {
+                canvas.drawText(mActiveTimes[i] + "分钟", mColumnRect.centerX(), mColumnRect.top - 10, mTimePaint);
+            }
         }
     }
 }

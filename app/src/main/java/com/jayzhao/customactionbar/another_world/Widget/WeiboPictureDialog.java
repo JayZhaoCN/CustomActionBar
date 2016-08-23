@@ -31,6 +31,7 @@ public class WeiboPictureDialog extends DialogFragment {
         mAnimator.setDuration(5000);
         /**
          * 这里是否已经出现了内存泄露？
+         * 在Activity的onPause()方法中取消动画等占用CPU资源的对象，否则可能导致内存泄露
          */
         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override

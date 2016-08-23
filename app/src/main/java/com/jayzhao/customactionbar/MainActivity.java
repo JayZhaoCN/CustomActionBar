@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 import com.jayzhao.customactionbar.another_world.AnotherMainActivity;
 import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
+import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -147,6 +148,20 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
     private void initViews() {
         mFullScreen = (TextView) findViewById(R.id.full_screen);
+        mFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, WeekActiveTimeActivity.class));
+            }
+        });
+
+        mFullScreen.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(MainActivity.this, JayActivity.class));
+                return true;
+            }
+        });
     }
 
     @Override

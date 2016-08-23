@@ -15,7 +15,6 @@
         android:layout_height="38dp"
         android:text="FullScreen"
         android:layout_marginTop="30dp"
-        android:onClick="click"
         />
 
     <TextView

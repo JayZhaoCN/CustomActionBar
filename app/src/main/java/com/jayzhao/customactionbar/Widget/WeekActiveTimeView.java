@@ -71,6 +71,14 @@ public class WeekActiveTimeView extends View {
         init();
     }
 
+    public void setData(int[] data) {
+        mActiveTimes = data;
+    }
+
+    public void isDrawText(boolean isDrawText) {
+        this.isDrawText = isDrawText;
+    }
+
     private void init() {
         mResources = getResources();
 
@@ -95,7 +103,7 @@ public class WeekActiveTimeView extends View {
 
         //先暂时做成这样
         mAnimator = ValueAnimator.ofInt(0, 1000);
-        mAnimator.setDuration(800);
+        mAnimator.setDuration(900);
         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

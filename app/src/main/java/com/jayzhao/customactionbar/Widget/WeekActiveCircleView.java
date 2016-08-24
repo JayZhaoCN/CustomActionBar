@@ -140,6 +140,14 @@ public class WeekActiveCircleView extends View {
         //startLoading();
     }
 
+    public void setCenterText(String centerText) {
+        mCenterText = centerText;
+        Rect rect = new Rect();
+        mCenterTextPaint.getTextBounds(mCenterText, 0, mCenterText.length(), rect);
+        mCenterTextWidth = rect.width();
+        mCenterTextHeight = rect.height();
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

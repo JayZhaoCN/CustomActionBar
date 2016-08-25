@@ -23,6 +23,7 @@ import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 import com.jayzhao.customactionbar.another_world.AnotherMainActivity;
 import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
 import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
+import com.jayzhao.customactionbar.another_world.WheelMainActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -271,6 +272,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 dialog.setmOnItemClickListener(new MyAlertDialog.MyOnItemClickListener() {
                     @Override
                     public void firstItemClick(View v, Dialog realDialog) {
+                        startActivity(new Intent(MainActivity.this, WheelMainActivity.class));
                         MyUtils.showToast(MainActivity.this, "Custom Toast");
                         myDialog.dismiss();
                     }

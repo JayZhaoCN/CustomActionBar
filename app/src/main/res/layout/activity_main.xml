@@ -6,46 +6,50 @@
     android:paddingLeft="5dp"
     >
 
-    <TextView
+    <com.jayzhao.customactionbar.another_world.Widget.TypefaceTextView
+        android:fontFamily="miui_light"
         android:id="@+id/full_screen"
         android:background="@drawable/button_background"
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="200dp"
         android:layout_height="38dp"
-        android:text="FullScreen"
+        android:text="全屏的显示风格"
         android:layout_marginTop="30dp"
         />
 
-    <TextView
+    <com.jayzhao.customactionbar.another_world.Widget.TypefaceTextView
+        android:fontFamily="din_med"
         android:background="@drawable/button_background"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:layout_width="200dp"
         android:layout_height="38dp"
-        android:text="RecyclerView"
+        android:text="RecyclerView tel: 18119602814"
         android:layout_marginTop="30dp"
         android:id="@+id/recyclerViewText"
         />
 
-    <TextView
+    <com.jayzhao.customactionbar.another_world.Widget.TypefaceTextView
+        android:fontFamily="pt_din"
         android:background="@drawable/button_background"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:layout_width="200dp"
         android:layout_height="38dp"
-        android:text="TableLayout"
+        android:text="TableLayout  tel: 18119602814"
         android:layout_marginTop="30dp"
         android:id="@+id/tableLayoutText"
         />
 
-    <TextView
+    <com.jayzhao.customactionbar.another_world.Widget.TypefaceTextView
+        android:fontFamily="miui_bold"
         android:background="@drawable/button_background"
         android:textSize="15sp"
         android:gravity="center"
         android:layout_width="200dp"
         android:layout_height="38dp"
-        android:text="Internet"
+        android:text="自定义的浏览器视图"
         android:layout_marginTop="30dp"
         android:id="@+id/webText"
         />

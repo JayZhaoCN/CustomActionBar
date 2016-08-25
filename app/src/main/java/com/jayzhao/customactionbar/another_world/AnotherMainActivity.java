@@ -1,10 +1,14 @@
 package com.jayzhao.customactionbar.another_world;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.BinderThread;
 import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
@@ -72,6 +76,21 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
                 progressAnimator.start();
             }
         }, 3000);
+
+        /*ObjectAnimator rotateX = ObjectAnimator.ofFloat(mListText, "rotationX", 0, 180, 0);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(mListText, "alpha", 0, 1, 0);
+        rotateX.setDuration(2000);
+        alpha.setDuration(2000);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(rotateX, alpha);
+        set.start();*/
+
+        PropertyValuesHolder rotationHolder = PropertyValuesHolder.ofFloat("Rotation", 60f, -60f, 40f, -40f, -20f, 20f, 10f, -10f, 0f);
+        PropertyValuesHolder colorHolder = PropertyValuesHolder.ofInt("BackgroundColor", 0xffffffff, 0xffff00ff, 0xffffff00, 0xffffffff);
+        ObjectAnimator animator1 = ObjectAnimator.ofPropertyValuesHolder(mListText, rotationHolder, colorHolder);
+        animator1.setDuration(3000);
+        animator1.setInterpolator(new AccelerateInterpolator());
+        animator1.start();
     }
 
     @OnClick(R.id.recycler_view_new)

@@ -81,7 +81,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 activity.mTableText.setText("Weak Reference");
                 sendEmptyMessageDelayed(2, 1000);
             } else if(msg.what == 2) {
-                activity.mTableText.setText("TableLayout");
+                activity.mTableText.setText("TableLayout  tel: 18119602814");
             }
         }
     }

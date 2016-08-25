@@ -41,7 +41,6 @@ public class TypefaceTextView extends TextView {
         }
     }
 
-
     public TypefaceTextView(Context context) {
         this(context, null);
     }
@@ -52,6 +51,12 @@ public class TypefaceTextView extends TextView {
 
     public TypefaceTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        /**
+         * obtainStyledAttributes()
+         * params 1: atrrs 集合
+         * params 2: attr数组，自己定义的
+         * don't know the means of params 3 and 4, unhappy...
+         */
         TypedArray ta = context.obtainStyledAttributes(attrs, new int[]{android.R.attr.fontFamily}, 0, defStyleAttr);
         Log.i(TAG, android.R.attr.fontFamily + "");
         String typeFaceStr = ta.getString(0);

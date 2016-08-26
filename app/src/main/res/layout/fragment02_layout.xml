@@ -8,7 +8,7 @@
   <TextView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:text="Fragment02"
+      android:text="@string/fragment_name_2"
       android:textColor="@color/white_80_percent"
       android:background="@color/colorPrimary"
       android:gravity="center"

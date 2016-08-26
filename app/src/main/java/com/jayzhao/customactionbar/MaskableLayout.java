@@ -31,6 +31,7 @@ public class MaskableLayout extends RelativeLayout {
     }
 
     //似乎用onDraw()不可以
+    //现在先记住，在ViewGroup中绘制需要调用dispatchDraw()方法
     @Override
     protected void dispatchDraw(Canvas canvas) {
 

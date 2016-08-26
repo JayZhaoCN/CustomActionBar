@@ -23,7 +23,7 @@ public class ChangeAnimation extends MyBaseTitleActivity {
     private ValueAnimator mAnimator12 = null;
     private ValueAnimator mAnimator21 = null;
 
-    private boolean mFlag = false;
+    private boolean mFlag = true;
 
     private Point mScreenSize = new Point();
 
@@ -31,8 +31,6 @@ public class ChangeAnimation extends MyBaseTitleActivity {
 
     private AnimatorUpdateListener mListener = null;
     private int index = 0;
-
-    String [] arr = {"变成红色了", "变成蓝色了", "炫酷吗？", "挺炫酷吧？"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +48,15 @@ public class ChangeAnimation extends MyBaseTitleActivity {
         findViewById(R.id.change).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(ChangeAnimation.this, arr[index], Toast.LENGTH_SHORT).show();
-                MyUtils.showToast(ChangeAnimation.this, arr[index]);
                 index ++;
                 if(index == 4) {
                     index = 0;
                 }
                 if (mFlag) {
-                    mAnimator21.start();
+                    mAnimator12.start();
                     mFlag = false;
                 } else {
-                    mAnimator12.start();
+                    mAnimator21.start();
                     mFlag = true;
                 }
             }
@@ -72,29 +68,27 @@ public class ChangeAnimation extends MyBaseTitleActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int value = (int) animation.getAnimatedValue();
-                //Log.e("value: ", value + "");
                 double index = value/100d;
                 int currentRadius = (int) (index * mMaxRadius);
-                //Log.e("currentRadius: ", currentRadius + "");
-                mFragment2.getRoot().setOvalMask(mScreenSize.x, 0, currentRadius);
+                mFragment1.getRoot().setOvalMask(mScreenSize.x, 0, currentRadius);
             }
         };
 
         mAnimator12 = ValueAnimator.ofInt(0, 100);
         mAnimator21 = ValueAnimator.ofInt(100, 0);
-        mAnimator21.setDuration(500);
-        mAnimator12.setDuration(500);
+        mAnimator21.setDuration(1500);
+        mAnimator12.setDuration(1500);
         mAnimator12.addUpdateListener(mListener);
         mAnimator21.addUpdateListener(mListener);
-        initFragment01();
         initFragment02();
+        initFragment01();
     }
 
     private void initFragment01() {
         if(mFragment1 == null) {
             mFragment1 = new Fragment1();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, mFragment1);
+            ft.add(R.id.fragment_container, mFragment1);
             ft.commit();
         }
     }
@@ -103,7 +97,7 @@ public class ChangeAnimation extends MyBaseTitleActivity {
         if(mFragment2 == null) {
             mFragment2 = new Fragment2();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.fragment_container, mFragment2);
+            ft.replace(R.id.fragment_container, mFragment2);
             ft.commit();
         }
     }

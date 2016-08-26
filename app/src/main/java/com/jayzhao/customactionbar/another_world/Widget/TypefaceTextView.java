@@ -11,7 +11,7 @@ import android.widget.TextView;
  * Created by Jay on 16-8-25.
  * 可以自定义字体的TextView.
  * 用法：
- * 在layout xml文件中增加
+ * 在layout xml文件中使用TypefaceTextView，并增加
  * android:fontFamily="miui_light"
  * android:fontFamily="miui_bold"
  * android:fontFamily="miui_normal"

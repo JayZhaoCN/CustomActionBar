@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.BinderThread;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
@@ -44,6 +45,8 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
     @Bind(R.id.stop_loading_text)
     TextView mStopLoadingText = null;
 
+    private TextView mCircleLoadingText = null;
+
     private static final String TAG = "AnotherMainActivity";
 
     @Override
@@ -53,6 +56,14 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         setContentView(R.layout.another_layout);
         setTitle("Another Home");
         ButterKnife.bind(this);
+
+        mCircleLoadingText = (TextView) findViewById(R.id.circle_loading_text);
+        mCircleLoadingText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         /**
          * 模拟进度变化

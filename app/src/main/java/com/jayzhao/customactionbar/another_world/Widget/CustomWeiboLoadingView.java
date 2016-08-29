@@ -184,7 +184,7 @@ public class CustomWeiboLoadingView extends View {
                 }
             });
             mAnimator.setInterpolator(new LinearInterpolator());
-            mAnimator.setDuration(1200);
+            mAnimator.setDuration(500);
             mAnimator.setRepeatCount(ValueAnimator.INFINITE);
         }
         if(!mAnimator.isRunning()) {

@@ -17,6 +17,7 @@ import com.jayzhao.customactionbar.MyBaseTitleActivity;
 import com.jayzhao.customactionbar.R;
 import com.jayzhao.customactionbar.another_world.Widget.CustomWeiboLoadingView;
 import com.jayzhao.customactionbar.another_world.Widget.MyProgressView;
+import com.jayzhao.customactionbar.another_world.Widget.OnLoadingDoneListener;
 import com.jayzhao.customactionbar.another_world.Widget.WeiboLoadingDialog;
 import com.jayzhao.customactionbar.another_world.Widget.WeiboPictureDialog;
 
@@ -136,7 +137,15 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
 
     @OnClick(R.id.stop_loading_text)
     public void stopLoading() {
-        WeiboPictureDialog dialog = new WeiboPictureDialog();
+        mProgressView.setVisibility(View.INVISIBLE);
+        final WeiboPictureDialog dialog = new WeiboPictureDialog();
+        dialog.setListener(new OnLoadingDoneListener() {
+            @Override
+            public void onLoadingDone(View view) {
+                dialog.dismiss();
+                mProgressView.setVisibility(View.VISIBLE);
+            }
+        });
         dialog.show(getSupportFragmentManager(), "WeiboPictureDialog");
     }
 }

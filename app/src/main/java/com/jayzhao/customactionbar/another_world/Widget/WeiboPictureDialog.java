@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 
+import com.jayzhao.customactionbar.MyLoadingDialog;
 import com.jayzhao.customactionbar.R;
 
 /**
@@ -20,6 +21,8 @@ public class WeiboPictureDialog extends DialogFragment {
     private ValueAnimator mAnimator = null;
 
     private static final String TAG = "WeiboPictureDialog";
+
+    private OnLoadingDoneListener mListener = null;
 
     @Nullable
     @Override
@@ -38,7 +41,12 @@ public class WeiboPictureDialog extends DialogFragment {
             public void onAnimationUpdate(ValueAnimator animation) {
                 loadingPictureView.setProgress((int) animation.getAnimatedValue());
                 if((int) animation.getAnimatedValue() == 360) {
-                    dismiss();
+                    loadingPictureView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mListener.onLoadingDone(loadingPictureView);
+                        }
+                    }, 200);
                 }
             }
         });
@@ -52,6 +60,10 @@ public class WeiboPictureDialog extends DialogFragment {
         int style = DialogFragment.STYLE_NO_FRAME;
         int theme = R.style.WeiboLoadingDialog;
         setStyle(style, theme);
+    }
+
+    public void setListener(OnLoadingDoneListener listener) {
+        mListener = listener;
     }
 
     @Override

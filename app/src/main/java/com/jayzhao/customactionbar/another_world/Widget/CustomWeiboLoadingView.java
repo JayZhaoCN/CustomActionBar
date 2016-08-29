@@ -1,5 +1,7 @@
 package com.jayzhao.customactionbar.another_world.Widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
@@ -51,6 +53,8 @@ public class CustomWeiboLoadingView extends View {
     private ValueAnimator mAnimator = null;
 
     private Matrix mMatrix = null;
+
+    private OnLoadingCompleteListener mListener = null;
 
     public CustomWeiboLoadingView(Context context) {
         this(context, null);
@@ -129,6 +133,10 @@ public class CustomWeiboLoadingView extends View {
         mPaint.setStrokeCap(Paint.Cap.ROUND);
     }
 
+    public void setListener(OnLoadingCompleteListener listener) {
+        this.mListener = listener;
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -185,7 +193,15 @@ public class CustomWeiboLoadingView extends View {
             });
             mAnimator.setInterpolator(new LinearInterpolator());
             mAnimator.setDuration(500);
-            mAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            mAnimator.setRepeatCount(5);
+
+            mAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mListener.onComplete(CustomWeiboLoadingView.this);
+                }
+            });
         }
         if(!mAnimator.isRunning()) {
             mAnimator.start();
@@ -199,5 +215,9 @@ public class CustomWeiboLoadingView extends View {
                 mAnimator = null;
             }
         }
+    }
+
+    public interface OnLoadingCompleteListener {
+        void onComplete(View view);
     }
 }

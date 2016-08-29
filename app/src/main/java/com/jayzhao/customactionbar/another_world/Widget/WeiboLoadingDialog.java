@@ -16,6 +16,7 @@ import com.jayzhao.customactionbar.R;
  */
 public class WeiboLoadingDialog extends DialogFragment {
     private CustomWeiboLoadingView mCustomWeiboLoadingView = null;
+    private CustomWeiboLoadingView.OnLoadingCompleteListener mListener = null;
 
     private static final String TAG = "CustomWeiboLoadingView";
 
@@ -25,6 +26,7 @@ public class WeiboLoadingDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.weiboi_loading, container, false);
         mCustomWeiboLoadingView = (CustomWeiboLoadingView) view.findViewById(R.id.weibo_loading_view);
         //getDialog().setCanceledOnTouchOutside(true);
+        mCustomWeiboLoadingView.setListener(mListener);
         return view;
     }
 
@@ -47,5 +49,9 @@ public class WeiboLoadingDialog extends DialogFragment {
         super.onCancel(dialog);
         Log.i(TAG, "onCancel");
         mCustomWeiboLoadingView.stopLoading();
+    }
+
+    public void setViewListener(CustomWeiboLoadingView.OnLoadingCompleteListener listener) {
+        mListener = listener;
     }
 }

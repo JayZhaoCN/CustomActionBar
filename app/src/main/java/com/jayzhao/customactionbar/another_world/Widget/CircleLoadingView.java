@@ -1,5 +1,6 @@
 package com.jayzhao.customactionbar.another_world.Widget;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.SweepGradient;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -38,6 +40,10 @@ public class CircleLoadingView extends View {
     private int mSweepAngle = 0;
     private Matrix mMatrix = null;
 
+    private ValueAnimator mAnimator = null;
+
+    private OnLoadingDoneListener mListener = null;
+
     public CircleLoadingView(Context context) {
         this(context, null);
     }
@@ -60,8 +66,8 @@ public class CircleLoadingView extends View {
         mPaint.setStyle(Paint.Style.FILL);
         mPointList = new ArrayList<>();
 
-        ValueAnimator animator = ValueAnimator.ofInt(0, 360);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        mAnimator = ValueAnimator.ofInt(0, 360);
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mSweepAngle = (Integer) animation.getAnimatedValue();
@@ -69,10 +75,41 @@ public class CircleLoadingView extends View {
             }
         });
 
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setDuration(500);
-        animator.start();
+        /**
+         * onAnimationEnd表示动画完成一定会调用
+         * onAnimationCancel在调用了animation.cancel()方法后会调用，之后也会调用onAnimationEnd()
+         */
+        mAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                Log.i(TAG, "onAnimationStart");
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Log.i(TAG, "onAnimationEnd");
+                mListener.onLoadingDone(CircleLoadingView.this);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                Log.i(TAG, "onAnimationCancel");
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                Log.i(TAG, "onAnimationRepeat");
+            }
+        });
+
+        mAnimator.setInterpolator(new LinearInterpolator());
+        mAnimator.setRepeatCount(5);
+        mAnimator.setDuration(500);
+        mAnimator.start();
+    }
+
+    public void setListener(OnLoadingDoneListener listener) {
+        mListener = listener;
     }
 
     @Override

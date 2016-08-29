@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:background="@color/transparency"
+        android:layout_width="60dp"
+        android:layout_height="60dp">
+
+        <com.jayzhao.customactionbar.another_world.Widget.CircleLoadingView
+            android:id="@+id/circle_loading_view"
+            android:layout_gravity="center"
+            app:endColor="@color/black_50_percent"
+            app:startColor="@color/transparency"
+            app:strokeWidth2="3dp"
+            app:radius1="25dp"
+            app:radius2="13dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+    </FrameLayout>
+</FrameLayout>

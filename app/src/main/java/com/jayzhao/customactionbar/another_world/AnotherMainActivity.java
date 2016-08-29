@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.jayzhao.customactionbar.MyBaseTitleActivity;
 import com.jayzhao.customactionbar.R;
+import com.jayzhao.customactionbar.another_world.Widget.CircleLoadingDialog;
 import com.jayzhao.customactionbar.another_world.Widget.CustomWeiboLoadingView;
 import com.jayzhao.customactionbar.another_world.Widget.MyProgressView;
 import com.jayzhao.customactionbar.another_world.Widget.OnLoadingDoneListener;
@@ -63,7 +64,16 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         mCircleLoadingText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mProgressView.setVisibility(View.INVISIBLE);
+                final CircleLoadingDialog dialog = new CircleLoadingDialog();
+                dialog.setViewListener(new OnLoadingDoneListener() {
+                    @Override
+                    public void onLoadingDone(View view) {
+                        dialog.dismiss();
+                        mProgressView.setVisibility(View.VISIBLE);
+                    }
+                });
+                dialog.show(getSupportFragmentManager(), "CircleLoadingDialog");
             }
         });
 

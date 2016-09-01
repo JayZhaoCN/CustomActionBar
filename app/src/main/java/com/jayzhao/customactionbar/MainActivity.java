@@ -2,9 +2,15 @@ package com.jayzhao.customactionbar;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
@@ -25,6 +31,7 @@ import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
 import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
 import com.jayzhao.customactionbar.another_world.WheelMainActivity;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 
@@ -42,6 +49,9 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
     private MyHandler mMyHandler = null;
     private WeakHandler mWeakHandler = null;
+    private DownloadHandler mDownloadHandler = null;
+
+    private BroadcastReceiver mReceiver;
 
     class MyHandler extends Handler {
         @Override
@@ -58,6 +68,26 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Log.e(TAG, "handle message");
+        }
+    }
+
+    static class DownloadHandler extends Handler {
+        WeakReference<MainActivity> mWeakReference = null;
+
+        public DownloadHandler(MainActivity activity) {
+            mWeakReference = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    Log.i(TAG, "Download started!");
+                    long reference = msg.getData().getLong("reference");
+                    break;
+
+            }
         }
     }
 
@@ -124,6 +154,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(mReceiver);
         Log.i(TAG, "onDestoroy>>>>>>");
     }
 
@@ -213,6 +244,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mWeakHandler = new WeakHandler(this);
         mWeakHandler.sendEmptyMessageDelayed(1, 1000);
+        mDownloadHandler = new DownloadHandler(this);
 
 
         mRecyclerViewText = (TextView) findViewById(R.id.recyclerViewText);
@@ -252,6 +284,44 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
         mPromptDialogText.setOnClickListener(this);
+
+        mPromptDialogText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse("http://www.wandoujia.com/apps/com.xiaomi.hm.health/binding?source=wandoujia-web_inner_referral_binded");
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                //设置下载标题
+                request.setTitle("JayZhao");
+                //设置下载的详细描述
+                request.setDescription("asdfalifguyqageruy");
+                //很奇怪，为什么下不到外部存储中，总是只能下载到内部存储？
+                //这种写法会下载到内部存储的jay_file目录下
+                //request.setDestinationInExternalPublicDir("/download/", "jayzhao.apk");
+                //request.setDestinationInExternalPublicDir("jay_file", "jayzhao.apk");
+                //这种写法会下载到内部存储的DOWNLOAD目录下
+                //request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "jayzhao.apk");
+                //下到专用文件夹中
+                //request.setDestinationInExternalFilesDir(MainActivity.this, Environment.DIRECTORY_DOWNLOADS, "jayzhao.apk");
+
+                //关于DownloadManager
+                //可以参考这篇博文：http://www.open-open.com/lib/view/open1428024407365.html
+
+                //下载到指定路径
+                File downloadFile = new File("/storage/sdcard1/", "jayzhao.apk");
+                request.setDestinationUri(Uri.fromFile(downloadFile));
+
+                //reference是此次下载的唯一ID
+                long reference = manager.enqueue(request);
+                Bundle bundle = new Bundle();
+                bundle.putLong("reference", reference);
+                Message message = Message.obtain();
+                message.setData(bundle);
+                message.what = 1;
+                mDownloadHandler.sendMessage(message);
+                return true;
+            }
+        });
 
         mNextPage = (TextView) findViewById(R.id.nextPage);
         mNextPage.setOnClickListener(this);
@@ -297,6 +367,19 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 myDialog.show();
             }
         });
+
+
+        IntentFilter intentFilter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+
+        //注册一个接收下载完成的广播接收器
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                long reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                Log.i(TAG, "reference is: " + reference);
+            }
+        };
+        registerReceiver(mReceiver, intentFilter);
     }
 
     public void click(View view) {
@@ -304,6 +387,9 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         //intent.putExtra("URL", "https://www.baidu.com/");
         //startActivity(intent);
         startActivity(new Intent(MainActivity.this, JayActivity.class));
+    }
+
+    static class MyThread extends Thread {
     }
 
     @Override

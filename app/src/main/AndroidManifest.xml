@@ -41,6 +41,7 @@
         <activity android:name=".another_world.FragmentAnimationActivity"/>
         <activity android:name=".another_world.WeekActiveTimeActivity"/>
         <activity android:name=".another_world.WheelMainActivity"/>
+        <activity android:name=".another_world.DownloadActivity"/>
     </application>
 
 </manifest>

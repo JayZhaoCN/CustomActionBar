@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 import com.jayzhao.customactionbar.another_world.AnotherMainActivity;
+import com.jayzhao.customactionbar.another_world.DownloadActivity;
 import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
 import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
 import com.jayzhao.customactionbar.another_world.WheelMainActivity;
@@ -351,6 +352,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                     public void secondItemClick(View v, Dialog realDialog) {
                         MyUtils.showIconToast(MainActivity.this, "Icon Toast!", R.mipmap.ic_launcher);
                         myDialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, DownloadActivity.class));
                     }
 
                     @Override

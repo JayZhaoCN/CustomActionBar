@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.jayzhao.customactionbar.Widget.MyDialogFragment;
 import com.jayzhao.customactionbar.another_world.AnotherMainActivity;
+import com.jayzhao.customactionbar.another_world.CustomViewActivity;
 import com.jayzhao.customactionbar.another_world.DownloadActivity;
 import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
 import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
@@ -358,6 +359,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                     @Override
                     public void thirdItemClick(View v, Dialog realDialog) {
                         MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
+                        startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
                         myDialog.dismiss();
                     }
 

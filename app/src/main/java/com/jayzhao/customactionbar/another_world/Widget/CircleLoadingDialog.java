@@ -3,6 +3,7 @@ package com.jayzhao.customactionbar.another_world.Widget;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class CircleLoadingDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int style = DialogFragment.STYLE_NO_FRAME;
+        int style = DialogFragment.STYLE_NORMAL;
         /**
          * <item name="android:backgroundDimEnabled">true</item>
          * 表示DialogFragment出现是背景是否会变暗
@@ -45,5 +46,7 @@ public class CircleLoadingDialog extends DialogFragment {
          */
         int theme = R.style.WeiboLoadingDialog;
         setStyle(style, theme);
+        //在onCreate()方法中拿不到Dialog
+        //getDialog().getWindow().setGravity(Gravity.TOP);
     }
 }

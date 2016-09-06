@@ -358,7 +358,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
                     @Override
                     public void thirdItemClick(View v, Dialog realDialog) {
-                        MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
+                        //MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
                         startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
                         myDialog.dismiss();
                     }

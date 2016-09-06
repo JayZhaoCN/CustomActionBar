@@ -56,10 +56,42 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <!--
+    android:windowBackground:设置DialogFragment的背景
 
-    <style name="WeiboLoadingDialog" parent="@android:style/Theme.Holo.Light.Panel">
+    android:colorBackgroundCacheHint:背景缓存色 设置为透明，可以防止拖动全黑
+
+    windowFrame:Dialog的windowFrame框
+
+    windowIsTranslucent:是否半透明
+
+    windowAnimationStyle:Window进入和离开的动画
+
+    windowIsFloating:windowIsFloating属性设置为false, 默认将Window设置成全屏大小，设置为true，则window大小为wrap_content。
+    如果dialog布局大小不变，而window大小为全屏，且gravity没有设置为center，那么可能导致dailog在左上角而不是中间，而且window大小全屏时会导致touchoutside失效。
+
+    backgroundDimEnabled:表示Dialog展示时，屏幕其他部分是否会变暗。ture:变暗，false：不变暗
+
+    windowNoTitle:设置是否有Window的Title
+
+    windowCloseOnTouchOutside:设置当点击屏幕外部是否dismiss Dialog
+
+    windowContentOverlay:查看以下博客
+    http://blog.csdn.net/hqiong208/article/details/50295647
+    http://blog.csdn.net/qinjuning/article/details/6667482
+    -->
+
+    <style name="WeiboLoadingDialog">
+        <item name="android:windowBackground">@color/transparency</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
 
     <style name="DimPanel" parent="DimPanelBase">

@@ -25,6 +25,12 @@ import com.jayzhao.customactionbar.another_world.Widget.WeiboPictureDialog;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Jay on 16-8-8.
@@ -114,6 +120,98 @@ public class AnotherMainActivity extends MyBaseTitleActivity {
         animator1.setDuration(3000);
         animator1.setInterpolator(new AccelerateInterpolator());
         animator1.start();
+
+        //Observable: 被观测者
+        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                //在call方法中被观察者Observable在执行代码，并在必要的时候触发事件，通知观察者Observer
+                //持有Subscriber的引用，方便向观察者通知事件的发生
+                subscriber.onNext("Hello");
+                subscriber.onNext("Hi");
+                subscriber.onNext("NiHao");
+                subscriber.onCompleted();
+            }
+        });
+
+        //Observer: 观察者，是一个接口
+        //Subscriber: 订阅者，是实现了Observer的一个抽象类
+        Subscriber<String> subscriber = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+                Log.i(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.i(TAG, "onError");
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.i(TAG, "onNext: " + s);
+            }
+        };
+
+        //Observable和Subscriber形成订阅关系
+        //注意写法
+        //Subscriber实现了Observer和Subscription接口，这里返回一个Subscription是为了方便取消订阅
+        Subscription subscription = observable.subscribe(subscriber);
+        //解除订阅
+        //subscription.unsubscribe();
+
+        String[] names = {"wrr", "fgh", "sdf", "asd"};
+
+        //这段代码这样理解：
+        //首先：Observable.from()方法返回一个Observable对象
+        //其次，调用subscribe方法，Observable对象被订阅
+       /* Observable.from(names)
+                .subscribeOn(Schedulers.io())  //被观察者在IO线程
+                .observeOn(AndroidSchedulers.mainThread())  //观察者在Android的主线程
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        Log.i(TAG, s);
+                    }
+                });*/
+
+        //上面这段代码还有另外的写法
+        /*Observable.from(names)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.i(TAG, s);
+                    }
+                });*/
+
+        Observable.just("wrr", "fgh", "sdf", "asd")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.i(TAG, s);
+                    }
+                });
+        //RXJava中创建时间序列的方法有三种：
+        //Observable.create();
+        //Observable.just();
+        //Observable.from();
+        //每个事件队列中的对象类型可能都不一样，通过泛型的方式确定。可以是String，也可以是其他任何类型
+        //可以对事件的类型进行变换
+        //具体如何变换，暂时我也不清楚，不太理解
     }
 
     @OnClick(R.id.recycler_view_new)

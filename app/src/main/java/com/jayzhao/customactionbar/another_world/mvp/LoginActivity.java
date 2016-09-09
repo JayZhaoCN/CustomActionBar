@@ -91,6 +91,6 @@ public class LoginActivity extends MyBaseTitleActivity implements View.OnClickLi
 
     @Override
     public void showLoginFail() {
-.        MyUtils.showToast(this, "登陆失败");
+        MyUtils.showToast(this, "登陆失败");
     }
 }

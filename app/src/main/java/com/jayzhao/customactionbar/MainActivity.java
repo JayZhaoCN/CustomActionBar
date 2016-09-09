@@ -32,6 +32,8 @@ import com.jayzhao.customactionbar.another_world.DownloadActivity;
 import com.jayzhao.customactionbar.another_world.FragmentAnimationActivity;
 import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
 import com.jayzhao.customactionbar.another_world.WheelMainActivity;
+import com.jayzhao.customactionbar.another_world.mvp.LoginActivity;
+import com.jayzhao.customactionbar.another_world.mvp.LoginListener;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -279,7 +281,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mChangeAnimation.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                startActivity(new Intent(MainActivity.this, AnotherMainActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
             }
         });

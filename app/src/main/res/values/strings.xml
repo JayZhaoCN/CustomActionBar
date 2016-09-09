@@ -6,4 +6,6 @@
     <string name="fragment_name_1">Fragment01</string>
     <string name="fragment_name_2">Fragment02</string>
     <string name="circle_loading_dialog">CircleLoadingDialog</string>
+    <string name="login">登陆</string>
+    <string name="clear">重置</string>
 </resources>

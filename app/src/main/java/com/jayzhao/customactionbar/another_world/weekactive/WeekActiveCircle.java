@@ -21,6 +21,10 @@ public class WeekActiveCircle extends View {
     private static final String TAG = "WeekActiveCircle";
 
     private float mDensity = 0f;
+    private static float STROKE = 1f;
+    private static float LINE_WIDTH = 1f;
+    private static float GAP = 8f;
+    private static float LINE_LENGTH = 15f;
 
 
     private Context mContext = null;
@@ -28,10 +32,10 @@ public class WeekActiveCircle extends View {
     private int mDegree = 0;
     private int mWidth = 0;
     private int mHeight = 0;
-    private int mStrokeWidth = 2;
-    private int mLineWidth = 2;
-    private int mLineLength = 30;
-    private int mGap = 15;
+    private float mStrokeWidth = 0;
+    private float mLineWidth = 0;
+    private float mLineLength = 0;
+    private float mGap = 0;
 
     private Paint mCirclePaint = null;
     private Paint mLinePaint = null;
@@ -58,6 +62,13 @@ public class WeekActiveCircle extends View {
     private void init(Context context) {
         mContext = context;
         mResources = mContext.getResources();
+
+        mDensity = getDensity(mContext);
+        mStrokeWidth = STROKE * mDensity;
+        mLineWidth = LINE_WIDTH * mDensity;
+        mGap = GAP * mDensity;
+        mLineLength = LINE_LENGTH * mDensity;
+
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setStyle(Paint.Style.STROKE);
         mCirclePaint.setStrokeWidth(mStrokeWidth);
@@ -72,9 +83,6 @@ public class WeekActiveCircle extends View {
         mProgressPaint.setColor(mResources.getColor(R.color.blue_light));
         mProgressPaint.setStyle(Paint.Style.STROKE);
         mProgressPaint.setStrokeWidth(mLineLength);
-
-        mDensity = getDensity(mContext);
-        Log.i(TAG, "MDensity is: " + mDensity);
     }
 
     private void obtainStyledAttr(AttributeSet attrs, int defStyleAttr) {
@@ -105,7 +113,7 @@ public class WeekActiveCircle extends View {
         rect.bottom = h - getPaddingBottom();
 
         mRect = new RectF(mStrokeWidth, mStrokeWidth, w - mStrokeWidth, w - mStrokeWidth);
-        mProgressRect = new RectF(mLineLength, mLineLength, w - mLineLength, w - mLineLength);
+        mProgressRect = new RectF(mGap + mLineLength / 2, mGap + mLineLength / 2, w - mGap - mLineLength / 2, w - mGap - mLineLength / 2);
     }
 
     @Override
@@ -113,7 +121,7 @@ public class WeekActiveCircle extends View {
         super.onDraw(canvas);
         canvas.drawArc(mRect, 90 + mDegree / 2, 360 - mDegree, false, mCirclePaint);
         drawLines(canvas);
-        canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree, false, mProgressPaint);
+        canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree - 90, false, mProgressPaint);
     }
 
     private void drawLines(Canvas canvas) {

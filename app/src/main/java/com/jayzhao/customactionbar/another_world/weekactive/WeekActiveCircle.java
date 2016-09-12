@@ -25,25 +25,28 @@ public class WeekActiveCircle extends View {
     private static float LINE_WIDTH = 1f;
     private static float GAP = 8f;
     private static float LINE_LENGTH = 15f;
+    private static float MARGIN = 5f;
 
 
     private Context mContext = null;
-    private int mRadius = 0;
-    private int mDegree = 0;
-    private int mWidth = 0;
-    private int mHeight = 0;
-    private float mStrokeWidth = 0;
-    private float mLineWidth = 0;
-    private float mLineLength = 0;
-    private float mGap = 0;
+    private int mRadius;
+    private int mDegree;
+    private int mWidth;
+    private int mHeight;
+    private float mStrokeWidth;
+    private float mLineWidth;
+    private float mLineLength;
+    private float mGap;
+    private float mMargin;
 
-    private Paint mCirclePaint = null;
-    private Paint mLinePaint = null;
-    private Paint mProgressPaint = null;
-    private Resources mResources = null;
-    private RectF mRect = null;
-    private RectF mProgressRect = null;
-    private float mLinePoints[] = null;
+    private Paint mCirclePaint;
+    private Paint mLinePaint;
+    private Paint mProgressPaint;
+    private Paint mDotPaint;
+    private Resources mResources;
+    private RectF mRect;
+    private RectF mProgressRect;
+    private float mLinePoints[];
 
     public WeekActiveCircle(Context context) {
         this(context, null);
@@ -68,6 +71,7 @@ public class WeekActiveCircle extends View {
         mLineWidth = LINE_WIDTH * mDensity;
         mGap = GAP * mDensity;
         mLineLength = LINE_LENGTH * mDensity;
+        mMargin = MARGIN * mDensity;
 
         mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaint.setStyle(Paint.Style.STROKE);
@@ -83,6 +87,10 @@ public class WeekActiveCircle extends View {
         mProgressPaint.setColor(mResources.getColor(R.color.blue_light));
         mProgressPaint.setStyle(Paint.Style.STROKE);
         mProgressPaint.setStrokeWidth(mLineLength);
+
+        mDotPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mDotPaint.setColor(mResources.getColor(R.color.blue_light));
+        mDotPaint.setStyle(Paint.Style.FILL);
     }
 
     private void obtainStyledAttr(AttributeSet attrs, int defStyleAttr) {
@@ -110,10 +118,19 @@ public class WeekActiveCircle extends View {
         rect.left = getPaddingLeft();
         rect.top = getPaddingTop();
         rect.right = w - getPaddingRight();
-        rect.bottom = h - getPaddingBottom();
+        rect.bottom = w - getPaddingBottom();
+        Log.i(TAG, rect.left + " " + rect.top + " " + rect.bottom + " " + rect.right);
+        Log.i(TAG, getPaddingLeft() + " " + getPaddingTop() + " " + getPaddingBottom() + " " + getPaddingRight());
+        Log.i(TAG, "Margin is: " + mMargin);
 
-        mRect = new RectF(mStrokeWidth, mStrokeWidth, w - mStrokeWidth, w - mStrokeWidth);
-        mProgressRect = new RectF(mGap + mLineLength / 2, mGap + mLineLength / 2, w - mGap - mLineLength / 2, w - mGap - mLineLength / 2);
+        mRect = new RectF(rect);
+        mRect.left += mMargin;
+        mRect.top += mMargin;
+        mRect.bottom -= mMargin;
+        mRect.right -= mMargin;
+        mProgressRect = new RectF
+                (mGap + mLineLength / 2 + mMargin, mGap + mLineLength / 2 + mMargin,
+                        w - mGap - mLineLength / 2 - mMargin, w - mGap - mLineLength / 2 - mMargin);
     }
 
     @Override
@@ -122,6 +139,14 @@ public class WeekActiveCircle extends View {
         canvas.drawArc(mRect, 90 + mDegree / 2, 360 - mDegree, false, mCirclePaint);
         drawLines(canvas);
         canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree - 90, false, mProgressPaint);
+        drawDot(canvas);
+    }
+
+    private void drawDot(Canvas canvas) {
+        float cx = (float) (mRadius + (mRadius - mMargin) * Math.cos(Math.toRadians(285)));
+        float cy = (float) (mRadius + (mRadius - mMargin) * Math.sin(Math.toRadians(285)));
+
+        canvas.drawCircle(cx, cy, 5, mDotPaint);
     }
 
     private void drawLines(Canvas canvas) {
@@ -129,13 +154,13 @@ public class WeekActiveCircle extends View {
             Log.i(TAG, "create new lines!");
             mLinePoints = new float[(360 - mDegree + 1) * 4];
             float outerX, outerY, innerX, innerY;
-            float outerR = mRadius - mGap;
-            float innerR = mRadius - mGap - mLineLength + 0.5f;
+            float outerR = mRadius - mGap - mMargin;
+            float innerR = mRadius - mGap - mLineLength + 0.5f - mMargin;
             int startDegree = 90 + mDegree / 2;
             for (int i = 0; i <= 360 - mDegree; i++) {
                 if(i == 0 || i == 360 - mDegree) {
-                    outerX = (float) (mRadius + (mRadius - mStrokeWidth) * Math.cos(Math.toRadians(startDegree + i)));
-                    outerY = (float) (mRadius + (mRadius - mStrokeWidth) * Math.sin(Math.toRadians(startDegree + i)));
+                    outerX = (float) (mRadius + (mRadius - mMargin) * Math.cos(Math.toRadians(startDegree + i)));
+                    outerY = (float) (mRadius + (mRadius - mMargin) * Math.sin(Math.toRadians(startDegree + i)));
                 } else {
                     outerX = (float) (mRadius + outerR * Math.cos(Math.toRadians(startDegree + i)));
                     outerY = (float) (mRadius + outerR * Math.sin(Math.toRadians(startDegree + i)));

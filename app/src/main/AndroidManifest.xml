@@ -44,6 +44,7 @@
         <activity android:name=".another_world.DownloadActivity"/>
         <activity android:name=".another_world.CustomViewActivity"/>
         <activity android:name=".another_world.mvp.LoginActivity"/>
+        <activity android:name=".another_world.weekactive.TestWeekActiveActivity"/>
     </application>
 
 </manifest>

@@ -34,6 +34,7 @@ import com.jayzhao.customactionbar.another_world.WeekActiveTimeActivity;
 import com.jayzhao.customactionbar.another_world.WheelMainActivity;
 import com.jayzhao.customactionbar.another_world.mvp.LoginActivity;
 import com.jayzhao.customactionbar.another_world.mvp.LoginListener;
+import com.jayzhao.customactionbar.another_world.weekactive.TestWeekActiveActivity;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -288,8 +289,15 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
         mPromptDialogText = (TextView) findViewById(R.id.promptDiglog);
         mPromptDialogText.setOnClickListener(this);
-
         mPromptDialogText.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startActivity(new Intent(MainActivity.this, TestWeekActiveActivity.class));
+                return true;
+            }
+        });
+
+/*        mPromptDialogText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 DownloadManager manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
@@ -325,7 +333,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 mDownloadHandler.sendMessage(message);
                 return true;
             }
-        });
+        });*/
 
         mNextPage = (TextView) findViewById(R.id.nextPage);
         mNextPage.setOnClickListener(this);

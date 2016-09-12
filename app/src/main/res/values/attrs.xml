@@ -82,4 +82,9 @@
         <attr name="radius1" format="dimension"/>
         <attr name="radius2" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="WeekActiveCircle">
+        <attr name="CircleRadius" format="dimension"/>
+        <attr name="CircleDegree" format="integer"/>
+    </declare-styleable>
 </resources>

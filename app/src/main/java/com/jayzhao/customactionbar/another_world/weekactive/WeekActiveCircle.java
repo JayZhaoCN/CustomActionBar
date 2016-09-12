@@ -20,8 +20,8 @@ import com.jayzhao.customactionbar.R;
 public class WeekActiveCircle extends View {
     private static final String TAG = "WeekActiveCircle";
 
-    private static final float MARGIN = 5.0f;
     private float mDensity = 0f;
+
 
     private Context mContext = null;
     private int mRadius = 0;
@@ -29,7 +29,7 @@ public class WeekActiveCircle extends View {
     private int mWidth = 0;
     private int mHeight = 0;
     private int mStrokeWidth = 2;
-    private int mLineWidth = 1;
+    private int mLineWidth = 2;
     private int mLineLength = 30;
     private int mGap = 15;
 
@@ -74,6 +74,7 @@ public class WeekActiveCircle extends View {
         mProgressPaint.setStrokeWidth(mLineLength);
 
         mDensity = getDensity(mContext);
+        Log.i(TAG, "MDensity is: " + mDensity);
     }
 
     private void obtainStyledAttr(AttributeSet attrs, int defStyleAttr) {
@@ -87,13 +88,10 @@ public class WeekActiveCircle extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int desireHeight = (int) (mRadius + mRadius * Math.sin(Math.toRadians(90 - mDegree / 2)));
         int desireWidth = 2 * mRadius;
-        Log.i(TAG, "height is: " + desireHeight);
-        Log.i(TAG, "width is: " + desireWidth);
 
         mWidth = View.resolveSize(desireWidth, widthMeasureSpec);
         mHeight = View.resolveSize(desireHeight, heightMeasureSpec);
-        Log.i(TAG, "mWidth is: " + mWidth);
-        Log.i(TAG, "mHeight is: " + mHeight);
+
         setMeasuredDimension(mWidth, mHeight);
     }
 
@@ -107,9 +105,7 @@ public class WeekActiveCircle extends View {
         rect.bottom = h - getPaddingBottom();
 
         mRect = new RectF(mStrokeWidth, mStrokeWidth, w - mStrokeWidth, w - mStrokeWidth);
-        mProgressRect = new RectF
-                (mStrokeWidth / 2 + mLineLength, mStrokeWidth / 2 + mLineLength,
-                        w - mStrokeWidth / 2  - mLineLength, w - mStrokeWidth / 2 - mLineLength);
+        mProgressRect = new RectF(mLineLength, mLineLength, w - mLineLength, w - mLineLength);
     }
 
     @Override
@@ -117,7 +113,7 @@ public class WeekActiveCircle extends View {
         super.onDraw(canvas);
         canvas.drawArc(mRect, 90 + mDegree / 2, 360 - mDegree, false, mCirclePaint);
         drawLines(canvas);
-        canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree - 90, false, mProgressPaint);
+        canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree, false, mProgressPaint);
     }
 
     private void drawLines(Canvas canvas) {
@@ -125,21 +121,19 @@ public class WeekActiveCircle extends View {
             Log.i(TAG, "create new lines!");
             mLinePoints = new float[(360 - mDegree + 1) * 4];
             float outerX, outerY, innerX, innerY;
-            int outerR = mRadius - mGap;
-            int innerR = mRadius - mGap - mLineLength;
+            float outerR = mRadius - mGap;
+            float innerR = mRadius - mGap - mLineLength + 0.5f;
             int startDegree = 90 + mDegree / 2;
             for (int i = 0; i <= 360 - mDegree; i++) {
                 if(i == 0 || i == 360 - mDegree) {
-                    outerX = (float) (mRadius + mRadius * Math.cos(Math.toRadians(startDegree + i)));
-                    outerY = (float) (mRadius + mRadius * Math.sin(Math.toRadians(startDegree + i)));
-                    innerX = (float) (mRadius + innerR * Math.cos(Math.toRadians(startDegree + i)));
-                    innerY = (float) (mRadius + innerR * Math.sin(Math.toRadians(startDegree + i)));
+                    outerX = (float) (mRadius + (mRadius - mStrokeWidth) * Math.cos(Math.toRadians(startDegree + i)));
+                    outerY = (float) (mRadius + (mRadius - mStrokeWidth) * Math.sin(Math.toRadians(startDegree + i)));
                 } else {
                     outerX = (float) (mRadius + outerR * Math.cos(Math.toRadians(startDegree + i)));
                     outerY = (float) (mRadius + outerR * Math.sin(Math.toRadians(startDegree + i)));
-                    innerX = (float) (mRadius + innerR * Math.cos(Math.toRadians(startDegree + i)));
-                    innerY = (float) (mRadius + innerR * Math.sin(Math.toRadians(startDegree + i)));
                 }
+                innerX = (float) (mRadius + innerR * Math.cos(Math.toRadians(startDegree + i)));
+                innerY = (float) (mRadius + innerR * Math.sin(Math.toRadians(startDegree + i)));
                 mLinePoints[i * 4] = outerX;
                 mLinePoints[i * 4 + 1] = outerY;
                 mLinePoints[i * 4 + 2] = innerX;
@@ -150,7 +144,7 @@ public class WeekActiveCircle extends View {
     }
 
     public static float getDensity(Context context) {
-        float density = 0;
+        float density;
         if (context == null) {
             return 3f;
         }

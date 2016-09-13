@@ -1,5 +1,6 @@
 package com.jayzhao.customactionbar.another_world.weekactive;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -10,6 +11,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.jayzhao.customactionbar.R;
 
@@ -48,6 +50,8 @@ public class WeekActiveCircle extends View {
     private RectF mProgressRect;
     private float mLinePoints[];
 
+    private int mCurrentDegree;
+
     public WeekActiveCircle(Context context) {
         this(context, null);
     }
@@ -60,6 +64,12 @@ public class WeekActiveCircle extends View {
         super(context, attrs, defStyleAttr);
         init(context);
         obtainStyledAttr(attrs, defStyleAttr);
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startLoading();
+            }
+        }, 500);
     }
 
     private void init(Context context) {
@@ -100,6 +110,19 @@ public class WeekActiveCircle extends View {
         ta.recycle();
     }
 
+    private void startLoading() {
+        ValueAnimator animator = ValueAnimator.ofInt(0, 360 - mDegree - 90);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                mCurrentDegree = (int) valueAnimator.getAnimatedValue();
+                postInvalidateOnAnimation();
+            }
+        });
+        animator.setDuration(1200);
+        animator.start();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int desireHeight = (int) (mRadius + mRadius * Math.sin(Math.toRadians(90 - mDegree / 2)));
@@ -138,13 +161,13 @@ public class WeekActiveCircle extends View {
         super.onDraw(canvas);
         canvas.drawArc(mRect, 90 + mDegree / 2, 360 - mDegree, false, mCirclePaint);
         drawLines(canvas);
-        canvas.drawArc(mProgressRect, 90 + mDegree / 2, 360 - mDegree - 90, false, mProgressPaint);
+        canvas.drawArc(mProgressRect, 90 + mDegree / 2, mCurrentDegree, false, mProgressPaint);
         drawDot(canvas);
     }
 
     private void drawDot(Canvas canvas) {
-        float cx = (float) (mRadius + (mRadius - mMargin) * Math.cos(Math.toRadians(285)));
-        float cy = (float) (mRadius + (mRadius - mMargin) * Math.sin(Math.toRadians(285)));
+        float cx = (float) (mRadius + (mRadius - mMargin) * Math.cos(Math.toRadians(90 + mDegree / 2 + mCurrentDegree)));
+        float cy = (float) (mRadius + (mRadius - mMargin) * Math.sin(Math.toRadians(90 + mDegree / 2 + mCurrentDegree)));
 
         canvas.drawCircle(cx, cy, 5, mDotPaint);
     }

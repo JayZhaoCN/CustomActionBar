@@ -26,62 +26,32 @@ import java.lang.reflect.Method;
 
 /**
  * Created by Jay on 2016/4/7.
+ * 项目中所有Activity的基类
  */
-public class MyBaseTitleActivity extends FragmentActivity implements View.OnClickListener {
+public class MyBaseTitleActivity extends FragmentActivity {
 
     private static final String TAG = "MyBaseTitleActivity";
     private FrameLayout mContentParent;
-    private Button mLeftButton;
     private Button mRightButton;
 
-    private ISearch mSearchListener = null;
+    private ISearch mSearchListener;
 
-    private View mContentView = null;
-    private TextView mTitleText = null;
-    private EditText mEditText  = null;
+    private View mContentView;
+    private TextView mTitleText;
+    private EditText mEditText;
 
-    private Button mSearchButton = null;
+    private Button mSearchButton;
 
     private RelativeLayout mTitle;
 
-    private View mStatusView = null;
-    private ViewGroup mTitleParent = null;
+    private View mStatusView;
+    private ViewGroup mTitleParent;
 
-    /**默认的风格是BACK_AND_MORE*/
+    //默认的风格是BACK_AND_MORE
     private STYLE mStyle = STYLE.BACK_AND_MORE;
 
-    @Override
-    public void onClick(View v) {
-        Log.e(TAG, "some button has been clicked");
-        switch(v.getId()) {
-            //任何情况下点击LeftButton都会返回上一级。
-            case R.id.left:
-                Log.e(TAG, "back click!");
-                finish();
-                break;
-            case R.id.right:
-                switch(mStyle) {
-                    case BACK_AND_EDIT:
-                        changeToEdit();
-                        /**
-                         * 下面的代码展示了如何调起软键盘
-                         */
-                        mEditText.setFocusable(true);
-                        mEditText.setFocusableInTouchMode(true);
-                        mEditText.requestFocus();
-                        InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
-                        break;
-                }
-                break;
-            case R.id.search_button:
-                mSearchListener.onSearchClicked();
-                break;
-        }
-    }
-
     /**
-     * Sytle枚举
+     * Style枚举
      */
     public enum STYLE {
         BACK_AND_MORE,
@@ -92,7 +62,7 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
 
     /**
      * 得到右边的Button
-     * @return
+     * @return 右Button
      */
     public Button getRightButton() {
         return mRightButton;
@@ -139,7 +109,7 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
 
         mTitleText = (TextView) findViewById(R.id.title_text);
 
-        mLeftButton  = (Button) findViewById(R.id.left);
+        Button mLeftButton = (Button) findViewById(R.id.left);
         //为什么？？？
         mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,8 +160,28 @@ public class MyBaseTitleActivity extends FragmentActivity implements View.OnClic
                 mRightButton.setBackgroundResource(R.drawable.edit_press);
                 mEditText = (EditText) findViewById(R.id.edit_text);
                 //BACK_AND_EDIT模式下，点击RightButton会转换编辑模式。
-                mRightButton.setOnClickListener(this);
-                mSearchButton.setOnClickListener(this);
+                mRightButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        switch(mStyle) {
+                            case BACK_AND_EDIT:
+                                changeToEdit();
+                                //下面的代码展示了如何调起软键盘
+                                mEditText.setFocusable(true);
+                                mEditText.setFocusableInTouchMode(true);
+                                mEditText.requestFocus();
+                                InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                                inputManager.showSoftInput(mEditText, InputMethodManager.SHOW_FORCED);
+                                break;
+                        }
+                    }
+                });
+                mSearchButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mSearchListener.onSearchClicked();
+                    }
+                });
                 break;
             default:
                 break;

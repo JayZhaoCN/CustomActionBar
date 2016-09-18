@@ -103,39 +103,32 @@ public class MyBaseTitleActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.base_title_parent);
+        initViews();
 
+        //设置透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            window.setFlags(
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        setMiuiStatusBarDarkMode(this, false);
+    }
+
+    private void initViews() {
         mContentParent = (FrameLayout) findViewById(R.id.title_parent);
         mTitle = (RelativeLayout) findViewById(R.id.title);
-
         mTitleText = (TextView) findViewById(R.id.title_text);
-
-        Button mLeftButton = (Button) findViewById(R.id.left);
-        //为什么？？？
-        mLeftButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.left).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
         mRightButton = (Button) findViewById(R.id.right);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            // Translucent status bar
-            window.setFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-
-        setMiuiStatusBarDarkMode(this, false);
-
-        int x = getStatusBarHeight();
-
         mTitleParent = (ViewGroup) findViewById(R.id.title_container);
-
         mStatusView = findViewById(R.id.status_view);
-
-        mStatusView.getLayoutParams().height = x;
+        mStatusView.getLayoutParams().height = getStatusBarHeight();
     }
 
     /**
@@ -166,7 +159,7 @@ public class MyBaseTitleActivity extends FragmentActivity {
                         switch(mStyle) {
                             case BACK_AND_EDIT:
                                 changeToEdit();
-                                //下面的代码展示了如何调起软键盘
+                                //调起软键盘
                                 mEditText.setFocusable(true);
                                 mEditText.setFocusableInTouchMode(true);
                                 mEditText.requestFocus();
@@ -262,7 +255,6 @@ public class MyBaseTitleActivity extends FragmentActivity {
                (mContentParent.addView())，当然是null啊
              */
             if(mContentParent.getChildAt(1) != null) {
-                //Log.e(TAG, "child is not null");
                 FrameLayout.LayoutParams params =
                         (FrameLayout.LayoutParams) mContentParent.getChildAt(1).getLayoutParams();
                 params.topMargin = 0;

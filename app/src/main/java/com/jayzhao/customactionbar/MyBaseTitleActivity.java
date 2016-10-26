@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -99,6 +100,20 @@ public class MyBaseTitleActivity extends FragmentActivity {
     public Button getSearchButton() {
         return mSearchButton;
     }
+
+    /**
+     * set the color of titleBar and statusBar
+     * @param color colorInt, not colorRes
+     */
+    public void setColorValue(@ColorInt int color) {
+        if(mStatusView != null) {
+            mStatusView.setBackgroundColor(color);
+        }
+        if(null != mTitleParent) {
+            mTitleParent.setBackgroundColor(color);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,7 @@
 package com.jayzhao.customactionbar;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DownloadManager;
@@ -14,12 +16,14 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -201,10 +205,37 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         });
     }
 
+    private ValueAnimator mColorAnimator = null;
+
+    private void initAnimator() {
+        if(mColorAnimator == null) {
+            //关于Color的动画，调用ValueAnimator.ofArgb(int ...values)
+            mColorAnimator = ValueAnimator.ofInt
+                    (ContextCompat.getColor(this, R.color.bg_color_red),
+                            ContextCompat.getColor(this, R.color.colorPrimary), ContextCompat.getColor(this, R.color.blue_light));
+            //如果调用了ofArgb方法，就不用再去设置Evaluator了
+            mColorAnimator.setEvaluator(new ArgbEvaluator());
+            mColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                int currentColor;
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    currentColor = (int) animation.getAnimatedValue();
+                    setColorValue(currentColor);
+                }
+            });
+            mColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            mColorAnimator.setDuration(5000);
+            mColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            mColorAnimator.setInterpolator(new LinearInterpolator());
+            mColorAnimator.start();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
+        initAnimator();
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);

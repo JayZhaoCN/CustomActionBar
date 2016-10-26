@@ -43,7 +43,7 @@ public class FragmentAnimationActivity extends MyBaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
         setStyle(STYLE.SINGLE_BACK, R.color.bg_color_red);
-        setTitle("FragmentAnimation");
+        setTitle("Fragment切换动画");
         ButterKnife.bind(this);
         mResources = getResources();
         mFragments = new ArrayList<AnimationFragment>();

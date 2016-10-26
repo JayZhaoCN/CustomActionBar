@@ -38,7 +38,7 @@ public class ChangeAnimation extends MyBaseTitleActivity {
         super.onCreate(savedInstanceState);
         setStyle(STYLE.SINGLE_BACK);
         setContentView(R.layout.change_animation);
-        setTitle("MyChangeAnimation");
+        setTitle("页面切换动画");
 
         Display display = getWindowManager().getDefaultDisplay();
         display.getSize(mScreenSize);
@@ -76,8 +76,8 @@ public class ChangeAnimation extends MyBaseTitleActivity {
 
         mAnimator12 = ValueAnimator.ofInt(0, 100);
         mAnimator21 = ValueAnimator.ofInt(100, 0);
-        mAnimator21.setDuration(1500);
-        mAnimator12.setDuration(1500);
+        mAnimator21.setDuration(1000);
+        mAnimator12.setDuration(1000);
         mAnimator12.addUpdateListener(mListener);
         mAnimator21.addUpdateListener(mListener);
         initFragment02();

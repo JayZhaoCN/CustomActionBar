@@ -282,7 +282,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
         mChangeAnimation.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, AnotherMainActivity.class));
                 return true;
             }
         });
@@ -368,7 +368,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
 
                     @Override
                     public void thirdItemClick(View v, Dialog realDialog) {
-                        //MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
+                        MyUtils.showCustomToast(MainActivity.this, "Jay Zhao", "Custom Toast", R.mipmap.ic_launcher);
                         startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
                         myDialog.dismiss();
                     }
@@ -397,10 +397,10 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
     }
 
     public void click(View view) {
-        //Intent intent = new Intent(MainActivity.this, MyWebActivity.class);
-        //intent.putExtra("URL", "https://www.baidu.com/");
-        //startActivity(intent);
-        startActivity(new Intent(MainActivity.this, JayActivity.class));
+        Intent intent = new Intent(MainActivity.this, MyWebActivity.class);
+        intent.putExtra("URL", "http://mobile.baidu.com/item?pid=1120893&from=1019105c");
+        startActivity(intent);
+        //startActivity(new Intent(MainActivity.this, JayActivity.class));
     }
 
     static class MyThread extends Thread {
@@ -418,7 +418,7 @@ public class MainActivity extends MyBaseTitleActivity implements View.OnClickLis
                 break;
             case R.id.webText:
                 intent = new Intent(MainActivity.this, MyWebActivity.class);
-                intent.putExtra("URL", "http://www.hao123.com");
+                intent.putExtra("URL", "http://mobile.baidu.com/item?pid=1120893&from=1019105c");
                 startActivity(intent);
                 break;
             case R.id.changeAnimation:

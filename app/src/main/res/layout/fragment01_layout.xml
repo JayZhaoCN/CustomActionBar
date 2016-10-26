@@ -8,7 +8,7 @@
       android:layout_height="match_parent"
       android:text="@string/fragment_name_1"
       android:textColor="@color/white_80_percent"
-      android:background="@color/colorAccent"
+      android:background="@color/bg_color_red_dark"
       android:gravity="center"
       />
 </com.jayzhao.customactionbar.MaskableLayout>

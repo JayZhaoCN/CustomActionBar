@@ -107,6 +107,7 @@ public class WeekActiveCircle extends View {
         TypedArray ta = mContext.obtainStyledAttributes(attrs, R.styleable.WeekActiveCircle, 0, defStyleAttr);
         mRadius = ta.getDimensionPixelOffset(R.styleable.WeekActiveCircle_CircleRadius, 100);
         mDegree = ta.getInt(R.styleable.WeekActiveCircle_CircleDegree, 120);
+        Log.i(TAG, "mDegree: " + mDegree);
         ta.recycle();
     }
 
@@ -162,6 +163,7 @@ public class WeekActiveCircle extends View {
         canvas.drawArc(mRect, 90 + mDegree / 2, 360 - mDegree, false, mCirclePaint);
         drawLines(canvas);
         canvas.drawArc(mProgressRect, 90 + mDegree / 2, mCurrentDegree, false, mProgressPaint);
+        Log.i(TAG, "currentDegree: " + mCurrentDegree);
         drawDot(canvas);
     }
 

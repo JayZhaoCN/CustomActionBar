@@ -4,13 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/bg_color_red"
     >
 
     <TextView
         android:textSize="20sp"
         android:gravity="center"
-        android:text="宝宝最帅"
+        android:text="这是全屏的展示风格"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

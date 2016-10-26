@@ -49,31 +49,31 @@ public class FragmentAnimationActivity extends MyBaseTitleActivity {
         mFragments = new ArrayList<AnimationFragment>();
 
         Bundle bundle01 = new Bundle();
-        bundle01.putString("hero", "敌法师");
+        bundle01.putString("hero", "Fragment01");
         bundle01.putInt("color", mResources.getColor(R.color.bg_color_red));
         bundle01.putInt("background", mResources.getColor(R.color.bg_color_steps));
         mFragment01 = (AnimationFragment) Fragment.instantiate(FragmentAnimationActivity.this, AnimationFragment.class.getName(), bundle01);
 
         Bundle bundle02 = new Bundle();
-        bundle02.putString("hero", "蝙蝠骑士");
+        bundle02.putString("hero", "Fragment02");
         bundle02.putInt("color", mResources.getColor(R.color.blue_light));
         bundle02.putInt("background", mResources.getColor(R.color.bluegrass));
         mFragment02 = (AnimationFragment) Fragment.instantiate(FragmentAnimationActivity.this, AnimationFragment.class.getName(), bundle02);
 
         Bundle bundle03 = new Bundle();
-        bundle03.putString("hero", "斧王");
+        bundle03.putString("hero", "Fragment03");
         bundle03.putInt("color", mResources.getColor(R.color.colorPrimary));
         bundle03.putInt("background", mResources.getColor(R.color.change_sport_goal_confirm_solid));
         mFragment03 = (AnimationFragment) Fragment.instantiate(FragmentAnimationActivity.this, AnimationFragment.class.getName(), bundle03);
 
         Bundle bundle04 = new Bundle();
-        bundle04.putString("hero", "上古巨神");
+        bundle04.putString("hero", "Fragment04");
         bundle04.putInt("color", mResources.getColor(R.color.agree_text_color));
         bundle04.putInt("background", mResources.getColor(R.color.bg_color_red));
         mFragment04 = (AnimationFragment) Fragment.instantiate(FragmentAnimationActivity.this, AnimationFragment.class.getName(), bundle04);
 
         Bundle bundle05 = new Bundle();
-        bundle05.putString("hero", "光之守卫");
+        bundle05.putString("hero", "Fragment05");
         bundle05.putInt("color", mResources.getColor(R.color.bg_color_grey));
         bundle05.putInt("background", mResources.getColor(R.color.bg_mode_weight));
         mFragment05 = (AnimationFragment) Fragment.instantiate(FragmentAnimationActivity.this, AnimationFragment.class.getName(), bundle05);
